@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apex Digital — Web Design & AI Automation for Local Businesses</title>
+  <meta name="description" content="Apex Digital helps small businesses in the San Fernando Valley modernize their websites and add AI tools that save time and generate leads." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0e1a2b;
+      --navy-mid: #1a2e45;
+      --navy-light: #243d57;
+      --cream: #f5f0e8;
+      --cream-dark: #ede7d9;
+      --gold: #c9a84c;
+      --gold-light: #e4c97a;
+      --white: #ffffff;
+      --text-muted: #7a8fa6;
+      --text-body: #c8d4e0;
+      --radius: 4px;
+      --radius-lg: 10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--text-body);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(14, 26, 43, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+      transition: padding 0.3s ease;
+    }
+
+    .logo {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--cream);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+    .logo em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cream); }
+
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--navy);
+      background: var(--gold);
+      border: none;
+      padding: 10px 22px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 140px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 40%, rgba(201, 168, 76, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(26, 46, 69, 0.8) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 760px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.1s ease forwards;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.2s ease forwards;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--text-body);
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.3s ease forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.4s ease forwards;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 14px 30px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-body);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--cream); }
+    .btn-ghost svg { transition: transform 0.2s; }
+    .btn-ghost:hover svg { transform: translateX(3px); }
+
+    .hero-location {
+      position: absolute;
+      bottom: 48px;
+      right: 48px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.6s ease forwards;
+    }
+    .location-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s infinite;
+    }
+
+    /* ---- SOCIAL PROOF BAR ---- */
+    .proof-bar {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      overflow: hidden;
+    }
+    .proof-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .proof-items {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .proof-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .proof-item svg { color: var(--gold); flex-shrink: 0; }
+
+    /* ---- SECTION COMMON ---- */
+    section { padding: 96px 48px; }
+    .section-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-tag::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 32px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .section-sub {
+      font-size: 16px;
+      color: var(--text-body);
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 56px;
+    }
+
+    /* ---- SERVICES ---- */
+    #services { background: var(--navy-mid); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .service-card {
+      background: var(--navy);
+      padding: 36px 32px;
+      transition: background 0.25s;
+      cursor: default;
+    }
+    .service-card:hover { background: var(--navy-light); }
+
+    .service-num {
+      font-family: 'Fraunces', serif;
+      font-size: 13px;
+      color: var(--gold);
+      opacity: 0.6;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .service-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .service-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 20px;
+    }
+    .tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+
+    /* ---- HOW IT WORKS ---- */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      counter-reset: steps;
+    }
+    .step { counter-increment: steps; position: relative; padding-top: 20px; }
+    .step::before {
+      content: '0' counter(steps);
+      font-family: 'Fraunces', serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: rgba(201, 168, 76, 0.15);
+      line-height: 1;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .step h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+    .step p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+    /* ---- PRICING ---- */
+    #pricing { background: var(--navy-mid); }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .pricing-card {
+      background: var(--navy);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .pricing-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-4px); }
+    .pricing-card.featured {
+      border-color: var(--gold);
+      position: relative;
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: -1px; left: 50%; transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 4px 16px;
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+
+    .plan-name {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .plan-price {
+      font-family: 'Fraunces', serif;
+      font-size: 38px;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .plan-price sup { font-size: 20px; vertical-align: super; }
+    .plan-recur {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+    .plan-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin-bottom: 28px;
+    }
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+      margin-bottom: 32px;
+    }
+    .plan-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-body);
+    }
+    .plan-features li svg { flex-shrink: 0; margin-top: 3px; color: var(--gold); }
+
+    .plan-btn {
+      display: block;
+      text-align: center;
+      padding: 13px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      letter-spacing: 0.03em;
+    }
+    .plan-btn-outline {
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold);
+    }
+    .plan-btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.07); }
+    .plan-btn-filled {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .plan-btn-filled:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ---- ABOUT ---- */
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    @media (max-width: 768px) { .about-inner { grid-template-columns: 1fr; gap: 40px; } }
+    .about-text .section-sub { margin-bottom: 32px; }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .stat-box {
+      background: var(--navy-mid);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+    .stat-number {
+      font-family: 'Fraunces', serif;
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label { font-size: 13px; color: var(--text-muted); }
+
+    /* ---- CTA ---- */
+    #contact {
+      background: var(--navy-mid);
+      text-align: center;
+    }
+    #contact .section-tag { justify-content: center; }
+    #contact .section-tag::after { display: none; }
+    #contact .section-title { margin: 0 auto 16px; }
+    #contact .section-sub { margin: 0 auto 44px; text-align: center; }
+
+    .contact-form {
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 13px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input::placeholder { color: var(--text-muted); }
+    .form-input:focus { border-color: rgba(201,168,76,0.5); }
+    .form-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    /* ---- FOOTER ---- */
+    footer {
+      padding: 28px 48px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer p { font-size: 13px; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--cream); }
+
+    /* ---- ANIMATIONS ---- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    /* ---- MOBILE ---- */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 24px 60px; }
+      .hero-location { display: none; }
+      section { padding: 64px 24px; }
+      .proof-bar { padding: 16px 24px; flex-direction: column; align-items: flex-start; gap: 16px; }
+      footer { padding: 24px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">Apex <em>Digital</em></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Free site audit</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">San Fernando Valley's Digital Partner</div>
+      <h1>Your business deserves a website that <em>works</em></h1>
+      <p class="hero-sub">We modernize local small businesses with professional websites and practical AI tools — so you capture more leads, answer customers 24/7, and look as good online as you are in person.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Get a free site audit</a>
+        <a href="#services" class="btn-ghost">
+          See what we do
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-location">
+      <div class="location-dot"></div>
+      Woodland Hills, CA
+    </div>
+  </section>
+
+  <!-- PROOF BAR -->
+  <div class="proof-bar">
+    <span class="proof-label">Built for local business</span>
+    <div class="proof-items">
+      <div class="proof-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Restaurants &amp; cafes
+      </div>
+      <div class="proof-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Medical &amp; wellness
+      </div>
+      <div class="proof-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Home services
+      </div>
+      <div class="proof-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Retail &amp; boutiques
+      </div>
+      <div class="proof-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Professional services
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-tag">What we do</div>
+    <h2 class="section-title">Everything your business<br>needs <em>online</em></h2>
+    <p class="section-sub">From a fresh website to AI tools that handle customer questions after hours — we build it, maintain it, and keep it working for you.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>Website Design &amp; Build</h3>
+        <p>Modern, fast, mobile-ready sites built to convert visitors into customers. SEO-optimized from day one.</p>
+        <div class="service-tags">
+          <span class="tag">Custom design</span>
+          <span class="tag">Mobile-first</span>
+          <span class="tag">SEO-ready</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>AI Chatbot &amp; Lead Capture</h3>
+        <p>Answer customer questions, qualify leads, and book appointments automatically — even at 2am.</p>
+        <div class="service-tags">
+          <span class="tag">24/7 responses</span>
+          <span class="tag">Lead capture</span>
+          <span class="tag">Booking</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>Review &amp; Reputation</h3>
+        <p>Automated systems that follow up with happy customers and get them to leave you Google reviews.</p>
+        <div class="service-tags">
+          <span class="tag">Google reviews</span>
+          <span class="tag">Automated</span>
+          <span class="tag">SMS follow-up</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h3>Google &amp; Local SEO</h3>
+        <p>Get found when local customers search for what you offer. Google Business Profile optimization included.</p>
+        <div class="service-tags">
+          <span class="tag">Local search</span>
+          <span class="tag">GBP setup</span>
+          <span class="tag">Citations</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="section-tag">The process</div>
+    <h2 class="section-title">Simple from <em>start</em> to launch</h2>
+    <p class="section-sub">We've designed our process to be fast, transparent, and painless — even for business owners who've never worked with a web agency before.</p>
+    <div class="steps">
+      <div class="step">
+        <h3>Free audit</h3>
+        <p>We review your current online presence and show you exactly what's costing you customers — no charge, no commitment.</p>
+      </div>
+      <div class="step">
+        <h3>Custom proposal</h3>
+        <p>You get a clear, itemized plan with flat-rate pricing. No surprises, no hourly billing, no tech jargon.</p>
+      </div>
+      <div class="step">
+        <h3>We build it</h3>
+        <p>Our team handles everything. You stay updated via simple check-ins, not long meetings or confusing tickets.</p>
+      </div>
+      <div class="step">
+        <h3>We maintain it</h3>
+        <p>After launch, your monthly retainer keeps everything current, secure, and performing. We're always one call away.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="section-tag">Pricing</div>
+    <h2 class="section-title">Transparent, <em>flat-rate</em> plans</h2>
+    <p class="section-sub">One-time build fee plus a monthly retainer. No hourly surprises. No contracts longer than 90 days.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price"><sup>$</sup>1,500</div>
+        <div class="plan-recur">+ $150 / month</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>5–7 page website</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mobile-first design</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Google Business setup</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Basic SEO</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Monthly maintenance</li>
+        </ul>
+        <a href="#contact" class="plan-btn plan-btn-outline">Get started</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="featured-badge">Most popular</div>
+        <div class="plan-name">Growth</div>
+        <div class="plan-price"><sup>$</sup>3,500</div>
+        <div class="plan-recur">+ $350 / month</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Starter</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>AI chatbot</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Review automation</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>CRM integration</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Quarterly check-in call</li>
+        </ul>
+        <a href="#contact" class="plan-btn plan-btn-filled">Get started</a>
+      </div>
+      <div class="pricing-card">
+        <div class="plan-name">Pro</div>
+        <div class="plan-price"><sup>$</sup>7,000+</div>
+        <div class="plan-recur">+ $700 / month</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Growth</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom AI workflows</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Analytics dashboard</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority support</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Monthly strategy call</li>
+        </ul>
+        <a href="#contact" class="plan-btn plan-btn-outline">Get started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-text">
+        <div class="section-tag">About us</div>
+        <h2 class="section-title">Local people,<br><em>real</em> expertise</h2>
+        <p class="section-sub">We're a husband-and-wife team based in Woodland Hills. Between us we bring deep sales experience in the local business community and modern technical skills in web development and AI — a combination most agencies can't offer.</p>
+        <p class="section-sub" style="margin-bottom: 0;">We're not a faceless agency. When you work with us, you work with us — and we're invested in your success because we're your neighbors.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-box">
+          <div class="stat-number">SFV</div>
+          <div class="stat-label">Locally rooted in the San Fernando Valley</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">AI tools that work even when you're closed</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">90d</div>
+          <div class="stat-label">Max contract length — no long lock-ins</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">$0</div>
+          <div class="stat-label">Cost for your initial site audit</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / CONTACT -->
+  <section id="contact">
+    <div class="section-tag">Get in touch</div>
+    <h2 class="section-title">Let's audit your site — <em>free</em></h2>
+    <p class="section-sub">Tell us a little about your business. We'll review your current online presence and come back with specific, honest recommendations. No commitment, no sales pressure.</p>
+    <div class="contact-form">
+      <div class="form-row">
+        <input class="form-input" type="text" placeholder="Your name" />
+        <input class="form-input" type="text" placeholder="Business name" />
+      </div>
+      <input class="form-input" type="email" placeholder="Email address" />
+      <input class="form-input" type="tel" placeholder="Phone number (optional)" />
+      <input class="form-input" type="url" placeholder="Current website URL (if any)" />
+      <button class="form-submit" type="submit">Request my free audit</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Apex Digital · Woodland Hills, CA</p>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Shrink nav on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.padding = window.scrollY > 60 ? '12px 48px' : '20px 48px';
+    });
+
+    // Fade in sections on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.service-card, .step, .pricing-card, .stat-box').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+
+    // Form submission placeholder
+    document.querySelector('.form-submit').addEventListener('click', () => {
+      const inputs = document.querySelectorAll('.form-input');
+      const name = inputs[0].value.trim();
+      const email = inputs[2].value.trim();
+      if (name && email) {
+        document.querySelector('.contact-form').innerHTML =
+          `<div style="text-align:center; padding: 48px 0;">
+            <div style="font-family:'Fraunces',serif; font-size:28px; color:var(--cream); margin-bottom:12px;">Thanks, ${name}.</div>
+            <p style="color:var(--text-muted); font-size:15px;">We'll be in touch within one business day.</p>
+          </div>`;
+      } else {
+        inputs[0].style.borderColor = !name ? 'rgba(201,100,76,0.6)' : '';
+        inputs[2].style.borderColor = !email ? 'rgba(201,100,76,0.6)' : '';
+      }
+    });
+  </script>
+</body>
+</html>
