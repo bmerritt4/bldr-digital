@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLDR Digital — Web Design & AI Automation for Local Businesses</title>
+<meta name="description" content="BLDR Digital builds websites and AI tools for local businesses in the San Fernando Valley. We build it. We maintain it. You grow.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --black:#080808;
+  --dark:#0F0F0F;
+  --dark-2:#161616;
+  --dark-3:#1E1E1E;
+  --dark-4:#2A2A2A;
+  --orange:#FF5C00;
+  --orange-dim:#CC4A00;
+  --orange-glow:rgba(255,92,0,0.15);
+  --white:#F5F5F5;
+  --white-dim:#A0A0A0;
+  --white-faint:#404040;
+  --border:#242424;
+  --font-display:'Bebas Neue',sans-serif;
+  --font-mono:'DM Mono',monospace;
+  --font-sans:'DM Sans',system-ui,sans-serif;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-sans);
+  font-weight:300;
+  color:var(--white);
+  background:var(--black);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  cursor:crosshair;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* Custom cursor */
+.cursor{
+  position:fixed;width:8px;height:8px;
+  background:var(--orange);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform 0.1s;
+  mix-blend-mode:normal;
+}
+
+/* Shell */
+.shell{max-width:1280px;margin:0 auto;padding:0 40px}
+
+/* NAV */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 40px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,8,8,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+
+.nav-logo{
+  font-family:var(--font-display);
+  font-size:28px;
+  letter-spacing:0.12em;
+  color:var(--white);
+  display:flex;align-items:center;gap:2px;
+}
+
+.nav-logo-accent{color:var(--orange)}
+
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:400;
+  color:var(--white-dim);
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--orange)}
+
+.nav-cta{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--black)!important;
+  background:var(--orange);
+  padding:10px 20px;
+  border:none;cursor:pointer;
+  transition:background 0.2s,transform 0.15s;
+  display:inline-block;
+}
+.nav-cta:hover{background:var(--orange-dim);transform:translateY(-1px)}
+
+.nav-mobile-btn{
+  display:none;background:none;border:none;
+  cursor:pointer;padding:4px;flex-direction:column;gap:5px;
+}
+.nav-mobile-btn span{display:block;width:22px;height:1px;background:var(--white)}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  padding-top:64px;
+  position:relative;
+  overflow:hidden;
+  background:var(--black);
+}
+
+/* Grid background */
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,92,0,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,92,0,0.04) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:linear-gradient(to bottom,transparent 0%,black 30%,black 70%,transparent 100%);
+}
+
+/* Big BLDR lettermark */
+.hero-mark{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-52%);
+  font-family:var(--font-display);
+  font-size:clamp(180px,25vw,380px);
+  letter-spacing:0.05em;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,92,0,0.08);
+  pointer-events:none;
+  white-space:nowrap;
+  user-select:none;
+}
+
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 40px 80px;
+  max-width:1280px;
+  margin:0 auto;
+  width:100%;
+}
+
+.hero-tag{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:400;
+  color:var(--orange);
+  letter-spacing:0.2em;text-transform:uppercase;
+  margin-bottom:24px;
+  display:flex;align-items:center;gap:12px;
+  opacity:0;animation:fadeUp 0.8s 0.2s forwards;
+}
+
+.hero-tag::before{
+  content:'';display:block;
+  width:32px;height:1px;background:var(--orange);
+}
+
+.hero-headline{
+  font-family:var(--font-display);
+  font-size:clamp(60px,9vw,140px);
+  line-height:0.92;
+  letter-spacing:0.02em;
+  color:var(--white);
+  margin-bottom:32px;
+  opacity:0;animation:fadeUp 0.8s 0.35s forwards;
+}
+
+.hero-headline span{color:var(--orange)}
+
+.hero-sub{
+  font-family:var(--font-mono);
+  font-size:14px;font-weight:300;
+  color:var(--white-dim);
+  line-height:1.8;
+  max-width:480px;
+  margin-bottom:48px;
+  opacity:0;animation:fadeUp 0.8s 0.5s forwards;
+}
+
+.hero-actions{
+  display:flex;align-items:center;gap:24px;
+  opacity:0;animation:fadeUp 0.8s 0.65s forwards;
+}
+
+.btn-primary{
+  font-family:var(--font-mono);
+  font-size:12px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--black);
+  background:var(--orange);
+  padding:14px 32px;
+  border:none;cursor:pointer;
+  transition:background 0.2s,transform 0.15s;
+  display:inline-block;
+}
+.btn-primary:hover{background:var(--orange-dim);transform:translateY(-1px);color:var(--black)}
+
+.btn-outline{
+  font-family:var(--font-mono);
+  font-size:12px;font-weight:400;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--white-dim);
+  border:1px solid var(--white-faint);
+  padding:14px 32px;
+  transition:border-color 0.2s,color 0.2s;
+  display:inline-block;
+}
+.btn-outline:hover{border-color:var(--orange);color:var(--orange)}
+
+.hero-stats{
+  position:absolute;right:40px;bottom:80px;
+  display:flex;flex-direction:column;gap:24px;
+  opacity:0;animation:fadeIn 1s 0.8s forwards;
+}
+
+.hero-stat-num{
+  font-family:var(--font-display);
+  font-size:40px;letter-spacing:0.05em;
+  color:var(--white);line-height:1;
+}
+
+.hero-stat-label{
+  font-family:var(--font-mono);
+  font-size:10px;color:var(--white-dim);
+  letter-spacing:0.12em;text-transform:uppercase;
+  margin-top:4px;
+}
+
+.hero-stat-divider{
+  width:1px;height:40px;
+  background:linear-gradient(to bottom,transparent,var(--border),transparent);
+}
+
+/* MARQUEE */
+.marquee-wrap{
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:var(--dark-2);
+  padding:14px 0;
+  overflow:hidden;
+  position:relative;z-index:2;
+}
+
+.marquee-track{
+  display:flex;gap:0;
+  animation:marquee 30s linear infinite;
+  width:max-content;
+}
+
+.marquee-item{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:400;
+  color:var(--white-dim);
+  letter-spacing:0.14em;text-transform:uppercase;
+  padding:0 32px;
+  white-space:nowrap;
+  display:flex;align-items:center;gap:32px;
+}
+
+.marquee-item::after{
+  content:'◆';color:var(--orange);font-size:8px;
+}
+
+@keyframes marquee{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+/* SECTIONS */
+.section{padding:120px 0}
+.section--dark{background:var(--dark)}
+.section--dark-2{background:var(--dark-2)}
+.section--black{background:var(--black)}
+
+.section-label{
+  font-family:var(--font-mono);
+  font-size:10px;font-weight:500;
+  color:var(--orange);
+  letter-spacing:0.2em;text-transform:uppercase;
+  margin-bottom:20px;
+  display:flex;align-items:center;gap:12px;
+}
+.section-label::before{content:'//';color:var(--white-faint)}
+
+.section-headline{
+  font-family:var(--font-display);
+  font-size:clamp(42px,5vw,80px);
+  letter-spacing:0.03em;
+  line-height:0.95;
+  color:var(--white);
+  margin-bottom:24px;
+}
+.section-headline span{color:var(--orange)}
+
+.section-body{
+  font-family:var(--font-mono);
+  font-size:13px;font-weight:300;
+  color:var(--white-dim);
+  line-height:1.9;
+  margin-bottom:16px;
+}
+
+/* SERVICES */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1px;
+  background:var(--border);
+  margin-top:60px;
+}
+
+.service-card{
+  background:var(--dark);
+  padding:48px 40px;
+  position:relative;
+  overflow:hidden;
+  transition:background 0.3s;
+}
+
+.service-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;
+  height:2px;
+  background:var(--orange);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.4s;
+}
+
+.service-card:hover{background:var(--dark-2)}
+.service-card:hover::before{transform:scaleX(1)}
+
+.service-num{
+  font-family:var(--font-display);
+  font-size:72px;letter-spacing:0.05em;
+  color:var(--border);
+  line-height:1;margin-bottom:20px;
+  transition:color 0.3s;
+}
+.service-card:hover .service-num{color:var(--dark-4)}
+
+.service-name{
+  font-family:var(--font-display);
+  font-size:28px;letter-spacing:0.05em;
+  color:var(--white);margin-bottom:12px;
+}
+
+.service-desc{
+  font-family:var(--font-mono);
+  font-size:12px;font-weight:300;
+  color:var(--white-dim);
+  line-height:1.8;margin-bottom:24px;
+}
+
+.service-tags{display:flex;flex-wrap:wrap;gap:8px}
+.service-tag{
+  font-family:var(--font-mono);
+  font-size:10px;font-weight:400;
+  color:var(--orange);
+  border:1px solid rgba(255,92,0,0.3);
+  padding:4px 10px;
+  letter-spacing:0.1em;
+}
+
+/* WHAT BLDR MEANS */
+.bldr-section{
+  padding:120px 0;
+  background:var(--black);
+  position:relative;
+  overflow:hidden;
+}
+
+.bldr-section::before{
+  content:'BLDR';
+  position:absolute;right:-40px;top:50%;
+  transform:translateY(-50%);
+  font-family:var(--font-display);
+  font-size:300px;letter-spacing:0.1em;
+  color:transparent;
+  -webkit-text-stroke:1px var(--border);
+  pointer-events:none;
+  user-select:none;
+}
+
+.bldr-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+}
+
+.bldr-letters{
+  display:flex;flex-direction:column;gap:0;
+}
+
+.bldr-letter-row{
+  display:flex;align-items:stretch;
+  border-bottom:1px solid var(--border);
+  padding:28px 0;
+  gap:24px;
+  position:relative;
+  overflow:hidden;
+  transition:background 0.2s;
+  cursor:default;
+}
+
+.bldr-letter-row:first-child{border-top:1px solid var(--border)}
+.bldr-letter-row:hover{background:var(--dark-2)}
+
+.bldr-letter{
+  font-family:var(--font-display);
+  font-size:64px;letter-spacing:0.05em;
+  color:var(--orange);
+  line-height:1;
+  width:64px;flex-shrink:0;
+}
+
+.bldr-letter-content{display:flex;flex-direction:column;justify-content:center}
+
+.bldr-letter-word{
+  font-family:var(--font-display);
+  font-size:28px;letter-spacing:0.05em;
+  color:var(--white);
+  margin-bottom:4px;
+}
+
+.bldr-letter-desc{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:300;
+  color:var(--white-dim);
+  line-height:1.6;
+  letter-spacing:0.04em;
+}
+
+/* PROCESS */
+.process-steps{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--border);
+  margin-top:60px;
+}
+
+.process-step{
+  background:var(--dark);
+  padding:40px 32px;
+  position:relative;
+}
+
+.process-step-num{
+  font-family:var(--font-display);
+  font-size:48px;letter-spacing:0.05em;
+  color:var(--border);
+  line-height:1;margin-bottom:20px;
+}
+
+.process-step-name{
+  font-family:var(--font-display);
+  font-size:22px;letter-spacing:0.05em;
+  color:var(--white);margin-bottom:12px;
+}
+
+.process-step-desc{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:300;
+  color:var(--white-dim);
+  line-height:1.8;
+}
+
+.process-step::after{
+  content:'→';
+  position:absolute;right:-12px;top:40px;
+  font-size:16px;color:var(--orange);
+  z-index:2;
+}
+.process-step:last-child::after{display:none}
+
+/* PRICING */
+.pricing-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--border);
+  margin-top:60px;
+}
+
+.pricing-card{
+  background:var(--dark);
+  padding:56px 48px;
+  position:relative;
+  overflow:hidden;
+}
+
+.pricing-card--featured{
+  background:var(--dark-2);
+}
+
+.pricing-card--featured::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;
+  height:2px;
+  background:var(--orange);
+}
+
+.pricing-badge{
+  font-family:var(--font-mono);
+  font-size:10px;font-weight:500;
+  color:var(--black);
+  background:var(--orange);
+  padding:4px 12px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  display:inline-block;
+  margin-bottom:24px;
+}
+
+.pricing-name{
+  font-family:var(--font-display);
+  font-size:40px;letter-spacing:0.05em;
+  color:var(--white);margin-bottom:8px;
+}
+
+.pricing-desc{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:300;
+  color:var(--white-dim);
+  margin-bottom:32px;
+  line-height:1.7;
+}
+
+.pricing-build{
+  margin-bottom:8px;
+}
+
+.pricing-build-num{
+  font-family:var(--font-display);
+  font-size:56px;letter-spacing:0.03em;
+  color:var(--white);line-height:1;
+}
+
+.pricing-build-label{
+  font-family:var(--font-mono);
+  font-size:10px;color:var(--white-dim);
+  letter-spacing:0.12em;text-transform:uppercase;
+  margin-top:4px;
+}
+
+.pricing-retainer{
+  font-family:var(--font-mono);
+  font-size:13px;font-weight:400;
+  color:var(--orange);
+  letter-spacing:0.06em;
+  margin-bottom:40px;
+  margin-top:8px;
+}
+
+.pricing-divider{
+  width:100%;height:1px;
+  background:var(--border);
+  margin-bottom:32px;
+}
+
+.pricing-features{
+  list-style:none;
+  display:flex;flex-direction:column;
+  gap:12px;margin-bottom:40px;
+}
+
+.pricing-feature{
+  font-family:var(--font-mono);
+  font-size:12px;font-weight:300;
+  color:var(--white-dim);
+  display:flex;align-items:flex-start;gap:12px;
+  line-height:1.5;
+}
+
+.pricing-feature::before{
+  content:'→';color:var(--orange);
+  flex-shrink:0;font-size:11px;
+  margin-top:1px;
+}
+
+/* ABOUT */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+}
+
+.about-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--border);
+  margin-top:48px;
+}
+
+.about-stat{
+  background:var(--dark-3);
+  padding:28px 24px;
+}
+
+.about-stat-num{
+  font-family:var(--font-display);
+  font-size:44px;letter-spacing:0.05em;
+  color:var(--orange);line-height:1;
+}
+
+.about-stat-label{
+  font-family:var(--font-mono);
+  font-size:10px;color:var(--white-dim);
+  letter-spacing:0.1em;text-transform:uppercase;
+  margin-top:6px;
+}
+
+.about-visual{
+  position:relative;
+}
+
+.about-img-block{
+  background:var(--dark-3);
+  border:1px solid var(--border);
+  aspect-ratio:4/5;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.about-img-block::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--dark-3) 0%,var(--dark-4) 100%);
+}
+
+.about-img-placeholder{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;
+  align-items:center;gap:12px;
+}
+
+.about-img-placeholder svg{
+  width:48px;height:48px;
+  stroke:var(--white-faint);fill:none;stroke-width:1;
+}
+
+.about-img-placeholder span{
+  font-family:var(--font-mono);
+  font-size:10px;color:var(--white-faint);
+  letter-spacing:0.14em;text-transform:uppercase;
+}
+
+.about-accent{
+  position:absolute;
+  bottom:-16px;right:-16px;
+  width:120px;height:120px;
+  border:1px solid var(--orange);
+  opacity:0.2;
+}
+
+/* CONTACT */
+.contact-section{
+  padding:120px 0;
+  background:var(--dark);
+  position:relative;
+  overflow:hidden;
+}
+
+.contact-section::before{
+  content:'BUILD';
+  position:absolute;bottom:-40px;right:-20px;
+  font-family:var(--font-display);
+  font-size:200px;letter-spacing:0.1em;
+  color:transparent;
+  -webkit-text-stroke:1px var(--border);
+  pointer-events:none;
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:start;
+}
+
+.contact-form{
+  display:flex;flex-direction:column;gap:16px;
+}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+.form-field{display:flex;flex-direction:column;gap:8px}
+
+.form-label{
+  font-family:var(--font-mono);
+  font-size:10px;font-weight:500;
+  color:var(--white-dim);
+  letter-spacing:0.14em;text-transform:uppercase;
+}
+
+.form-input,
+.form-textarea{
+  background:var(--dark-3);
+  border:1px solid var(--border);
+  color:var(--white);
+  font-family:var(--font-mono);
+  font-size:13px;font-weight:300;
+  padding:14px 16px;
+  outline:none;
+  transition:border-color 0.2s;
+  width:100%;
+}
+
+.form-input:focus,
+.form-textarea:focus{border-color:var(--orange)}
+
+.form-textarea{height:120px;resize:none}
+
+.form-submit{
+  font-family:var(--font-mono);
+  font-size:12px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--black);
+  background:var(--orange);
+  border:none;cursor:pointer;
+  padding:16px 32px;
+  transition:background 0.2s;
+  margin-top:8px;
+  align-self:flex-start;
+}
+
+.form-submit:hover{background:var(--orange-dim)}
+
+.contact-info{
+  display:flex;flex-direction:column;gap:32px;
+  padding-top:8px;
+}
+
+.contact-info-item{
+  display:flex;flex-direction:column;gap:6px;
+  padding-bottom:32px;
+  border-bottom:1px solid var(--border);
+}
+.contact-info-item:last-child{border-bottom:none}
+
+.contact-info-label{
+  font-family:var(--font-mono);
+  font-size:10px;font-weight:500;
+  color:var(--orange);
+  letter-spacing:0.16em;text-transform:uppercase;
+}
+
+.contact-info-value{
+  font-family:var(--font-mono);
+  font-size:13px;font-weight:300;
+  color:var(--white);
+  line-height:1.7;
+}
+
+.contact-info-value a{color:var(--white);transition:color 0.2s}
+.contact-info-value a:hover{color:var(--orange)}
+
+/* FOOTER */
+.footer{
+  background:var(--black);
+  border-top:1px solid var(--border);
+  padding:40px 0;
+}
+
+.footer-inner{
+  display:flex;align-items:center;
+  justify-content:space-between;
+}
+
+.footer-logo{
+  font-family:var(--font-display);
+  font-size:24px;letter-spacing:0.12em;
+  color:var(--white);
+}
+
+.footer-logo span{color:var(--orange)}
+
+.footer-links{
+  display:flex;gap:32px;list-style:none;
+}
+
+.footer-links a{
+  font-family:var(--font-mono);
+  font-size:11px;color:var(--white-dim);
+  letter-spacing:0.08em;
+  transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--orange)}
+
+.footer-copy{
+  font-family:var(--font-mono);
+  font-size:11px;color:var(--white-faint);
+  letter-spacing:0.06em;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeIn{
+  from{opacity:0}to{opacity:1}
+}
+
+.reveal{
+  opacity:0;transform:translateY(24px);
+  transition:opacity 0.7s,transform 0.7s;
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .bldr-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:1fr 1fr}
+  .hero-stats{display:none}
+  .about-visual{display:none}
+  .bldr-section::before{display:none}
+}
+
+@media(max-width:768px){
+  .nav{padding:0 20px}
+  .nav-links{display:none}
+  .nav-mobile-btn{display:flex}
+  .shell{padding:0 20px}
+  .hero-content{padding:0 20px 60px}
+  .section{padding:80px 0}
+  .process-steps{grid-template-columns:1fr}
+  .process-step::after{display:none}
+  .about-stats{grid-template-columns:1fr 1fr}
+  .footer-inner{flex-direction:column;gap:24px;text-align:center}
+  .footer-links{flex-wrap:wrap;justify-content:center}
+  .form-row{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-logo">BLD<span class="nav-logo-accent">R</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Free Audit</a></li>
+  </ul>
+  <button class="nav-mobile-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-mark">BLDR</div>
+
+  <div class="hero-content">
+    <div class="hero-tag">San Fernando Valley · Woodland Hills, CA</div>
+
+    <h1 class="hero-headline">
+      We don't<br>
+      template.<br>
+      We <span>build.</span>
+    </h1>
+
+    <p class="hero-sub">
+      BLDR Digital builds websites and AI tools for local businesses — 
+      dental practices, med spas, and service businesses that are tired 
+      of looking invisible online. We build it. We maintain it. You grow.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get a free audit</a>
+      <a href="#pricing" class="btn-outline">See pricing</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-num">30+</div>
+      <div class="hero-stat-label">Clients audited</div>
+    </div>
+    <div class="hero-stat-divider"></div>
+    <div>
+      <div class="hero-stat-num">24/7</div>
+      <div class="hero-stat-label">AI tools running</div>
+    </div>
+    <div class="hero-stat-divider"></div>
+    <div>
+      <div class="hero-stat-num">$0</div>
+      <div class="hero-stat-label">Cost to audit</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Website Design</div>
+    <div class="marquee-item">AI Chatbots</div>
+    <div class="marquee-item">Review Automation</div>
+    <div class="marquee-item">Local SEO</div>
+    <div class="marquee-item">Booking Integration</div>
+    <div class="marquee-item">Google Business</div>
+    <div class="marquee-item">Dental Practices</div>
+    <div class="marquee-item">Med Spas</div>
+    <div class="marquee-item">San Fernando Valley</div>
+    <div class="marquee-item">Website Design</div>
+    <div class="marquee-item">AI Chatbots</div>
+    <div class="marquee-item">Review Automation</div>
+    <div class="marquee-item">Local SEO</div>
+    <div class="marquee-item">Booking Integration</div>
+    <div class="marquee-item">Google Business</div>
+    <div class="marquee-item">Dental Practices</div>
+    <div class="marquee-item">Med Spas</div>
+    <div class="marquee-item">San Fernando Valley</div>
+  </div>
+</div>
+
+
+<!-- WHAT BLDR MEANS -->
+<section class="bldr-section" id="about-bldr">
+  <div class="shell">
+    <div class="bldr-grid">
+      <div class="reveal">
+        <div class="section-label">What we are</div>
+        <h2 class="section-headline">THE NAME<br>SAYS IT <span>ALL</span></h2>
+        <p class="section-body">
+          Every letter in BLDR stands for something we actually do — 
+          not agency buzzwords, not empty promises. Four principles 
+          that drive every project we take on.
+        </p>
+        <p class="section-body">
+          We're a husband-and-wife team from Woodland Hills. Brian builds. 
+          Jessica sells. Together we serve the local businesses that make 
+          the San Fernando Valley run — and we stay with them long after 
+          the site goes live.
+        </p>
+      </div>
+
+      <div class="bldr-letters reveal">
+        <div class="bldr-letter-row">
+          <div class="bldr-letter">B</div>
+          <div class="bldr-letter-content">
+            <div class="bldr-letter-word">Build</div>
+            <div class="bldr-letter-desc">We construct from scratch — no templates, no shortcuts, no recycled layouts from the last client.</div>
+          </div>
+        </div>
+        <div class="bldr-letter-row">
+          <div class="bldr-letter">L</div>
+          <div class="bldr-letter-content">
+            <div class="bldr-letter-word">Launch</div>
+            <div class="bldr-letter-desc">We get you live fast and configured correctly — SEO, SSL, analytics, and AI tools from day one.</div>
+          </div>
+        </div>
+        <div class="bldr-letter-row">
+          <div class="bldr-letter">D</div>
+          <div class="bldr-letter-content">
+            <div class="bldr-letter-word">Drive</div>
+            <div class="bldr-letter-desc">We drive real results — more appointments, more reviews, more customers finding you online.</div>
+          </div>
+        </div>
+        <div class="bldr-letter-row">
+          <div class="bldr-letter">R</div>
+          <div class="bldr-letter-content">
+            <div class="bldr-letter-word">Retain</div>
+            <div class="bldr-letter-desc">We stay with you. Monthly maintenance, ongoing improvements, and a team that picks up the phone.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SERVICES -->
+<section class="section section--dark" id="services">
+  <div class="shell">
+    <div class="reveal">
+      <div class="section-label">What we build</div>
+      <h2 class="section-headline">EVERYTHING YOUR<br>BUSINESS NEEDS <span>ONLINE</span></h2>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-num">01</div>
+        <div class="service-name">Website Design & Build</div>
+        <p class="service-desc">Modern, fast, mobile-ready sites built to convert visitors into patients and customers. Custom designed — never templated.</p>
+        <div class="service-tags">
+          <span class="service-tag">Custom design</span>
+          <span class="service-tag">Mobile-first</span>
+          <span class="service-tag">SEO-ready</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-num">02</div>
+        <div class="service-name">AI Chatbot & Lead Capture</div>
+        <p class="service-desc">Answer patient questions, capture leads, and book appointments automatically — even at 2am when your front desk is closed.</p>
+        <div class="service-tags">
+          <span class="service-tag">24/7 responses</span>
+          <span class="service-tag">Lead capture</span>
+          <span class="service-tag">Auto-booking</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-num">03</div>
+        <div class="service-name">Review Automation</div>
+        <p class="service-desc">Automated follow-ups that turn happy patients into Google reviews — consistently, without your staff lifting a finger.</p>
+        <div class="service-tags">
+          <span class="service-tag">Google reviews</span>
+          <span class="service-tag">SMS follow-up</span>
+          <span class="service-tag">Automated</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-num">04</div>
+        <div class="service-name">Local SEO & Google Business</div>
+        <p class="service-desc">Get found when local customers search. Google Business Profile optimization, citations, and local search presence — built in from day one.</p>
+        <div class="service-tags">
+          <span class="service-tag">Local search</span>
+          <span class="service-tag">GBP setup</span>
+          <span class="service-tag">Citations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PROCESS -->
+<section class="section section--black" id="process">
+  <div class="shell">
+    <div class="reveal">
+      <div class="section-label">How it works</div>
+      <h2 class="section-headline">SIMPLE FROM<br><span>START</span> TO LAUNCH</h2>
+      <p class="section-body" style="max-width:560px">
+        Four steps. Flat-rate pricing. No tech jargon, no long meetings, 
+        no surprises. We've designed this process for business owners who 
+        have a practice to run, not a website to manage.
+      </p>
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="process-step-num">01</div>
+        <div class="process-step-name">Free Audit</div>
+        <p class="process-step-desc">We review your current online presence and show you exactly what's costing you customers. No charge, no commitment.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-step-num">02</div>
+        <div class="process-step-name">Proposal</div>
+        <p class="process-step-desc">You get a clear, itemized plan with flat-rate pricing. No hourly billing, no tech jargon, no scope creep.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-step-num">03</div>
+        <div class="process-step-name">We Build</div>
+        <p class="process-step-desc">Our team handles everything. Simple check-ins keep you in the loop — not long meetings or confusing revision tickets.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-step-num">04</div>
+        <div class="process-step-name">We Maintain</div>
+        <p class="process-step-desc">After launch your monthly retainer keeps everything current, secure, and performing. We're always one call away.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PRICING -->
+<section class="section section--dark" id="pricing">
+  <div class="shell">
+    <div class="reveal">
+      <div class="section-label">Investment</div>
+      <h2 class="section-headline">TRANSPARENT,<br><span>FLAT-RATE</span> PLANS</h2>
+      <p class="section-body" style="max-width:560px">
+        One-time build fee plus a monthly retainer. No hourly surprises. 
+        No contracts longer than 90 days. Every plan includes a free site audit before you commit.
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- STARTER -->
+      <div class="pricing-card reveal">
+        <div class="pricing-name">Starter</div>
+        <p class="pricing-desc">A clean, professional website that establishes your presence and captures leads. Perfect for practices ready to stop being invisible online.</p>
+
+        <div class="pricing-build">
+          <div class="pricing-build-num">$2,000</div>
+          <div class="pricing-build-label">One-time build fee</div>
+        </div>
+        <div class="pricing-retainer">+ $200 / month retainer</div>
+
+        <div class="pricing-divider"></div>
+
+        <ul class="pricing-features">
+          <li class="pricing-feature">5–7 page custom website</li>
+          <li class="pricing-feature">Mobile-first, SEO-optimized design</li>
+          <li class="pricing-feature">Google Business Profile setup & optimization</li>
+          <li class="pricing-feature">Contact form with email notifications</li>
+          <li class="pricing-feature">Google Analytics 4 installed</li>
+          <li class="pricing-feature">Monthly site maintenance & updates (2 hrs/mo)</li>
+          <li class="pricing-feature">Monthly performance report</li>
+        </ul>
+
+        <a href="#contact" class="btn-outline">Get started</a>
+      </div>
+
+      <!-- GROWTH -->
+      <div class="pricing-card pricing-card--featured reveal">
+        <div class="pricing-badge">Most popular</div>
+        <div class="pricing-name">Growth</div>
+        <p class="pricing-desc">The full system — website plus AI tools that work while you sleep. Built for practices ready to actively grow their patient base.</p>
+
+        <div class="pricing-build">
+          <div class="pricing-build-num">$3,000</div>
+          <div class="pricing-build-label">One-time build fee</div>
+        </div>
+        <div class="pricing-retainer">+ $400 / month retainer</div>
+
+        <div class="pricing-divider"></div>
+
+        <ul class="pricing-features">
+          <li class="pricing-feature">Everything in Starter</li>
+          <li class="pricing-feature">8–10 page custom website</li>
+          <li class="pricing-feature">AI chatbot — answers questions & books appointments 24/7</li>
+          <li class="pricing-feature">Automated review generation system</li>
+          <li class="pricing-feature">Online booking widget integration</li>
+          <li class="pricing-feature">Monthly check-in call with performance review</li>
+          <li class="pricing-feature">Priority support & faster response times</li>
+        </ul>
+
+        <a href="#contact" class="btn-primary">Get started</a>
+      </div>
+
+    </div>
+
+    <!-- Fine print -->
+    <div style="margin-top:32px;padding:24px 32px;border:1px solid var(--border);background:var(--dark-2)">
+      <p style="font-family:var(--font-mono);font-size:11px;color:var(--white-dim);line-height:1.8;letter-spacing:0.04em">
+        All plans require a 50% deposit to begin. Retainer includes up to 2 hours of site updates per month — additional work billed at $85/hr. 
+        No contracts longer than 90 days. Upgrade from Starter to Growth anytime for a $500 expansion fee. 
+        Domain registered in your name — you own it always.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ABOUT -->
+<section class="section section--black" id="about">
+  <div class="shell">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="section-label">Who we are</div>
+        <h2 class="section-headline">LOCAL PEOPLE,<br><span>REAL</span> EXPERTISE</h2>
+        <p class="section-body">
+          We're a husband-and-wife team based in Woodland Hills. Brian brings 
+          deep technical expertise in web development and AI — currently completing 
+          a Computer Science degree at Oregon State. Jessica brings years of 
+          sales experience in the local business community.
+        </p>
+        <p class="section-body">
+          Together we offer something most agencies can't: genuine technical 
+          skill and genuine relationship-building, under one roof, in your 
+          neighborhood. When you work with BLDR, you work with us — not 
+          an account manager and a team you'll never meet.
+        </p>
+        <p class="section-body">
+          We serve dental practices, med spas, and local service businesses 
+          across the San Fernando Valley — businesses where reputation, 
+          trust, and local visibility are everything.
+        </p>
+
+        <div class="about-stats">
+          <div class="about-stat">
+            <div class="about-stat-num">SFV</div>
+            <div class="about-stat-label">Locally rooted</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">24/7</div>
+            <div class="about-stat-label">AI tools running</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">90d</div>
+            <div class="about-stat-label">Max contract length</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">$0</div>
+            <div class="about-stat-label">Cost to audit</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-visual reveal">
+        <div class="about-img-block">
+          <div class="about-img-placeholder">
+            <svg viewBox="0 0 48 48"><circle cx="24" cy="16" r="8"/><path d="M8 44c0-8.837 7.163-16 16-16s16 7.163 16 16"/></svg>
+            <span>Brian & Jessica — photo</span>
+          </div>
+        </div>
+        <div class="about-accent"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="shell">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="section-label">Get in touch</div>
+        <h2 class="section-headline">LET'S AUDIT<br>YOUR SITE — <span>FREE</span></h2>
+        <p class="section-body">
+          Tell us about your business. We'll review your current online 
+          presence and come back with specific, honest recommendations. 
+          No commitment, no sales pressure.
+        </p>
+
+        <div class="contact-info">
+          <div class="contact-info-item">
+            <div class="contact-info-label">Location</div>
+            <div class="contact-info-value">Woodland Hills, CA<br>Serving the San Fernando Valley</div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-label">Email</div>
+            <div class="contact-info-value"><a href="mailto:hello@bldrdigital.com">hello@bldrdigital.com</a></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-label">Response time</div>
+            <div class="contact-info-value">We respond within one business day.<br>Usually same day.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <form class="contact-form">
+          <div class="form-row">
+            <div class="form-field">
+              <label class="form-label">First name</label>
+              <input type="text" class="form-input" placeholder="Jane">
+            </div>
+            <div class="form-field">
+              <label class="form-label">Last name</label>
+              <input type="text" class="form-input" placeholder="Smith">
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Business name</label>
+            <input type="text" class="form-input" placeholder="Sherman Oaks Dental Care">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" placeholder="jane@yourbusiness.com">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-input" placeholder="(818) 555-0000">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Website (if you have one)</label>
+            <input type="url" class="form-input" placeholder="https://yourbusiness.com">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Anything else?</label>
+            <textarea class="form-textarea" placeholder="Tell us about your business and what you're looking for..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Request free audit →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="shell">
+    <div class="footer-inner">
+      <div class="footer-logo">BLD<span>R</span> Digital</div>
+      <ul class="footer-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="footer-copy">© 2026 BLDR Digital · Woodland Hills, CA</div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+
+document.querySelectorAll('a, button, .service-card, .bldr-letter-row').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%,-50%) scale(2.5)');
+  el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%,-50%) scale(1)');
+});
+
+// Sticky nav scroll
+const nav = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+  nav.style.borderBottomColor = window.scrollY > 20 ? 'var(--border)' : 'transparent';
+}, { passive: true });
+
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+
+</body>
+</html>
