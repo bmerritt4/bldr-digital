@@ -1,917 +1,1363 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Apex Digital — Web Design & AI Automation for Local Businesses</title>
-  <meta name="description" content="Apex Digital helps small businesses in the San Fernando Valley modernize their websites and add AI tools that save time and generate leads." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLDR Digital — Web Design & AI Automation for Local Businesses</title>
+<meta name="description" content="BLDR Digital builds websites and AI tools for local businesses in the San Fernando Valley. We build it. We maintain it. You grow.">
 
-    :root {
-      --navy: #0e1a2b;
-      --navy-mid: #1a2e45;
-      --navy-light: #243d57;
-      --cream: #f5f0e8;
-      --cream-dark: #ede7d9;
-      --gold: #c9a84c;
-      --gold-light: #e4c97a;
-      --white: #ffffff;
-      --text-muted: #7a8fa6;
-      --text-body: #c8d4e0;
-      --radius: 4px;
-      --radius-lg: 10px;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-    html { scroll-behavior: smooth; }
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-    body {
-      background: var(--navy);
-      color: var(--text-body);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
+:root{
+  --black:#080808;
+  --dark:#0F0F0F;
+  --dark-2:#161616;
+  --dark-3:#1E1E1E;
+  --dark-4:#2A2A2A;
+  --orange:#FF5C00;
+  --orange-dim:#CC4A00;
+  --orange-glow:rgba(255,92,0,0.15);
+  --white:#F5F5F5;
+  --white-dim:#A0A0A0;
+  --white-faint:#404040;
+  --border:#242424;
+  --font-display:'Bebas Neue',sans-serif;
+  --font-mono:'DM Mono',monospace;
+  --font-sans:'DM Sans',system-ui,sans-serif;
+}
 
-    /* ---- NAV ---- */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 48px;
-      background: rgba(14, 26, 43, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(201, 168, 76, 0.12);
-      transition: padding 0.3s ease;
-    }
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-sans);
+  font-weight:300;
+  color:var(--white);
+  background:var(--black);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  cursor:crosshair;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
 
-    .logo {
-      font-family: 'Fraunces', serif;
-      font-size: 20px;
-      font-weight: 400;
-      color: var(--cream);
-      letter-spacing: 0.02em;
-      text-decoration: none;
-    }
-    .logo em {
-      font-style: italic;
-      color: var(--gold);
-    }
+/* Custom cursor */
+.cursor{
+  position:fixed;width:8px;height:8px;
+  background:var(--orange);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform 0.1s;
+  mix-blend-mode:normal;
+}
 
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--text-muted);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--cream); }
+/* Shell */
+.shell{max-width:1280px;margin:0 auto;padding:0 40px}
 
-    .nav-cta {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--navy);
-      background: var(--gold);
-      border: none;
-      padding: 10px 22px;
-      border-radius: var(--radius);
-      cursor: pointer;
-      letter-spacing: 0.03em;
-      transition: background 0.2s, transform 0.15s;
-      text-decoration: none;
-    }
-    .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+/* NAV */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 40px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,8,8,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
 
-    /* ---- HERO ---- */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 140px 48px 80px;
-      position: relative;
-      overflow: hidden;
-    }
+.nav-logo{
+  font-family:var(--font-display);
+  font-size:28px;
+  letter-spacing:0.12em;
+  color:var(--white);
+  display:flex;align-items:center;gap:2px;
+}
 
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 80% 40%, rgba(201, 168, 76, 0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(26, 46, 69, 0.8) 0%, transparent 70%);
-      pointer-events: none;
-    }
+.nav-logo-accent{color:var(--orange)}
 
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
-      background-size: 80px 80px;
-      pointer-events: none;
-    }
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:400;
+  color:var(--white-dim);
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--orange)}
 
-    .hero-content {
-      position: relative;
-      max-width: 760px;
-    }
+.nav-cta{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--black)!important;
+  background:var(--orange);
+  padding:10px 20px;
+  border:none;cursor:pointer;
+  transition:background 0.2s,transform 0.15s;
+  display:inline-block;
+}
+.nav-cta:hover{background:var(--orange-dim);transform:translateY(-1px)}
 
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 28px;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.1s ease forwards;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      display: block;
-      width: 24px;
-      height: 1px;
-      background: var(--gold);
-    }
+.nav-mobile-btn{
+  display:none;background:none;border:none;
+  cursor:pointer;padding:4px;flex-direction:column;gap:5px;
+}
+.nav-mobile-btn span{display:block;width:22px;height:1px;background:var(--white)}
 
-    .hero h1 {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(42px, 6vw, 72px);
-      font-weight: 300;
-      line-height: 1.1;
-      color: var(--cream);
-      letter-spacing: -0.02em;
-      margin-bottom: 28px;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.2s ease forwards;
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--gold);
-    }
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  padding-top:64px;
+  position:relative;
+  overflow:hidden;
+  background:var(--black);
+}
 
-    .hero-sub {
-      font-size: 17px;
-      font-weight: 300;
-      color: var(--text-body);
-      line-height: 1.75;
-      max-width: 520px;
-      margin-bottom: 44px;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.3s ease forwards;
-    }
+/* Grid background */
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,92,0,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,92,0,0.04) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:linear-gradient(to bottom,transparent 0%,black 30%,black 70%,transparent 100%);
+}
 
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.4s ease forwards;
-    }
+/* Big BLDR lettermark */
+.hero-mark{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-52%);
+  font-family:var(--font-display);
+  font-size:clamp(180px,25vw,380px);
+  letter-spacing:0.05em;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,92,0,0.08);
+  pointer-events:none;
+  white-space:nowrap;
+  user-select:none;
+}
 
-    .btn-primary {
-      display: inline-block;
-      background: var(--gold);
-      color: var(--navy);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      padding: 14px 30px;
-      border-radius: var(--radius);
-      text-decoration: none;
-      letter-spacing: 0.03em;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 40px 80px;
+  max-width:1280px;
+  margin:0 auto;
+  width:100%;
+}
 
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--text-body);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .btn-ghost:hover { color: var(--cream); }
-    .btn-ghost svg { transition: transform 0.2s; }
-    .btn-ghost:hover svg { transform: translateX(3px); }
+.hero-tag{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:400;
+  color:var(--orange);
+  letter-spacing:0.2em;text-transform:uppercase;
+  margin-bottom:24px;
+  display:flex;align-items:center;gap:12px;
+  opacity:0;animation:fadeUp 0.8s 0.2s forwards;
+}
 
-    .hero-location {
-      position: absolute;
-      bottom: 48px;
-      right: 48px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.6s ease forwards;
-    }
-    .location-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-      animation: pulse 2s infinite;
-    }
+.hero-tag::before{
+  content:'';display:block;
+  width:32px;height:1px;background:var(--orange);
+}
 
-    /* ---- SOCIAL PROOF BAR ---- */
-    .proof-bar {
-      border-top: 1px solid rgba(255,255,255,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      padding: 20px 48px;
-      display: flex;
-      align-items: center;
-      gap: 48px;
-      overflow: hidden;
-    }
-    .proof-label {
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .proof-items {
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-    .proof-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-    .proof-item svg { color: var(--gold); flex-shrink: 0; }
+.hero-headline{
+  font-family:var(--font-display);
+  font-size:clamp(60px,9vw,140px);
+  line-height:0.92;
+  letter-spacing:0.02em;
+  color:var(--white);
+  margin-bottom:32px;
+  opacity:0;animation:fadeUp 0.8s 0.35s forwards;
+}
 
-    /* ---- SECTION COMMON ---- */
-    section { padding: 96px 48px; }
-    .section-tag {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .section-tag::after {
-      content: '';
-      display: block;
-      height: 1px;
-      width: 32px;
-      background: var(--gold);
-      opacity: 0.5;
-    }
-    .section-title {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(28px, 4vw, 44px);
-      font-weight: 300;
-      color: var(--cream);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-    }
-    .section-title em { font-style: italic; color: var(--gold); }
-    .section-sub {
-      font-size: 16px;
-      color: var(--text-body);
-      line-height: 1.75;
-      max-width: 520px;
-      margin-bottom: 56px;
-    }
+.hero-headline span{color:var(--orange)}
 
-    /* ---- SERVICES ---- */
-    #services { background: var(--navy-mid); }
+.hero-sub{
+  font-family:var(--font-mono);
+  font-size:14px;font-weight:300;
+  color:var(--white-dim);
+  line-height:1.8;
+  max-width:480px;
+  margin-bottom:48px;
+  opacity:0;animation:fadeUp 0.8s 0.5s forwards;
+}
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2px;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-    }
+.hero-actions{
+  display:flex;align-items:center;gap:24px;
+  opacity:0;animation:fadeUp 0.8s 0.65s forwards;
+}
 
-    .service-card {
-      background: var(--navy);
-      padding: 36px 32px;
-      transition: background 0.25s;
-      cursor: default;
-    }
-    .service-card:hover { background: var(--navy-light); }
+.btn-primary{
+  font-family:var(--font-mono);
+  font-size:12px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--black);
+  background:var(--orange);
+  padding:14px 32px;
+  border:none;cursor:pointer;
+  transition:background 0.2s,transform 0.15s;
+  display:inline-block;
+}
+.btn-primary:hover{background:var(--orange-dim);transform:translateY(-1px);color:var(--black)}
 
-    .service-num {
-      font-family: 'Fraunces', serif;
-      font-size: 13px;
-      color: var(--gold);
-      opacity: 0.6;
-      margin-bottom: 20px;
-      font-style: italic;
-    }
-    .service-card h3 {
-      font-family: 'Fraunces', serif;
-      font-size: 20px;
-      font-weight: 400;
-      color: var(--cream);
-      margin-bottom: 12px;
-      line-height: 1.3;
-    }
-    .service-card p {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-    .service-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 20px;
-    }
-    .tag {
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      border: 1px solid rgba(201, 168, 76, 0.25);
-      color: var(--gold);
-      letter-spacing: 0.04em;
-    }
+.btn-outline{
+  font-family:var(--font-mono);
+  font-size:12px;font-weight:400;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--white-dim);
+  border:1px solid var(--white-faint);
+  padding:14px 32px;
+  transition:border-color 0.2s,color 0.2s;
+  display:inline-block;
+}
+.btn-outline:hover{border-color:var(--orange);color:var(--orange)}
 
-    /* ---- HOW IT WORKS ---- */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 40px;
-      counter-reset: steps;
-    }
-    .step { counter-increment: steps; position: relative; padding-top: 20px; }
-    .step::before {
-      content: '0' counter(steps);
-      font-family: 'Fraunces', serif;
-      font-size: 48px;
-      font-weight: 300;
-      color: rgba(201, 168, 76, 0.15);
-      line-height: 1;
-      margin-bottom: 16px;
-      display: block;
-    }
-    .step h3 {
-      font-family: 'Fraunces', serif;
-      font-size: 18px;
-      font-weight: 400;
-      color: var(--cream);
-      margin-bottom: 10px;
-    }
-    .step p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+.hero-stats{
+  position:absolute;right:40px;bottom:80px;
+  display:flex;flex-direction:column;gap:24px;
+  opacity:0;animation:fadeIn 1s 0.8s forwards;
+}
 
-    /* ---- PRICING ---- */
-    #pricing { background: var(--navy-mid); }
+.hero-stat-num{
+  font-family:var(--font-display);
+  font-size:40px;letter-spacing:0.05em;
+  color:var(--white);line-height:1;
+}
 
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
+.hero-stat-label{
+  font-family:var(--font-mono);
+  font-size:10px;color:var(--white-dim);
+  letter-spacing:0.12em;text-transform:uppercase;
+  margin-top:4px;
+}
 
-    .pricing-card {
-      background: var(--navy);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: var(--radius-lg);
-      padding: 36px 32px;
-      display: flex;
-      flex-direction: column;
-      transition: border-color 0.25s, transform 0.25s;
-    }
-    .pricing-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-4px); }
-    .pricing-card.featured {
-      border-color: var(--gold);
-      position: relative;
-    }
+.hero-stat-divider{
+  width:1px;height:40px;
+  background:linear-gradient(to bottom,transparent,var(--border),transparent);
+}
 
-    .featured-badge {
-      position: absolute;
-      top: -1px; left: 50%; transform: translateX(-50%);
-      background: var(--gold);
-      color: var(--navy);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      padding: 4px 16px;
-      border-radius: 0 0 var(--radius) var(--radius);
-    }
+/* MARQUEE */
+.marquee-wrap{
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:var(--dark-2);
+  padding:14px 0;
+  overflow:hidden;
+  position:relative;z-index:2;
+}
 
-    .plan-name {
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
-    .plan-price {
-      font-family: 'Fraunces', serif;
-      font-size: 38px;
-      font-weight: 300;
-      color: var(--cream);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .plan-price sup { font-size: 20px; vertical-align: super; }
-    .plan-recur {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 28px;
-    }
-    .plan-divider {
-      height: 1px;
-      background: rgba(255,255,255,0.07);
-      margin-bottom: 28px;
-    }
-    .plan-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      flex: 1;
-      margin-bottom: 32px;
-    }
-    .plan-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 14px;
-      color: var(--text-body);
-    }
-    .plan-features li svg { flex-shrink: 0; margin-top: 3px; color: var(--gold); }
+.marquee-track{
+  display:flex;gap:0;
+  animation:marquee 30s linear infinite;
+  width:max-content;
+}
 
-    .plan-btn {
-      display: block;
-      text-align: center;
-      padding: 13px;
-      border-radius: var(--radius);
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s;
-      letter-spacing: 0.03em;
-    }
-    .plan-btn-outline {
-      background: transparent;
-      border: 1px solid rgba(201,168,76,0.4);
-      color: var(--gold);
-    }
-    .plan-btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.07); }
-    .plan-btn-filled {
-      background: var(--gold);
-      color: var(--navy);
-    }
-    .plan-btn-filled:hover { background: var(--gold-light); transform: translateY(-1px); }
+.marquee-item{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:400;
+  color:var(--white-dim);
+  letter-spacing:0.14em;text-transform:uppercase;
+  padding:0 32px;
+  white-space:nowrap;
+  display:flex;align-items:center;gap:32px;
+}
 
-    /* ---- ABOUT ---- */
-    .about-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    @media (max-width: 768px) { .about-inner { grid-template-columns: 1fr; gap: 40px; } }
-    .about-text .section-sub { margin-bottom: 32px; }
-    .about-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .stat-box {
-      background: var(--navy-mid);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-    }
-    .stat-number {
-      font-family: 'Fraunces', serif;
-      font-size: 36px;
-      font-weight: 300;
-      color: var(--gold);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .stat-label { font-size: 13px; color: var(--text-muted); }
+.marquee-item::after{
+  content:'◆';color:var(--orange);font-size:8px;
+}
 
-    /* ---- CTA ---- */
-    #contact {
-      background: var(--navy-mid);
-      text-align: center;
-    }
-    #contact .section-tag { justify-content: center; }
-    #contact .section-tag::after { display: none; }
-    #contact .section-title { margin: 0 auto 16px; }
-    #contact .section-sub { margin: 0 auto 44px; text-align: center; }
+@keyframes marquee{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
 
-    .contact-form {
-      max-width: 480px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-input {
-      width: 100%;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--radius);
-      padding: 13px 16px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      color: var(--cream);
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .form-input::placeholder { color: var(--text-muted); }
-    .form-input:focus { border-color: rgba(201,168,76,0.5); }
-    .form-submit {
-      width: 100%;
-      padding: 15px;
-      background: var(--gold);
-      color: var(--navy);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      border: none;
-      border-radius: var(--radius);
-      cursor: pointer;
-      letter-spacing: 0.03em;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
+/* SECTIONS */
+.section{padding:120px 0}
+.section--dark{background:var(--dark)}
+.section--dark-2{background:var(--dark-2)}
+.section--black{background:var(--black)}
 
-    /* ---- FOOTER ---- */
-    footer {
-      padding: 28px 48px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    footer p { font-size: 13px; color: var(--text-muted); }
-    .footer-links { display: flex; gap: 28px; }
-    .footer-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--cream); }
+.section-label{
+  font-family:var(--font-mono);
+  font-size:10px;font-weight:500;
+  color:var(--orange);
+  letter-spacing:0.2em;text-transform:uppercase;
+  margin-bottom:20px;
+  display:flex;align-items:center;gap:12px;
+}
+.section-label::before{content:'//';color:var(--white-faint)}
 
-    /* ---- ANIMATIONS ---- */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.5; transform: scale(1.4); }
-    }
+.section-headline{
+  font-family:var(--font-display);
+  font-size:clamp(42px,5vw,80px);
+  letter-spacing:0.03em;
+  line-height:0.95;
+  color:var(--white);
+  margin-bottom:24px;
+}
+.section-headline span{color:var(--orange)}
 
-    /* ---- MOBILE ---- */
-    @media (max-width: 768px) {
-      nav { padding: 16px 24px; }
-      .nav-links { display: none; }
-      .hero { padding: 100px 24px 60px; }
-      .hero-location { display: none; }
-      section { padding: 64px 24px; }
-      .proof-bar { padding: 16px 24px; flex-direction: column; align-items: flex-start; gap: 16px; }
-      footer { padding: 24px; }
-      .form-row { grid-template-columns: 1fr; }
-    }
-  </style>
+.section-body{
+  font-family:var(--font-mono);
+  font-size:13px;font-weight:300;
+  color:var(--white-dim);
+  line-height:1.9;
+  margin-bottom:16px;
+}
+
+/* SERVICES */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1px;
+  background:var(--border);
+  margin-top:60px;
+}
+
+.service-card{
+  background:var(--dark);
+  padding:48px 40px;
+  position:relative;
+  overflow:hidden;
+  transition:background 0.3s;
+}
+
+.service-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;
+  height:2px;
+  background:var(--orange);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.4s;
+}
+
+.service-card:hover{background:var(--dark-2)}
+.service-card:hover::before{transform:scaleX(1)}
+
+.service-num{
+  font-family:var(--font-display);
+  font-size:72px;letter-spacing:0.05em;
+  color:var(--border);
+  line-height:1;margin-bottom:20px;
+  transition:color 0.3s;
+}
+.service-card:hover .service-num{color:var(--dark-4)}
+
+.service-name{
+  font-family:var(--font-display);
+  font-size:28px;letter-spacing:0.05em;
+  color:var(--white);margin-bottom:12px;
+}
+
+.service-desc{
+  font-family:var(--font-mono);
+  font-size:12px;font-weight:300;
+  color:var(--white-dim);
+  line-height:1.8;margin-bottom:24px;
+}
+
+.service-tags{display:flex;flex-wrap:wrap;gap:8px}
+.service-tag{
+  font-family:var(--font-mono);
+  font-size:10px;font-weight:400;
+  color:var(--orange);
+  border:1px solid rgba(255,92,0,0.3);
+  padding:4px 10px;
+  letter-spacing:0.1em;
+}
+
+/* WHAT BLDR MEANS */
+.bldr-section{
+  padding:120px 0;
+  background:var(--black);
+  position:relative;
+  overflow:hidden;
+}
+
+.bldr-section::before{
+  content:'BLDR';
+  position:absolute;right:-40px;top:50%;
+  transform:translateY(-50%);
+  font-family:var(--font-display);
+  font-size:300px;letter-spacing:0.1em;
+  color:transparent;
+  -webkit-text-stroke:1px var(--border);
+  pointer-events:none;
+  user-select:none;
+}
+
+.bldr-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+}
+
+.bldr-letters{
+  display:flex;flex-direction:column;gap:0;
+}
+
+.bldr-letter-row{
+  display:flex;align-items:stretch;
+  border-bottom:1px solid var(--border);
+  padding:28px 0;
+  gap:24px;
+  position:relative;
+  overflow:hidden;
+  transition:background 0.2s;
+  cursor:default;
+}
+
+.bldr-letter-row:first-child{border-top:1px solid var(--border)}
+.bldr-letter-row:hover{background:var(--dark-2)}
+
+.bldr-letter{
+  font-family:var(--font-display);
+  font-size:64px;letter-spacing:0.05em;
+  color:var(--orange);
+  line-height:1;
+  width:64px;flex-shrink:0;
+}
+
+.bldr-letter-content{display:flex;flex-direction:column;justify-content:center}
+
+.bldr-letter-word{
+  font-family:var(--font-display);
+  font-size:28px;letter-spacing:0.05em;
+  color:var(--white);
+  margin-bottom:4px;
+}
+
+.bldr-letter-desc{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:300;
+  color:var(--white-dim);
+  line-height:1.6;
+  letter-spacing:0.04em;
+}
+
+/* PROCESS */
+.process-steps{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--border);
+  margin-top:60px;
+}
+
+.process-step{
+  background:var(--dark);
+  padding:40px 32px;
+  position:relative;
+}
+
+.process-step-num{
+  font-family:var(--font-display);
+  font-size:48px;letter-spacing:0.05em;
+  color:var(--border);
+  line-height:1;margin-bottom:20px;
+}
+
+.process-step-name{
+  font-family:var(--font-display);
+  font-size:22px;letter-spacing:0.05em;
+  color:var(--white);margin-bottom:12px;
+}
+
+.process-step-desc{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:300;
+  color:var(--white-dim);
+  line-height:1.8;
+}
+
+.process-step::after{
+  content:'→';
+  position:absolute;right:-12px;top:40px;
+  font-size:16px;color:var(--orange);
+  z-index:2;
+}
+.process-step:last-child::after{display:none}
+
+/* PRICING */
+.pricing-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--border);
+  margin-top:60px;
+}
+
+.pricing-card{
+  background:var(--dark);
+  padding:56px 48px;
+  position:relative;
+  overflow:hidden;
+}
+
+.pricing-card--featured{
+  background:var(--dark-2);
+}
+
+.pricing-card--featured::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;
+  height:2px;
+  background:var(--orange);
+}
+
+.pricing-badge{
+  font-family:var(--font-mono);
+  font-size:10px;font-weight:500;
+  color:var(--black);
+  background:var(--orange);
+  padding:4px 12px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  display:inline-block;
+  margin-bottom:24px;
+}
+
+.pricing-name{
+  font-family:var(--font-display);
+  font-size:40px;letter-spacing:0.05em;
+  color:var(--white);margin-bottom:8px;
+}
+
+.pricing-desc{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:300;
+  color:var(--white-dim);
+  margin-bottom:32px;
+  line-height:1.7;
+}
+
+.pricing-build{
+  margin-bottom:8px;
+}
+
+.pricing-build-num{
+  font-family:var(--font-display);
+  font-size:56px;letter-spacing:0.03em;
+  color:var(--white);line-height:1;
+}
+
+.pricing-build-label{
+  font-family:var(--font-mono);
+  font-size:10px;color:var(--white-dim);
+  letter-spacing:0.12em;text-transform:uppercase;
+  margin-top:4px;
+}
+
+.pricing-retainer{
+  font-family:var(--font-mono);
+  font-size:13px;font-weight:400;
+  color:var(--orange);
+  letter-spacing:0.06em;
+  margin-bottom:40px;
+  margin-top:8px;
+}
+
+.pricing-divider{
+  width:100%;height:1px;
+  background:var(--border);
+  margin-bottom:32px;
+}
+
+.pricing-features{
+  list-style:none;
+  display:flex;flex-direction:column;
+  gap:12px;margin-bottom:40px;
+}
+
+.pricing-feature{
+  font-family:var(--font-mono);
+  font-size:12px;font-weight:300;
+  color:var(--white-dim);
+  display:flex;align-items:flex-start;gap:12px;
+  line-height:1.5;
+}
+
+.pricing-feature::before{
+  content:'→';color:var(--orange);
+  flex-shrink:0;font-size:11px;
+  margin-top:1px;
+}
+
+/* ABOUT */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+}
+
+.about-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--border);
+  margin-top:48px;
+}
+
+.about-stat{
+  background:var(--dark-3);
+  padding:28px 24px;
+}
+
+.about-stat-num{
+  font-family:var(--font-display);
+  font-size:44px;letter-spacing:0.05em;
+  color:var(--orange);line-height:1;
+}
+
+.about-stat-label{
+  font-family:var(--font-mono);
+  font-size:10px;color:var(--white-dim);
+  letter-spacing:0.1em;text-transform:uppercase;
+  margin-top:6px;
+}
+
+.about-visual{
+  position:relative;
+}
+
+.about-img-block{
+  background:var(--dark-3);
+  border:1px solid var(--border);
+  aspect-ratio:4/5;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.about-img-block::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--dark-3) 0%,var(--dark-4) 100%);
+}
+
+.about-img-placeholder{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;
+  align-items:center;gap:12px;
+}
+
+.about-img-placeholder svg{
+  width:48px;height:48px;
+  stroke:var(--white-faint);fill:none;stroke-width:1;
+}
+
+.about-img-placeholder span{
+  font-family:var(--font-mono);
+  font-size:10px;color:var(--white-faint);
+  letter-spacing:0.14em;text-transform:uppercase;
+}
+
+.about-accent{
+  position:absolute;
+  bottom:-16px;right:-16px;
+  width:120px;height:120px;
+  border:1px solid var(--orange);
+  opacity:0.2;
+}
+
+/* CONTACT */
+.contact-section{
+  padding:120px 0;
+  background:var(--dark);
+  position:relative;
+  overflow:hidden;
+}
+
+.contact-section::before{
+  content:'BUILD';
+  position:absolute;bottom:-40px;right:-20px;
+  font-family:var(--font-display);
+  font-size:200px;letter-spacing:0.1em;
+  color:transparent;
+  -webkit-text-stroke:1px var(--border);
+  pointer-events:none;
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:start;
+}
+
+.contact-form{
+  display:flex;flex-direction:column;gap:16px;
+}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+.form-field{display:flex;flex-direction:column;gap:8px}
+
+.form-label{
+  font-family:var(--font-mono);
+  font-size:10px;font-weight:500;
+  color:var(--white-dim);
+  letter-spacing:0.14em;text-transform:uppercase;
+}
+
+.form-input,
+.form-textarea{
+  background:var(--dark-3);
+  border:1px solid var(--border);
+  color:var(--white);
+  font-family:var(--font-mono);
+  font-size:13px;font-weight:300;
+  padding:14px 16px;
+  outline:none;
+  transition:border-color 0.2s;
+  width:100%;
+}
+
+.form-input:focus,
+.form-textarea:focus{border-color:var(--orange)}
+
+.form-textarea{height:120px;resize:none}
+
+.form-submit{
+  font-family:var(--font-mono);
+  font-size:12px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--black);
+  background:var(--orange);
+  border:none;cursor:pointer;
+  padding:16px 32px;
+  transition:background 0.2s;
+  margin-top:8px;
+  align-self:flex-start;
+}
+
+.form-submit:hover{background:var(--orange-dim)}
+
+.contact-info{
+  display:flex;flex-direction:column;gap:32px;
+  padding-top:8px;
+}
+
+.contact-info-item{
+  display:flex;flex-direction:column;gap:6px;
+  padding-bottom:32px;
+  border-bottom:1px solid var(--border);
+}
+.contact-info-item:last-child{border-bottom:none}
+
+.contact-info-label{
+  font-family:var(--font-mono);
+  font-size:10px;font-weight:500;
+  color:var(--orange);
+  letter-spacing:0.16em;text-transform:uppercase;
+}
+
+.contact-info-value{
+  font-family:var(--font-mono);
+  font-size:13px;font-weight:300;
+  color:var(--white);
+  line-height:1.7;
+}
+
+.contact-info-value a{color:var(--white);transition:color 0.2s}
+.contact-info-value a:hover{color:var(--orange)}
+
+/* FOOTER */
+.footer{
+  background:var(--black);
+  border-top:1px solid var(--border);
+  padding:40px 0;
+}
+
+.footer-inner{
+  display:flex;align-items:center;
+  justify-content:space-between;
+}
+
+.footer-logo{
+  font-family:var(--font-display);
+  font-size:24px;letter-spacing:0.12em;
+  color:var(--white);
+}
+
+.footer-logo span{color:var(--orange)}
+
+.footer-links{
+  display:flex;gap:32px;list-style:none;
+}
+
+.footer-links a{
+  font-family:var(--font-mono);
+  font-size:11px;color:var(--white-dim);
+  letter-spacing:0.08em;
+  transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--orange)}
+
+.footer-copy{
+  font-family:var(--font-mono);
+  font-size:11px;color:var(--white-faint);
+  letter-spacing:0.06em;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeIn{
+  from{opacity:0}to{opacity:1}
+}
+
+.reveal{
+  opacity:0;transform:translateY(24px);
+  transition:opacity 0.7s,transform 0.7s;
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .bldr-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:1fr 1fr}
+  .hero-stats{display:none}
+  .about-visual{display:none}
+  .bldr-section::before{display:none}
+}
+
+@media(max-width:768px){
+  .nav{padding:0 20px}
+  .nav-links{display:none}
+  .nav-mobile-btn{display:flex}
+  .shell{padding:0 20px}
+  .hero-content{padding:0 20px 60px}
+  .section{padding:80px 0}
+  .process-steps{grid-template-columns:1fr}
+  .process-step::after{display:none}
+  .about-stats{grid-template-columns:1fr 1fr}
+  .footer-inner{flex-direction:column;gap:24px;text-align:center}
+  .footer-links{flex-wrap:wrap;justify-content:center}
+  .form-row{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#" class="logo">Apex <em>Digital</em></a>
-    <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#how">How it works</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#about">About</a></li>
-    </ul>
-    <a href="#contact" class="nav-cta">Free site audit</a>
-  </nav>
+<div class="cursor" id="cursor"></div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">San Fernando Valley's Digital Partner</div>
-      <h1>Your business deserves a website that <em>works</em></h1>
-      <p class="hero-sub">We modernize local small businesses with professional websites and practical AI tools — so you capture more leads, answer customers 24/7, and look as good online as you are in person.</p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Get a free site audit</a>
-        <a href="#services" class="btn-ghost">
-          See what we do
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-    </div>
-    <div class="hero-location">
-      <div class="location-dot"></div>
-      Woodland Hills, CA
-    </div>
-  </section>
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-logo">BLD<span class="nav-logo-accent">R</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Free Audit</a></li>
+  </ul>
+  <button class="nav-mobile-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-  <!-- PROOF BAR -->
-  <div class="proof-bar">
-    <span class="proof-label">Built for local business</span>
-    <div class="proof-items">
-      <div class="proof-item">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Restaurants &amp; cafes
-      </div>
-      <div class="proof-item">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Medical &amp; wellness
-      </div>
-      <div class="proof-item">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Home services
-      </div>
-      <div class="proof-item">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Retail &amp; boutiques
-      </div>
-      <div class="proof-item">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Professional services
-      </div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-mark">BLDR</div>
+
+  <div class="hero-content">
+    <div class="hero-tag">San Fernando Valley · Woodland Hills, CA</div>
+
+    <h1 class="hero-headline">
+      We don't<br>
+      template.<br>
+      We <span>build.</span>
+    </h1>
+
+    <p class="hero-sub">
+      BLDR Digital builds websites and AI tools for local businesses — 
+      dental practices, med spas, and service businesses that are tired 
+      of looking invisible online. We build it. We maintain it. You grow.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get a free audit</a>
+      <a href="#pricing" class="btn-outline">See pricing</a>
     </div>
   </div>
 
-  <!-- SERVICES -->
-  <section id="services">
-    <div class="section-tag">What we do</div>
-    <h2 class="section-title">Everything your business<br>needs <em>online</em></h2>
-    <p class="section-sub">From a fresh website to AI tools that handle customer questions after hours — we build it, maintain it, and keep it working for you.</p>
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-num">30+</div>
+      <div class="hero-stat-label">Clients audited</div>
+    </div>
+    <div class="hero-stat-divider"></div>
+    <div>
+      <div class="hero-stat-num">24/7</div>
+      <div class="hero-stat-label">AI tools running</div>
+    </div>
+    <div class="hero-stat-divider"></div>
+    <div>
+      <div class="hero-stat-num">$0</div>
+      <div class="hero-stat-label">Cost to audit</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Website Design</div>
+    <div class="marquee-item">AI Chatbots</div>
+    <div class="marquee-item">Review Automation</div>
+    <div class="marquee-item">Local SEO</div>
+    <div class="marquee-item">Booking Integration</div>
+    <div class="marquee-item">Google Business</div>
+    <div class="marquee-item">Dental Practices</div>
+    <div class="marquee-item">Med Spas</div>
+    <div class="marquee-item">San Fernando Valley</div>
+    <div class="marquee-item">Website Design</div>
+    <div class="marquee-item">AI Chatbots</div>
+    <div class="marquee-item">Review Automation</div>
+    <div class="marquee-item">Local SEO</div>
+    <div class="marquee-item">Booking Integration</div>
+    <div class="marquee-item">Google Business</div>
+    <div class="marquee-item">Dental Practices</div>
+    <div class="marquee-item">Med Spas</div>
+    <div class="marquee-item">San Fernando Valley</div>
+  </div>
+</div>
+
+
+<!-- WHAT BLDR MEANS -->
+<section class="bldr-section" id="about-bldr">
+  <div class="shell">
+    <div class="bldr-grid">
+      <div class="reveal">
+        <div class="section-label">What we are</div>
+        <h2 class="section-headline">THE NAME<br>SAYS IT <span>ALL</span></h2>
+        <p class="section-body">
+          Every letter in BLDR stands for something we actually do — 
+          not agency buzzwords, not empty promises. Four principles 
+          that drive every project we take on.
+        </p>
+        <p class="section-body">
+          We're a husband-and-wife team from Woodland Hills. Brian builds. 
+          Jessica sells. Together we serve the local businesses that make 
+          the San Fernando Valley run — and we stay with them long after 
+          the site goes live.
+        </p>
+      </div>
+
+      <div class="bldr-letters reveal">
+        <div class="bldr-letter-row">
+          <div class="bldr-letter">B</div>
+          <div class="bldr-letter-content">
+            <div class="bldr-letter-word">Build</div>
+            <div class="bldr-letter-desc">We construct from scratch — no templates, no shortcuts, no recycled layouts from the last client.</div>
+          </div>
+        </div>
+        <div class="bldr-letter-row">
+          <div class="bldr-letter">L</div>
+          <div class="bldr-letter-content">
+            <div class="bldr-letter-word">Launch</div>
+            <div class="bldr-letter-desc">We get you live fast and configured correctly — SEO, SSL, analytics, and AI tools from day one.</div>
+          </div>
+        </div>
+        <div class="bldr-letter-row">
+          <div class="bldr-letter">D</div>
+          <div class="bldr-letter-content">
+            <div class="bldr-letter-word">Drive</div>
+            <div class="bldr-letter-desc">We drive real results — more appointments, more reviews, more customers finding you online.</div>
+          </div>
+        </div>
+        <div class="bldr-letter-row">
+          <div class="bldr-letter">R</div>
+          <div class="bldr-letter-content">
+            <div class="bldr-letter-word">Retain</div>
+            <div class="bldr-letter-desc">We stay with you. Monthly maintenance, ongoing improvements, and a team that picks up the phone.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SERVICES -->
+<section class="section section--dark" id="services">
+  <div class="shell">
+    <div class="reveal">
+      <div class="section-label">What we build</div>
+      <h2 class="section-headline">EVERYTHING YOUR<br>BUSINESS NEEDS <span>ONLINE</span></h2>
+    </div>
+
     <div class="services-grid">
-      <div class="service-card">
+      <div class="service-card reveal">
         <div class="service-num">01</div>
-        <h3>Website Design &amp; Build</h3>
-        <p>Modern, fast, mobile-ready sites built to convert visitors into customers. SEO-optimized from day one.</p>
+        <div class="service-name">Website Design & Build</div>
+        <p class="service-desc">Modern, fast, mobile-ready sites built to convert visitors into patients and customers. Custom designed — never templated.</p>
         <div class="service-tags">
-          <span class="tag">Custom design</span>
-          <span class="tag">Mobile-first</span>
-          <span class="tag">SEO-ready</span>
+          <span class="service-tag">Custom design</span>
+          <span class="service-tag">Mobile-first</span>
+          <span class="service-tag">SEO-ready</span>
         </div>
       </div>
-      <div class="service-card">
+
+      <div class="service-card reveal">
         <div class="service-num">02</div>
-        <h3>AI Chatbot &amp; Lead Capture</h3>
-        <p>Answer customer questions, qualify leads, and book appointments automatically — even at 2am.</p>
+        <div class="service-name">AI Chatbot & Lead Capture</div>
+        <p class="service-desc">Answer patient questions, capture leads, and book appointments automatically — even at 2am when your front desk is closed.</p>
         <div class="service-tags">
-          <span class="tag">24/7 responses</span>
-          <span class="tag">Lead capture</span>
-          <span class="tag">Booking</span>
+          <span class="service-tag">24/7 responses</span>
+          <span class="service-tag">Lead capture</span>
+          <span class="service-tag">Auto-booking</span>
         </div>
       </div>
-      <div class="service-card">
+
+      <div class="service-card reveal">
         <div class="service-num">03</div>
-        <h3>Review &amp; Reputation</h3>
-        <p>Automated systems that follow up with happy customers and get them to leave you Google reviews.</p>
+        <div class="service-name">Review Automation</div>
+        <p class="service-desc">Automated follow-ups that turn happy patients into Google reviews — consistently, without your staff lifting a finger.</p>
         <div class="service-tags">
-          <span class="tag">Google reviews</span>
-          <span class="tag">Automated</span>
-          <span class="tag">SMS follow-up</span>
+          <span class="service-tag">Google reviews</span>
+          <span class="service-tag">SMS follow-up</span>
+          <span class="service-tag">Automated</span>
         </div>
       </div>
-      <div class="service-card">
+
+      <div class="service-card reveal">
         <div class="service-num">04</div>
-        <h3>Google &amp; Local SEO</h3>
-        <p>Get found when local customers search for what you offer. Google Business Profile optimization included.</p>
+        <div class="service-name">Local SEO & Google Business</div>
+        <p class="service-desc">Get found when local customers search. Google Business Profile optimization, citations, and local search presence — built in from day one.</p>
         <div class="service-tags">
-          <span class="tag">Local search</span>
-          <span class="tag">GBP setup</span>
-          <span class="tag">Citations</span>
+          <span class="service-tag">Local search</span>
+          <span class="service-tag">GBP setup</span>
+          <span class="service-tag">Citations</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- HOW IT WORKS -->
-  <section id="how">
-    <div class="section-tag">The process</div>
-    <h2 class="section-title">Simple from <em>start</em> to launch</h2>
-    <p class="section-sub">We've designed our process to be fast, transparent, and painless — even for business owners who've never worked with a web agency before.</p>
-    <div class="steps">
-      <div class="step">
-        <h3>Free audit</h3>
-        <p>We review your current online presence and show you exactly what's costing you customers — no charge, no commitment.</p>
+
+<!-- PROCESS -->
+<section class="section section--black" id="process">
+  <div class="shell">
+    <div class="reveal">
+      <div class="section-label">How it works</div>
+      <h2 class="section-headline">SIMPLE FROM<br><span>START</span> TO LAUNCH</h2>
+      <p class="section-body" style="max-width:560px">
+        Four steps. Flat-rate pricing. No tech jargon, no long meetings, 
+        no surprises. We've designed this process for business owners who 
+        have a practice to run, not a website to manage.
+      </p>
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="process-step-num">01</div>
+        <div class="process-step-name">Free Audit</div>
+        <p class="process-step-desc">We review your current online presence and show you exactly what's costing you customers. No charge, no commitment.</p>
       </div>
-      <div class="step">
-        <h3>Custom proposal</h3>
-        <p>You get a clear, itemized plan with flat-rate pricing. No surprises, no hourly billing, no tech jargon.</p>
+      <div class="process-step reveal">
+        <div class="process-step-num">02</div>
+        <div class="process-step-name">Proposal</div>
+        <p class="process-step-desc">You get a clear, itemized plan with flat-rate pricing. No hourly billing, no tech jargon, no scope creep.</p>
       </div>
-      <div class="step">
-        <h3>We build it</h3>
-        <p>Our team handles everything. You stay updated via simple check-ins, not long meetings or confusing tickets.</p>
+      <div class="process-step reveal">
+        <div class="process-step-num">03</div>
+        <div class="process-step-name">We Build</div>
+        <p class="process-step-desc">Our team handles everything. Simple check-ins keep you in the loop — not long meetings or confusing revision tickets.</p>
       </div>
-      <div class="step">
-        <h3>We maintain it</h3>
-        <p>After launch, your monthly retainer keeps everything current, secure, and performing. We're always one call away.</p>
+      <div class="process-step reveal">
+        <div class="process-step-num">04</div>
+        <div class="process-step-name">We Maintain</div>
+        <p class="process-step-desc">After launch your monthly retainer keeps everything current, secure, and performing. We're always one call away.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PRICING -->
-  <section id="pricing">
-    <div class="section-tag">Pricing</div>
-    <h2 class="section-title">Transparent, <em>flat-rate</em> plans</h2>
-    <p class="section-sub">One-time build fee plus a monthly retainer. No hourly surprises. No contracts longer than 90 days.</p>
+
+<!-- PRICING -->
+<section class="section section--dark" id="pricing">
+  <div class="shell">
+    <div class="reveal">
+      <div class="section-label">Investment</div>
+      <h2 class="section-headline">TRANSPARENT,<br><span>FLAT-RATE</span> PLANS</h2>
+      <p class="section-body" style="max-width:560px">
+        One-time build fee plus a monthly retainer. No hourly surprises. 
+        No contracts longer than 90 days. Every plan includes a free site audit before you commit.
+      </p>
+    </div>
+
     <div class="pricing-grid">
-      <div class="pricing-card">
-        <div class="plan-name">Starter</div>
-        <div class="plan-price"><sup>$</sup>1,500</div>
-        <div class="plan-recur">+ $150 / month</div>
-        <div class="plan-divider"></div>
-        <ul class="plan-features">
-          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>5–7 page website</li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mobile-first design</li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Google Business setup</li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Basic SEO</li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Monthly maintenance</li>
+
+      <!-- STARTER -->
+      <div class="pricing-card reveal">
+        <div class="pricing-name">Starter</div>
+        <p class="pricing-desc">A clean, professional website that establishes your presence and captures leads. Perfect for practices ready to stop being invisible online.</p>
+
+        <div class="pricing-build">
+          <div class="pricing-build-num">$2,000</div>
+          <div class="pricing-build-label">One-time build fee</div>
+        </div>
+        <div class="pricing-retainer">+ $200 / month retainer</div>
+
+        <div class="pricing-divider"></div>
+
+        <ul class="pricing-features">
+          <li class="pricing-feature">5–7 page custom website</li>
+          <li class="pricing-feature">Mobile-first, SEO-optimized design</li>
+          <li class="pricing-feature">Google Business Profile setup & optimization</li>
+          <li class="pricing-feature">Contact form with email notifications</li>
+          <li class="pricing-feature">Google Analytics 4 installed</li>
+          <li class="pricing-feature">Monthly site maintenance & updates (2 hrs/mo)</li>
+          <li class="pricing-feature">Monthly performance report</li>
         </ul>
-        <a href="#contact" class="plan-btn plan-btn-outline">Get started</a>
+
+        <a href="#contact" class="btn-outline">Get started</a>
       </div>
-      <div class="pricing-card featured">
-        <div class="featured-badge">Most popular</div>
-        <div class="plan-name">Growth</div>
-        <div class="plan-price"><sup>$</sup>3,500</div>
-        <div class="plan-recur">+ $350 / month</div>
-        <div class="plan-divider"></div>
-        <ul class="plan-features">
-          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Starter</li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>AI chatbot</li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Review automation</li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>CRM integration</li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Quarterly check-in call</li>
+
+      <!-- GROWTH -->
+      <div class="pricing-card pricing-card--featured reveal">
+        <div class="pricing-badge">Most popular</div>
+        <div class="pricing-name">Growth</div>
+        <p class="pricing-desc">The full system — website plus AI tools that work while you sleep. Built for practices ready to actively grow their patient base.</p>
+
+        <div class="pricing-build">
+          <div class="pricing-build-num">$3,000</div>
+          <div class="pricing-build-label">One-time build fee</div>
+        </div>
+        <div class="pricing-retainer">+ $400 / month retainer</div>
+
+        <div class="pricing-divider"></div>
+
+        <ul class="pricing-features">
+          <li class="pricing-feature">Everything in Starter</li>
+          <li class="pricing-feature">8–10 page custom website</li>
+          <li class="pricing-feature">AI chatbot — answers questions & books appointments 24/7</li>
+          <li class="pricing-feature">Automated review generation system</li>
+          <li class="pricing-feature">Online booking widget integration</li>
+          <li class="pricing-feature">Monthly check-in call with performance review</li>
+          <li class="pricing-feature">Priority support & faster response times</li>
         </ul>
-        <a href="#contact" class="plan-btn plan-btn-filled">Get started</a>
+
+        <a href="#contact" class="btn-primary">Get started</a>
       </div>
-      <div class="pricing-card">
-        <div class="plan-name">Pro</div>
-        <div class="plan-price"><sup>$</sup>7,000+</div>
-        <div class="plan-recur">+ $700 / month</div>
-        <div class="plan-divider"></div>
-        <ul class="plan-features">
-          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Growth</li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom AI workflows</li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Analytics dashboard</li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority support</li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Monthly strategy call</li>
-        </ul>
-        <a href="#contact" class="plan-btn plan-btn-outline">Get started</a>
+
+    </div>
+
+    <!-- Fine print -->
+    <div style="margin-top:32px;padding:24px 32px;border:1px solid var(--border);background:var(--dark-2)">
+      <p style="font-family:var(--font-mono);font-size:11px;color:var(--white-dim);line-height:1.8;letter-spacing:0.04em">
+        All plans require a 50% deposit to begin. Retainer includes up to 2 hours of site updates per month — additional work billed at $85/hr. 
+        No contracts longer than 90 days. Upgrade from Starter to Growth anytime for a $500 expansion fee. 
+        Domain registered in your name — you own it always.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ABOUT -->
+<section class="section section--black" id="about">
+  <div class="shell">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="section-label">Who we are</div>
+        <h2 class="section-headline">LOCAL PEOPLE,<br><span>REAL</span> EXPERTISE</h2>
+        <p class="section-body">
+          We're a husband-and-wife team based in Woodland Hills. Brian brings 
+          deep technical expertise in web development and AI — currently completing 
+          a Computer Science degree at Oregon State. Jessica brings years of 
+          sales experience in the local business community.
+        </p>
+        <p class="section-body">
+          Together we offer something most agencies can't: genuine technical 
+          skill and genuine relationship-building, under one roof, in your 
+          neighborhood. When you work with BLDR, you work with us — not 
+          an account manager and a team you'll never meet.
+        </p>
+        <p class="section-body">
+          We serve dental practices, med spas, and local service businesses 
+          across the San Fernando Valley — businesses where reputation, 
+          trust, and local visibility are everything.
+        </p>
+
+        <div class="about-stats">
+          <div class="about-stat">
+            <div class="about-stat-num">SFV</div>
+            <div class="about-stat-label">Locally rooted</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">24/7</div>
+            <div class="about-stat-label">AI tools running</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">90d</div>
+            <div class="about-stat-label">Max contract length</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">$0</div>
+            <div class="about-stat-label">Cost to audit</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-visual reveal">
+        <div class="about-img-block">
+          <div class="about-img-placeholder">
+            <svg viewBox="0 0 48 48"><circle cx="24" cy="16" r="8"/><path d="M8 44c0-8.837 7.163-16 16-16s16 7.163 16 16"/></svg>
+            <span>Brian & Jessica — photo</span>
+          </div>
+        </div>
+        <div class="about-accent"></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-inner">
-      <div class="about-text">
-        <div class="section-tag">About us</div>
-        <h2 class="section-title">Local people,<br><em>real</em> expertise</h2>
-        <p class="section-sub">We're a husband-and-wife team based in Woodland Hills. Between us we bring deep sales experience in the local business community and modern technical skills in web development and AI — a combination most agencies can't offer.</p>
-        <p class="section-sub" style="margin-bottom: 0;">We're not a faceless agency. When you work with us, you work with us — and we're invested in your success because we're your neighbors.</p>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="shell">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="section-label">Get in touch</div>
+        <h2 class="section-headline">LET'S AUDIT<br>YOUR SITE — <span>FREE</span></h2>
+        <p class="section-body">
+          Tell us about your business. We'll review your current online 
+          presence and come back with specific, honest recommendations. 
+          No commitment, no sales pressure.
+        </p>
+
+        <div class="contact-info">
+          <div class="contact-info-item">
+            <div class="contact-info-label">Location</div>
+            <div class="contact-info-value">Woodland Hills, CA<br>Serving the San Fernando Valley</div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-label">Email</div>
+            <div class="contact-info-value"><a href="mailto:hello@bldrdigital.com">hello@bldrdigital.com</a></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-label">Response time</div>
+            <div class="contact-info-value">We respond within one business day.<br>Usually same day.</div>
+          </div>
+        </div>
       </div>
-      <div class="about-stats">
-        <div class="stat-box">
-          <div class="stat-number">SFV</div>
-          <div class="stat-label">Locally rooted in the San Fernando Valley</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">24/7</div>
-          <div class="stat-label">AI tools that work even when you're closed</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">90d</div>
-          <div class="stat-label">Max contract length — no long lock-ins</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">$0</div>
-          <div class="stat-label">Cost for your initial site audit</div>
-        </div>
+
+      <div class="reveal">
+        <form class="contact-form">
+          <div class="form-row">
+            <div class="form-field">
+              <label class="form-label">First name</label>
+              <input type="text" class="form-input" placeholder="Jane">
+            </div>
+            <div class="form-field">
+              <label class="form-label">Last name</label>
+              <input type="text" class="form-input" placeholder="Smith">
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Business name</label>
+            <input type="text" class="form-input" placeholder="Sherman Oaks Dental Care">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" placeholder="jane@yourbusiness.com">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-input" placeholder="(818) 555-0000">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Website (if you have one)</label>
+            <input type="url" class="form-input" placeholder="https://yourbusiness.com">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Anything else?</label>
+            <textarea class="form-textarea" placeholder="Tell us about your business and what you're looking for..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Request free audit →</button>
+        </form>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CTA / CONTACT -->
-  <section id="contact">
-    <div class="section-tag">Get in touch</div>
-    <h2 class="section-title">Let's audit your site — <em>free</em></h2>
-    <p class="section-sub">Tell us a little about your business. We'll review your current online presence and come back with specific, honest recommendations. No commitment, no sales pressure.</p>
-    <div class="contact-form">
-      <div class="form-row">
-        <input class="form-input" type="text" placeholder="Your name" />
-        <input class="form-input" type="text" placeholder="Business name" />
-      </div>
-      <input class="form-input" type="email" placeholder="Email address" />
-      <input class="form-input" type="tel" placeholder="Phone number (optional)" />
-      <input class="form-input" type="url" placeholder="Current website URL (if any)" />
-      <button class="form-submit" type="submit">Request my free audit</button>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="shell">
+    <div class="footer-inner">
+      <div class="footer-logo">BLD<span>R</span> Digital</div>
+      <ul class="footer-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="footer-copy">© 2026 BLDR Digital · Woodland Hills, CA</div>
     </div>
-  </section>
+  </div>
+</footer>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2025 Apex Digital · Woodland Hills, CA</p>
-    <div class="footer-links">
-      <a href="#services">Services</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </footer>
 
-  <script>
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
 
-    // Shrink nav on scroll
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      nav.style.padding = window.scrollY > 60 ? '12px 48px' : '20px 48px';
-    });
+document.querySelectorAll('a, button, .service-card, .bldr-letter-row').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%,-50%) scale(2.5)');
+  el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%,-50%) scale(1)');
+});
 
-    // Fade in sections on scroll
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, { threshold: 0.1 });
+// Sticky nav scroll
+const nav = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+  nav.style.borderBottomColor = window.scrollY > 20 ? 'var(--border)' : 'transparent';
+}, { passive: true });
 
-    document.querySelectorAll('.service-card, .step, .pricing-card, .stat-box').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(16px)';
-      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      observer.observe(el);
-    });
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    // Form submission placeholder
-    document.querySelector('.form-submit').addEventListener('click', () => {
-      const inputs = document.querySelectorAll('.form-input');
-      const name = inputs[0].value.trim();
-      const email = inputs[2].value.trim();
-      if (name && email) {
-        document.querySelector('.contact-form').innerHTML =
-          `<div style="text-align:center; padding: 48px 0;">
-            <div style="font-family:'Fraunces',serif; font-size:28px; color:var(--cream); margin-bottom:12px;">Thanks, ${name}.</div>
-            <p style="color:var(--text-muted); font-size:15px;">We'll be in touch within one business day.</p>
-          </div>`;
-      } else {
-        inputs[0].style.borderColor = !name ? 'rgba(201,100,76,0.6)' : '';
-        inputs[2].style.borderColor = !email ? 'rgba(201,100,76,0.6)' : '';
-      }
-    });
-  </script>
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+
 </body>
 </html>
