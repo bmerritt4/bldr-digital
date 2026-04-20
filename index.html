@@ -46,7 +46,6 @@ body{
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 
-/* Custom cursor */
 .cursor{
   position:fixed;width:8px;height:8px;
   background:var(--orange);border-radius:50%;
@@ -56,10 +55,8 @@ img{display:block;max-width:100%}
   mix-blend-mode:normal;
 }
 
-/* Shell */
 .shell{max-width:1280px;margin:0 auto;padding:0 40px}
 
-/* NAV */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   padding:0 40px;height:64px;
@@ -109,7 +106,6 @@ img{display:block;max-width:100%}
 }
 .nav-mobile-btn span{display:block;width:22px;height:1px;background:var(--white)}
 
-/* HERO */
 .hero{
   min-height:100vh;
   display:flex;flex-direction:column;
@@ -120,7 +116,6 @@ img{display:block;max-width:100%}
   background:var(--black);
 }
 
-/* Grid background */
 .hero-grid{
   position:absolute;inset:0;
   background-image:
@@ -130,7 +125,6 @@ img{display:block;max-width:100%}
   mask-image:linear-gradient(to bottom,transparent 0%,black 30%,black 70%,transparent 100%);
 }
 
-/* Big BLDR lettermark */
 .hero-mark{
   position:absolute;
   top:50%;left:50%;
@@ -244,7 +238,6 @@ img{display:block;max-width:100%}
   background:linear-gradient(to bottom,transparent,var(--border),transparent);
 }
 
-/* MARQUEE */
 .marquee-wrap{
   border-top:1px solid var(--border);
   border-bottom:1px solid var(--border);
@@ -279,7 +272,6 @@ img{display:block;max-width:100%}
   to{transform:translateX(-50%)}
 }
 
-/* SECTIONS */
 .section{padding:120px 0}
 .section--dark{background:var(--dark)}
 .section--dark-2{background:var(--dark-2)}
@@ -313,7 +305,6 @@ img{display:block;max-width:100%}
   margin-bottom:16px;
 }
 
-/* SERVICES */
 .services-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -375,7 +366,6 @@ img{display:block;max-width:100%}
   letter-spacing:0.1em;
 }
 
-/* WHAT BLDR MEANS */
 .bldr-section{
   padding:120px 0;
   background:var(--black);
@@ -445,7 +435,6 @@ img{display:block;max-width:100%}
   letter-spacing:0.04em;
 }
 
-/* PROCESS */
 .process-steps{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -488,7 +477,6 @@ img{display:block;max-width:100%}
 }
 .process-step:last-child::after{display:none}
 
-/* PRICING */
 .pricing-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -540,30 +528,26 @@ img{display:block;max-width:100%}
   line-height:1.7;
 }
 
-.pricing-build{
-  margin-bottom:8px;
-}
-
-.pricing-build-num{
+.pricing-retainer-num{
   font-family:var(--font-display);
-  font-size:56px;letter-spacing:0.03em;
+  font-size:72px;letter-spacing:0.03em;
   color:var(--white);line-height:1;
 }
 
-.pricing-build-label{
+.pricing-retainer-label{
   font-family:var(--font-mono);
   font-size:10px;color:var(--white-dim);
   letter-spacing:0.12em;text-transform:uppercase;
-  margin-top:4px;
+  margin-top:6px;
+  margin-bottom:8px;
 }
 
-.pricing-retainer{
+.pricing-build-note{
   font-family:var(--font-mono);
-  font-size:13px;font-weight:400;
+  font-size:11px;font-weight:400;
   color:var(--orange);
   letter-spacing:0.06em;
   margin-bottom:40px;
-  margin-top:8px;
 }
 
 .pricing-divider{
@@ -592,7 +576,6 @@ img{display:block;max-width:100%}
   margin-top:1px;
 }
 
-/* ABOUT */
 .about-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -626,9 +609,7 @@ img{display:block;max-width:100%}
   margin-top:6px;
 }
 
-.about-visual{
-  position:relative;
-}
+.about-visual{position:relative;}
 
 .about-img-block{
   background:var(--dark-3);
@@ -670,7 +651,6 @@ img{display:block;max-width:100%}
   opacity:0.2;
 }
 
-/* CONTACT */
 .contact-section{
   padding:120px 0;
   background:var(--dark);
@@ -695,9 +675,7 @@ img{display:block;max-width:100%}
   align-items:start;
 }
 
-.contact-form{
-  display:flex;flex-direction:column;gap:16px;
-}
+.contact-form{display:flex;flex-direction:column;gap:16px;}
 
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 
@@ -743,10 +721,7 @@ img{display:block;max-width:100%}
 
 .form-submit:hover{background:var(--orange-dim)}
 
-.contact-info{
-  display:flex;flex-direction:column;gap:32px;
-  padding-top:8px;
-}
+.contact-info{display:flex;flex-direction:column;gap:32px;padding-top:8px;}
 
 .contact-info-item{
   display:flex;flex-direction:column;gap:6px;
@@ -772,7 +747,6 @@ img{display:block;max-width:100%}
 .contact-info-value a{color:var(--white);transition:color 0.2s}
 .contact-info-value a:hover{color:var(--orange)}
 
-/* FOOTER */
 .footer{
   background:var(--black);
   border-top:1px solid var(--border);
@@ -792,9 +766,7 @@ img{display:block;max-width:100%}
 
 .footer-logo span{color:var(--orange)}
 
-.footer-links{
-  display:flex;gap:32px;list-style:none;
-}
+.footer-links{display:flex;gap:32px;list-style:none;}
 
 .footer-links a{
   font-family:var(--font-mono);
@@ -810,7 +782,6 @@ img{display:block;max-width:100%}
   letter-spacing:0.06em;
 }
 
-/* ANIMATIONS */
 @keyframes fadeUp{
   from{opacity:0;transform:translateY(20px)}
   to{opacity:1;transform:translateY(0)}
@@ -825,7 +796,6 @@ img{display:block;max-width:100%}
 }
 .reveal.visible{opacity:1;transform:translateY(0)}
 
-/* RESPONSIVE */
 @media(max-width:1024px){
   .bldr-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
   .services-grid{grid-template-columns:1fr}
@@ -858,7 +828,6 @@ img{display:block;max-width:100%}
 
 <div class="cursor" id="cursor"></div>
 
-<!-- NAV -->
 <nav class="nav">
   <a href="/" class="nav-logo">BLD<span class="nav-logo-accent">R</span></a>
   <ul class="nav-links">
@@ -873,8 +842,6 @@ img{display:block;max-width:100%}
   </button>
 </nav>
 
-
-<!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="hero-mark">BLDR</div>
@@ -889,7 +856,7 @@ img{display:block;max-width:100%}
     </h1>
 
     <p class="hero-sub">
-      BLDR Digital builds websites and AI tools for local businesses that are tired 
+      BLDR Digital builds websites and AI tools for local businesses that are tired
       of looking invisible online. We build it. We maintain it. You grow.
     </p>
 
@@ -917,8 +884,6 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
-
-<!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
     <div class="marquee-item">Website Design</div>
@@ -942,8 +907,6 @@ img{display:block;max-width:100%}
   </div>
 </div>
 
-
-<!-- WHAT BLDR MEANS -->
 <section class="bldr-section" id="about-bldr">
   <div class="shell">
     <div class="bldr-grid">
@@ -951,14 +914,14 @@ img{display:block;max-width:100%}
         <div class="section-label">What we are</div>
         <h2 class="section-headline">THE NAME<br>SAYS IT <span>ALL</span></h2>
         <p class="section-body">
-          Every letter in BLDR stands for something we actually do — 
-          not agency buzzwords, not empty promises. Four principles 
+          Every letter in BLDR stands for something we actually do —
+          not agency buzzwords, not empty promises. Four principles
           that drive every project we take on.
         </p>
         <p class="section-body">
           We're a husband-and-wife team from Woodland Hills.
-          Together we serve the local businesses that make 
-          the San Fernando Valley run — and we stay with them long after 
+          Together we serve the local businesses that make
+          the San Fernando Valley run — and we stay with them long after
           the site goes live.
         </p>
       </div>
@@ -997,8 +960,6 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
-
-<!-- SERVICES -->
 <section class="section section--dark" id="services">
   <div class="shell">
     <div class="reveal">
@@ -1054,16 +1015,14 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
-
-<!-- PROCESS -->
 <section class="section section--black" id="process">
   <div class="shell">
     <div class="reveal">
       <div class="section-label">How it works</div>
       <h2 class="section-headline">SIMPLE FROM<br><span>START</span> TO LAUNCH</h2>
       <p class="section-body" style="max-width:560px">
-        Four steps. Flat-rate pricing. No tech jargon, no long meetings, 
-        no surprises. We've designed this process for business owners who 
+        Four steps. Flat-rate pricing. No tech jargon, no long meetings,
+        no surprises. We've designed this process for business owners who
         have a practice to run, not a website to manage.
       </p>
     </div>
@@ -1093,16 +1052,16 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
-
-<!-- PRICING -->
+<!-- PRICING — retainer-only display, build fee quoted after audit -->
 <section class="section section--dark" id="pricing">
   <div class="shell">
     <div class="reveal">
       <div class="section-label">Investment</div>
       <h2 class="section-headline">TRANSPARENT,<br><span>FLAT-RATE</span> PLANS</h2>
       <p class="section-body" style="max-width:560px">
-        One-time build fee plus a monthly retainer. No hourly surprises. 
-        No contracts longer than 90 days. Every plan includes a free site audit before you commit.
+        A fixed monthly retainer covers everything — maintenance, tools, reporting, and support.
+        Your one-time build fee is quoted after the free audit, based on your site's scope.
+        No hourly surprises. No contracts longer than 90 days.
       </p>
     </div>
 
@@ -1113,11 +1072,9 @@ img{display:block;max-width:100%}
         <div class="pricing-name">Starter</div>
         <p class="pricing-desc">A clean, professional website that establishes your presence and captures leads. Perfect for practices ready to stop being invisible online.</p>
 
-        <div class="pricing-build">
-          <div class="pricing-build-num">$2,000</div>
-          <div class="pricing-build-label">One-time build fee</div>
-        </div>
-        <div class="pricing-retainer">+ $200 / month retainer</div>
+        <div class="pricing-retainer-num">$250</div>
+        <div class="pricing-retainer-label">Per month</div>
+        <div class="pricing-build-note">+ one-time build fee — quoted after your free audit</div>
 
         <div class="pricing-divider"></div>
 
@@ -1140,11 +1097,9 @@ img{display:block;max-width:100%}
         <div class="pricing-name">Growth</div>
         <p class="pricing-desc">The full system — website plus AI tools that work while you sleep. Built for practices ready to actively grow their patient base.</p>
 
-        <div class="pricing-build">
-          <div class="pricing-build-num">$3,000</div>
-          <div class="pricing-build-label">One-time build fee</div>
-        </div>
-        <div class="pricing-retainer">+ $400 / month retainer</div>
+        <div class="pricing-retainer-num">$500</div>
+        <div class="pricing-retainer-label">Per month</div>
+        <div class="pricing-build-note">+ one-time build fee — quoted after your free audit</div>
 
         <div class="pricing-divider"></div>
 
@@ -1163,19 +1118,16 @@ img{display:block;max-width:100%}
 
     </div>
 
-    <!-- Fine print -->
     <div style="margin-top:32px;padding:24px 32px;border:1px solid var(--border);background:var(--dark-2)">
       <p style="font-family:var(--font-mono);font-size:11px;color:var(--white-dim);line-height:1.8;letter-spacing:0.04em">
-        All plans require a 50% deposit to begin. Retainer includes up to 2 hours of site updates per month — additional work billed at $85/hr. 
-        No contracts longer than 90 days. Upgrade from Starter to Growth anytime for a $500 expansion fee. 
+        All plans require a 50% deposit to begin. Retainer includes up to 2 hours of site updates per month — additional work billed at $85/hr.
+        No contracts longer than 90 days. Upgrade from Starter to Growth anytime for a $500 expansion fee.
         Domain registered in your name — you own it always.
       </p>
     </div>
   </div>
 </section>
 
-
-<!-- ABOUT -->
 <section class="section section--black" id="about">
   <div class="shell">
     <div class="about-grid">
@@ -1190,14 +1142,14 @@ img{display:block;max-width:100%}
           relationships with the people who run it.
         </p>
         <p class="section-body">
-          Together we offer something most agencies can't: genuine technical 
-          skill and genuine relationship-building, under one roof, in your 
-          neighborhood. When you work with BLDR, you work with us — not 
+          Together we offer something most agencies can't: genuine technical
+          skill and genuine relationship-building, under one roof, in your
+          neighborhood. When you work with BLDR, you work with us — not
           an account manager and a team you'll never meet.
         </p>
         <p class="section-body">
           We serve dental practices, med spas, wellness clinics, fitness studios
-          and other local service businesses across the San Fernando Valley — 
+          and other local service businesses across the San Fernando Valley —
           businesses where reputation, trust, and local visibility are everything.
         </p>
 
@@ -1234,8 +1186,6 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
-
-<!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="shell">
     <div class="contact-grid">
@@ -1243,8 +1193,8 @@ img{display:block;max-width:100%}
         <div class="section-label">Get in touch</div>
         <h2 class="section-headline">LET'S AUDIT<br>YOUR SITE — <span>FREE</span></h2>
         <p class="section-body">
-          Tell us about your business. We'll review your current online 
-          presence and come back with specific, honest recommendations. 
+          Tell us about your business. We'll review your current online
+          presence and come back with specific, honest recommendations.
           No commitment, no sales pressure.
         </p>
 
@@ -1304,8 +1254,6 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
-
-<!-- FOOTER -->
 <footer class="footer">
   <div class="shell">
     <div class="footer-inner">
@@ -1321,9 +1269,7 @@ img{display:block;max-width:100%}
   </div>
 </footer>
 
-
 <script>
-// Cursor
 const cursor = document.getElementById('cursor');
 document.addEventListener('mousemove', e => {
   cursor.style.left = e.clientX + 'px';
@@ -1335,13 +1281,11 @@ document.querySelectorAll('a, button, .service-card, .bldr-letter-row').forEach(
   el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%,-50%) scale(1)');
 });
 
-// Sticky nav scroll
 const nav = document.querySelector('.nav');
 window.addEventListener('scroll', () => {
   nav.style.borderBottomColor = window.scrollY > 20 ? 'var(--border)' : 'transparent';
 }, { passive: true });
 
-// Scroll reveal
 const obs = new IntersectionObserver((entries) => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
@@ -1353,7 +1297,6 @@ const obs = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Smooth scroll for nav links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
