@@ -1306,5 +1306,253 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 </script>
 
+<!-- ============================================================
+     Blueprint — BLDR Digital AI Assistant
+     Worker: bldr-chat.merrittbt4.workers.dev
+     ============================================================ -->
+<script>
+(function() {
+
+  const WORKER_URL    = "https://bldr-chat.merrittbt4.workers.dev";
+  const BRAND_COLOR   = "#FF5C00";
+  const PRACTICE_NAME = "BLDR Digital";
+  const GREETING      = "Hey — I'm Blueprint, BLDR's AI assistant. What kind of business are you looking to grow?";
+
+  let messages = [];
+  let isOpen   = false;
+  let isTyping = false;
+
+  const style = document.createElement("style");
+  style.textContent = `
+    #bldr-chat-btn {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: ${BRAND_COLOR}; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(255,92,0,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    #bldr-chat-btn:hover { transform: scale(1.08); box-shadow: 0 6px 20px rgba(255,92,0,0.4); }
+    #bldr-chat-btn svg { width: 24px; height: 24px; fill: #fff; }
+
+    #bldr-chat-window {
+      position: fixed; bottom: 92px; right: 24px; z-index: 9998;
+      width: 340px; max-height: 520px;
+      background: #0F0F0F; border-radius: 16px;
+      border: 1px solid #242424;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      display: none; flex-direction: column;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+    #bldr-chat-window.open { display: flex; }
+
+    #bldr-chat-header {
+      background: #161616; color: #F5F5F5;
+      padding: 14px 16px; display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid #242424;
+    }
+    #bldr-chat-header-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #FF5C00; flex-shrink: 0;
+    }
+    #bldr-chat-header-name { font-size: 14px; font-weight: 600; color: #F5F5F5; }
+    #bldr-chat-header-sub  { font-size: 11px; color: #A0A0A0; margin-top: 1px; }
+
+    #bldr-chat-messages {
+      flex: 1; overflow-y: auto; padding: 16px;
+      display: flex; flex-direction: column; gap: 10px;
+      background: #0F0F0F;
+    }
+
+    .bldr-msg {
+      max-width: 82%; padding: 10px 14px;
+      border-radius: 14px; font-size: 13px; line-height: 1.5;
+      word-wrap: break-word;
+    }
+    .bldr-msg-bot {
+      background: #1E1E1E; color: #F5F5F5;
+      border-bottom-left-radius: 4px; align-self: flex-start;
+      border: 1px solid #242424;
+    }
+    .bldr-msg-user {
+      background: ${BRAND_COLOR}; color: #fff;
+      border-bottom-right-radius: 4px; align-self: flex-end;
+    }
+    .bldr-msg-typing {
+      background: #1E1E1E; border: 1px solid #242424;
+      align-self: flex-start;
+      padding: 12px 16px; border-radius: 14px; border-bottom-left-radius: 4px;
+    }
+    .bldr-dots { display: flex; gap: 4px; }
+    .bldr-dots span {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #FF5C00; animation: bldr-bounce 1.2s infinite;
+    }
+    .bldr-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .bldr-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bldr-bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+    }
+
+    #bldr-chat-input-wrap {
+      display: flex; gap: 8px; padding: 12px;
+      border-top: 1px solid #242424;
+      background: #161616;
+    }
+    #bldr-chat-input {
+      flex: 1; border: 1px solid #2A2A2A; border-radius: 20px;
+      padding: 8px 14px; font-size: 13px; outline: none;
+      font-family: inherit; resize: none; line-height: 1.4;
+      transition: border-color 0.2s;
+      background: #0F0F0F; color: #F5F5F5;
+    }
+    #bldr-chat-input::placeholder { color: #404040; }
+    #bldr-chat-input:focus { border-color: ${BRAND_COLOR}; }
+    #bldr-chat-send {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: ${BRAND_COLOR}; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background 0.2s; align-self: flex-end;
+    }
+    #bldr-chat-send:hover { filter: brightness(0.9); }
+    #bldr-chat-send svg { width: 16px; height: 16px; fill: #fff; }
+    #bldr-chat-send:disabled { opacity: 0.4; cursor: default; }
+
+    #bldr-chat-footer {
+      text-align: center; padding: 6px 0 10px;
+      font-size: 10px; color: #404040;
+      font-family: inherit; background: #161616;
+      letter-spacing: 0.06em;
+    }
+  `;
+  document.head.appendChild(style);
+
+  const btn = document.createElement("button");
+  btn.id = "bldr-chat-btn";
+  btn.setAttribute("aria-label", "Open Blueprint chat");
+  btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>`;
+
+  const win = document.createElement("div");
+  win.id = "bldr-chat-window";
+  win.setAttribute("role", "dialog");
+  win.setAttribute("aria-label", "Blueprint — BLDR Digital assistant");
+  win.innerHTML = `
+    <div id="bldr-chat-header">
+      <div id="bldr-chat-header-dot"></div>
+      <div>
+        <div id="bldr-chat-header-name">Blueprint</div>
+        <div id="bldr-chat-header-sub">BLDR Digital AI assistant</div>
+      </div>
+    </div>
+    <div id="bldr-chat-messages" role="log" aria-live="polite"></div>
+    <div id="bldr-chat-input-wrap">
+      <textarea id="bldr-chat-input" rows="1" placeholder="Ask Blueprint anything..." aria-label="Chat message"></textarea>
+      <button id="bldr-chat-send" aria-label="Send message" disabled>
+        <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+      </button>
+    </div>
+    <div id="bldr-chat-footer">BLDR Digital · bldrdigital.com</div>
+  `;
+
+  document.body.appendChild(btn);
+  document.body.appendChild(win);
+
+  const msgContainer = document.getElementById("bldr-chat-messages");
+  const input        = document.getElementById("bldr-chat-input");
+  const sendBtn      = document.getElementById("bldr-chat-send");
+
+  function addMessage(text, role) {
+    const el = document.createElement("div");
+    el.className = `bldr-msg bldr-msg-${role}`;
+    el.textContent = text;
+    msgContainer.appendChild(el);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+    return el;
+  }
+
+  function showTyping() {
+    const el = document.createElement("div");
+    el.className = "bldr-msg-typing";
+    el.id = "bldr-typing";
+    el.innerHTML = `<div class="bldr-dots"><span></span><span></span><span></span></div>`;
+    msgContainer.appendChild(el);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+  }
+
+  function hideTyping() {
+    const el = document.getElementById("bldr-typing");
+    if (el) el.remove();
+  }
+
+  async function sendMessage(text) {
+    if (!text.trim() || isTyping) return;
+
+    addMessage(text, "user");
+    messages.push({ role: "user", content: text });
+    input.value = "";
+    input.style.height = "auto";
+    sendBtn.disabled = true;
+    isTyping = true;
+    showTyping();
+
+    try {
+      const res = await fetch(WORKER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages }),
+      });
+
+      const data = await res.json();
+      const reply = data.reply || "Something went wrong. Email us at info@bldrdigital.com.";
+
+      hideTyping();
+      addMessage(reply, "bot");
+      messages.push({ role: "assistant", content: reply });
+
+    } catch {
+      hideTyping();
+      addMessage("Having trouble connecting. Email us at info@bldrdigital.com.", "bot");
+    }
+
+    isTyping = false;
+    sendBtn.disabled = !input.value.trim();
+  }
+
+  btn.addEventListener("click", () => {
+    isOpen = !isOpen;
+    win.classList.toggle("open", isOpen);
+
+    if (isOpen && messages.length === 0) {
+      setTimeout(() => addMessage(GREETING, "bot"), 300);
+    }
+
+    if (isOpen) {
+      setTimeout(() => input.focus(), 350);
+      btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>`;
+    } else {
+      btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>`;
+    }
+  });
+
+  sendBtn.addEventListener("click", () => sendMessage(input.value));
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage(input.value);
+    }
+  });
+
+  input.addEventListener("input", () => {
+    sendBtn.disabled = !input.value.trim() || isTyping;
+    input.style.height = "auto";
+    input.style.height = Math.min(input.scrollHeight, 100) + "px";
+  });
+
+})();
+</script>
+
 </body>
 </html>
