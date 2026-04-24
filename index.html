@@ -819,6 +819,18 @@ img{display:block;max-width:100%}
   .nav{padding:0 20px}
   .nav-links{display:none}
   .nav-mobile-btn{display:flex}
+  .nav-links.nav-open{
+    display:flex;flex-direction:column;
+    position:fixed;top:64px;left:0;right:0;
+    background:rgba(8,8,8,0.97);
+    backdrop-filter:blur(16px);
+    padding:24px 20px 32px;
+    gap:0;z-index:99;
+    border-bottom:1px solid var(--border);
+  }
+  .nav-links.nav-open li{border-bottom:1px solid var(--border);}
+  .nav-links.nav-open a{display:block;padding:16px 0;font-size:14px;}
+  .nav-links.nav-open .nav-cta{margin-top:16px;text-align:center;padding:14px 20px;display:block;}
   .shell{padding:0 20px}
   .hero-content{padding:0 20px 60px}
   .hero{justify-content:center;}
@@ -1306,9 +1318,40 @@ const obs = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
+// Mobile nav toggle
+const mobileBtn = document.querySelector('.nav-mobile-btn');
+const navLinks = document.querySelector('.nav-links');
+let navOpen = false;
+
+mobileBtn.addEventListener('click', () => {
+  navOpen = !navOpen;
+  navLinks.classList.toggle('nav-open', navOpen);
+  mobileBtn.setAttribute('aria-expanded', navOpen);
+  // Animate hamburger to X
+  const spans = mobileBtn.querySelectorAll('span');
+  if (navOpen) {
+    spans[0].style.transform = 'rotate(45deg) translate(4px, 4px)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'rotate(-45deg) translate(4px, -4px)';
+  } else {
+    spans[0].style.transform = '';
+    spans[1].style.opacity = '';
+    spans[2].style.transform = '';
+  }
+});
+
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
+    // Close mobile nav if open
+    if (navOpen) {
+      navOpen = false;
+      navLinks.classList.remove('nav-open');
+      const spans = mobileBtn.querySelectorAll('span');
+      spans[0].style.transform = '';
+      spans[1].style.opacity = '';
+      spans[2].style.transform = '';
+    }
     const target = document.querySelector(a.getAttribute('href'));
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
