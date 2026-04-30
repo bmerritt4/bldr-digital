@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — BLDR Digital</title>
+  <meta name="description" content="BLDR Digital is a husband-and-wife web design and AI agency in Woodland Hills, CA. RISD-trained design. CS-engineered code. Built for local businesses in the San Fernando Valley.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+    :root{
+      --black:#080808;
+      --dark:#0F0F0F;
+      --dark-2:#161616;
+      --dark-3:#1E1E1E;
+      --dark-4:#2A2A2A;
+      --orange:#FF5C00;
+      --orange-dim:#CC4A00;
+      --orange-glow:rgba(255,92,0,0.15);
+      --white:#F5F5F5;
+      --white-dim:#A0A0A0;
+      --white-faint:#404040;
+      --border:#242424;
+      --font-display:'Bebas Neue',sans-serif;
+      --font-mono:'DM Mono',monospace;
+      --font-sans:'DM Sans',system-ui,sans-serif;
+    }
+
+    html{scroll-behavior:smooth}
+    body{
+      font-family:var(--font-sans);
+      font-weight:300;
+      color:var(--white);
+      background:var(--black);
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+      cursor:crosshair;
+    }
+    a{color:inherit;text-decoration:none}
+
+    .cursor{
+      position:fixed;width:8px;height:8px;
+      background:var(--orange);border-radius:50%;
+      pointer-events:none;z-index:9999;
+      transform:translate(-50%,-50%);
+      transition:transform 0.1s;
+    }
+    @media(hover:none){.cursor{display:none}}
+
+    .shell{max-width:1280px;margin:0 auto;padding:0 40px}
+
+    /* NAV — identical to index.html */
+    .nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      padding:0 40px;height:64px;
+      display:flex;align-items:center;justify-content:space-between;
+      background:rgba(8,8,8,0.92);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-logo{
+      font-family:var(--font-display);
+      font-size:28px;letter-spacing:0.12em;
+      color:var(--white);
+      display:flex;align-items:center;gap:2px;
+    }
+    .nav-logo-accent{color:var(--orange)}
+    .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+    .nav-links a{
+      font-family:var(--font-mono);
+      font-size:11px;font-weight:400;
+      color:var(--white-dim);
+      letter-spacing:0.1em;text-transform:uppercase;
+      transition:color 0.2s;
+    }
+    .nav-links a:hover,.nav-links a.active{color:var(--orange)}
+    .nav-cta{
+      font-family:var(--font-mono);
+      font-size:11px;font-weight:500;
+      letter-spacing:0.12em;text-transform:uppercase;
+      color:var(--black)!important;
+      background:var(--orange);
+      padding:10px 20px;
+      border:none;cursor:pointer;
+      transition:background 0.2s,transform 0.15s;
+      display:inline-block;
+    }
+    .nav-cta:hover{background:var(--orange-dim);transform:translateY(-1px)}
+    .nav-mobile-btn{
+      display:none;background:none;border:none;
+      cursor:pointer;padding:4px;flex-direction:column;gap:5px;
+    }
+    .nav-mobile-btn span{display:block;width:22px;height:1px;background:var(--white)}
+
+    /* HERO */
+    .hero{
+      min-height:80vh;
+      display:flex;flex-direction:column;
+      justify-content:flex-end;
+      padding-top:64px;
+      position:relative;overflow:hidden;
+      background:var(--black);
+    }
+    .hero-grid{
+      position:absolute;inset:0;
+      background-image:
+        linear-gradient(rgba(255,92,0,0.08) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,92,0,0.08) 1px,transparent 1px);
+      background-size:80px 80px;
+      mask-image:linear-gradient(to bottom,transparent 0%,black 30%,black 70%,transparent 100%);
+    }
+    .hero-mark{
+      position:absolute;
+      top:50%;left:50%;
+      transform:translate(-50%,-52%);
+      font-family:var(--font-display);
+      font-size:clamp(160px,22vw,340px);
+      letter-spacing:0.05em;
+      color:transparent;
+      -webkit-text-stroke:1px rgba(255,92,0,0.12);
+      pointer-events:none;
+      white-space:nowrap;
+      user-select:none;
+    }
+    .hero-content{
+      position:relative;z-index:2;
+      padding:0 40px 80px;
+      max-width:1280px;
+      margin:0 auto;width:100%;
+    }
+    .hero-tag{
+      font-family:var(--font-mono);
+      font-size:11px;font-weight:400;
+      color:var(--orange);
+      letter-spacing:0.2em;text-transform:uppercase;
+      margin-bottom:24px;
+      display:flex;align-items:center;gap:12px;
+      opacity:0;animation:fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-tag::before{content:'';display:block;width:32px;height:1px;background:var(--orange)}
+    .hero-headline{
+      font-family:var(--font-display);
+      font-size:clamp(56px,8vw,128px);
+      line-height:0.93;letter-spacing:0.02em;
+      color:var(--white);margin-bottom:32px;
+      opacity:0;animation:fadeUp 0.8s 0.35s forwards;
+    }
+    .hero-headline span{color:var(--orange)}
+    .hero-sub{
+      font-family:var(--font-mono);
+      font-size:14px;font-weight:300;
+      color:var(--white-dim);
+      line-height:1.8;max-width:480px;
+      opacity:0;animation:fadeUp 0.8s 0.5s forwards;
+    }
+
+    /* MARQUEE */
+    .marquee-wrap{
+      border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+      background:var(--dark-2);
+      padding:14px 0;overflow:hidden;
+    }
+    .marquee-track{
+      display:flex;
+      animation:marquee 30s linear infinite;
+      width:max-content;
+    }
+    .marquee-item{
+      font-family:var(--font-mono);
+      font-size:11px;font-weight:400;
+      color:var(--white-dim);
+      letter-spacing:0.14em;text-transform:uppercase;
+      padding:0 32px;white-space:nowrap;
+      display:flex;align-items:center;gap:32px;
+    }
+    .marquee-item::after{content:'◆';color:var(--orange);font-size:8px}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    /* SECTIONS */
+    .section{padding:120px 0}
+    .section--dark{background:var(--dark)}
+    .section--black{background:var(--black)}
+
+    .section-label{
+      font-family:var(--font-mono);
+      font-size:10px;font-weight:500;
+      color:var(--orange);
+      letter-spacing:0.2em;text-transform:uppercase;
+      margin-bottom:20px;
+      display:flex;align-items:center;gap:12px;
+    }
+    .section-label::before{content:'//';color:var(--white-faint)}
+
+    .section-headline{
+      font-family:var(--font-display);
+      font-size:clamp(40px,5vw,76px);
+      letter-spacing:0.03em;line-height:0.95;
+      color:var(--white);margin-bottom:24px;
+    }
+    .section-headline span{color:var(--orange)}
+
+    .section-body{
+      font-family:var(--font-mono);
+      font-size:13px;font-weight:300;
+      color:var(--white-dim);
+      line-height:1.9;margin-bottom:16px;
+    }
+    .section-body strong{color:var(--white);font-weight:400}
+
+    /* MISSION */
+    .mission-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:80px;align-items:start;
+    }
+
+    /* PULLQUOTE */
+    .pullquote-wrap{
+      border-left:2px solid var(--orange);
+      padding:28px 36px;
+      margin-top:40px;
+      background:var(--dark-2);
+    }
+    .pullquote{
+      font-family:var(--font-display);
+      font-size:clamp(24px,2.8vw,40px);
+      letter-spacing:0.03em;
+      line-height:1.15;
+      color:var(--white);
+      margin-bottom:12px;
+    }
+    .pullquote-attr{
+      font-family:var(--font-mono);
+      font-size:10px;font-weight:400;
+      color:var(--orange);
+      letter-spacing:0.18em;text-transform:uppercase;
+    }
+
+    /* STAT ROW */
+    .stat-row{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:1px;background:var(--border);
+      margin-top:48px;
+    }
+    .stat-cell{background:var(--dark-3);padding:28px 24px}
+    .stat-num{
+      font-family:var(--font-display);
+      font-size:44px;letter-spacing:0.05em;
+      color:var(--orange);line-height:1;
+    }
+    .stat-label{
+      font-family:var(--font-mono);
+      font-size:10px;color:var(--white-dim);
+      letter-spacing:0.1em;text-transform:uppercase;
+      margin-top:6px;
+    }
+
+    /* TEAM */
+    .team-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1px;background:var(--border);
+      margin-top:60px;
+    }
+    .team-card{
+      background:var(--dark);
+      padding:56px 48px;
+      position:relative;overflow:hidden;
+      transition:background 0.3s;
+    }
+    .team-card:hover{background:var(--dark-2)}
+    .team-card::before{
+      content:'';
+      position:absolute;top:0;left:0;right:0;
+      height:2px;background:var(--orange);
+      transform:scaleX(0);transform-origin:left;
+      transition:transform 0.4s;
+    }
+    .team-card:hover::before{transform:scaleX(1)}
+
+    .card-initials{
+      font-family:var(--font-display);
+      font-size:72px;letter-spacing:0.05em;
+      color:var(--border);
+      line-height:1;margin-bottom:24px;
+      transition:color 0.3s;
+    }
+    .team-card:hover .card-initials{color:var(--dark-4)}
+
+    .card-name{
+      font-family:var(--font-display);
+      font-size:34px;letter-spacing:0.05em;
+      color:var(--white);margin-bottom:6px;
+    }
+    .card-role{
+      font-family:var(--font-mono);
+      font-size:10px;font-weight:500;
+      letter-spacing:0.2em;text-transform:uppercase;
+      color:var(--orange);margin-bottom:28px;
+    }
+    .card-bio{
+      font-family:var(--font-mono);
+      font-size:12px;font-weight:300;
+      color:var(--white-dim);
+      line-height:1.85;margin-bottom:12px;
+    }
+    .card-bio strong{color:var(--white);font-weight:400}
+
+    .credentials{
+      border-top:1px solid var(--border);
+      padding-top:24px;margin-top:16px;
+      display:flex;flex-direction:column;gap:10px;
+    }
+    .cred{
+      display:flex;align-items:baseline;gap:12px;
+      font-family:var(--font-mono);font-size:11px;
+    }
+    .cred-school{color:var(--white);font-weight:400;white-space:nowrap}
+    .cred-detail{color:var(--white-faint);font-size:10px}
+
+    /* CTA STRIP */
+    .cta-strip{
+      background:var(--orange);
+      padding:64px 40px;
+      display:flex;align-items:center;
+      justify-content:space-between;gap:40px;
+      flex-wrap:wrap;
+    }
+    .cta-headline{
+      font-family:var(--font-display);
+      font-size:clamp(32px,4vw,64px);
+      letter-spacing:0.03em;
+      color:var(--black);line-height:1;
+    }
+    .btn-dark{
+      font-family:var(--font-mono);
+      font-size:12px;font-weight:500;
+      letter-spacing:0.12em;text-transform:uppercase;
+      color:var(--orange);
+      background:var(--black);
+      padding:16px 36px;
+      border:none;cursor:pointer;
+      transition:background 0.2s;
+      display:inline-block;white-space:nowrap;
+    }
+    .btn-dark:hover{background:var(--dark-2)}
+
+    /* FOOTER */
+    .footer{background:var(--black);border-top:1px solid var(--border);padding:40px 0}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between}
+    .footer-logo{font-family:var(--font-display);font-size:24px;letter-spacing:0.12em;color:var(--white)}
+    .footer-logo span{color:var(--orange)}
+    .footer-links{display:flex;gap:32px;list-style:none}
+    .footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--white-dim);letter-spacing:0.08em;transition:color 0.2s}
+    .footer-links a:hover{color:var(--orange)}
+    .footer-copy{font-family:var(--font-mono);font-size:11px;color:var(--white-faint);letter-spacing:0.06em}
+
+    /* ANIMATIONS */
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(20px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s,transform 0.7s}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* RESPONSIVE */
+    @media(max-width:1024px){
+      .mission-grid{grid-template-columns:1fr}
+      .team-grid{grid-template-columns:1fr}
+      .stat-row{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:768px){
+      .nav{padding:0 20px}
+      .nav-links{display:none}
+      .nav-mobile-btn{display:flex}
+      .nav-links.nav-open{
+        display:flex;flex-direction:column;
+        position:fixed;top:64px;left:0;right:0;
+        background:rgba(8,8,8,0.97);
+        backdrop-filter:blur(16px);
+        padding:24px 20px 32px;
+        gap:0;z-index:99;
+        border-bottom:1px solid var(--border);
+      }
+      .nav-links.nav-open li{border-bottom:1px solid var(--border)}
+      .nav-links.nav-open a{display:block;padding:16px 0;font-size:14px}
+      .nav-links.nav-open .nav-cta{margin-top:16px;text-align:center;padding:14px 20px;display:block}
+      .shell{padding:0 20px}
+      .hero-content{padding:0 20px 60px}
+      .hero{justify-content:center;min-height:100vh}
+      .section{padding:80px 0}
+      .team-card{padding:36px 24px}
+      .stat-row{grid-template-columns:1fr 1fr}
+      .cta-strip{flex-direction:column;padding:48px 20px}
+      .footer-inner{flex-direction:column;gap:24px;text-align:center}
+      .footer-links{flex-wrap:wrap;justify-content:center}
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-logo">BLD<span class="nav-logo-accent">R</span></a>
+  <ul class="nav-links">
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#process">Process</a></li>
+    <li><a href="/#pricing">Pricing</a></li>
+    <li><a href="/about" class="active">About</a></li>
+    <li><a href="/#contact" class="nav-cta">Free Audit</a></li>
+  </ul>
+  <button class="nav-mobile-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-mark">ABOUT</div>
+  <div class="hero-content">
+    <div class="hero-tag">Woodland Hills, CA · Est. 2026</div>
+    <h1 class="hero-headline">
+      Not a vendor.<br>
+      A <span>partner.</span>
+    </h1>
+    <p class="hero-sub">
+      Most businesses are stuck between a $150/mo template that looks like everyone else's
+      and a $2,000+/mo agency that's hard to reach and harder to measure.
+      We built BLDR for the space in between — boutique quality, AI tools included,
+      and a team that treats your business like a partner, not a ticket number.
+    </p>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section section--dark">
+  <div class="shell">
+    <div class="reveal">
+      <div class="section-label">The team</div>
+      <h2 class="section-headline">TWO PEOPLE.<br>EVERY <span>PROJECT.</span></h2>
+    </div>
+
+    <div class="team-grid">
+
+      <!-- JESSICA -->
+      <div class="team-card reveal">
+        <div class="card-initials">JM</div>
+        <div class="card-name">Jessica Merritt</div>
+        <div class="card-role">Design Direction &amp; Client Relationships</div>
+        <p class="card-bio">
+          Most agency websites look like other agency websites. Most dental websites look like other dental websites. Jessica is why ours don't.
+        </p>
+        <p class="card-bio">
+          She studied fine art and design formally — the kind of training that teaches you to see proportion, hierarchy, and tension before you ever open a design tool. She spent years teaching that same eye at UCLA. Now she uses it to make sure every business we work with looks like it belongs in a different category than its competitors.
+        </p>
+        <p class="card-bio">
+          She also handles every client relationship at BLDR. Which means when you call, she picks up. When something needs explaining, she explains it. No ticketing systems. No account managers. Just her.
+        </p>
+        <div class="credentials">
+          <div class="cred">
+            <span class="cred-school">RISD</span>
+            <span class="cred-detail">Rhode Island School of Design</span>
+          </div>
+          <div class="cred">
+            <span class="cred-school">Columbia University</span>
+            <span class="cred-detail">Graduate studies</span>
+          </div>
+          <div class="cred">
+            <span class="cred-school">UCLA</span>
+            <span class="cred-detail">Former faculty</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BRIAN -->
+      <div class="team-card reveal">
+        <div class="card-initials">BM</div>
+        <div class="card-name">Brian Merritt</div>
+        <div class="card-role">Engineering &amp; AI Integration</div>
+        <p class="card-bio">
+          Brian studied English and Computer Science — which sounds like a contradiction until you spend five minutes reading the copy on one of our sites, or watching a chatbot he built actually convert a lead at midnight.
+        </p>
+        <p class="card-bio">
+          He handles every line of code, every deployment, and every AI integration at BLDR. The chatbot architecture running on client sites is his. So are the GitHub repos, the Cloudflare deployments, and the reason a new site goes from kickoff call to live URL in seven days rather than seven weeks.
+        </p>
+        <p class="card-bio">
+          He also writes most of the client copy — because someone who understands both systems and sentences tends to write things that actually get read.
+        </p>
+        <div class="credentials">
+          <div class="cred">
+            <span class="cred-school">UC Berkeley</span>
+            <span class="cred-detail">B.A., English</span>
+          </div>
+          <div class="cred">
+            <span class="cred-school">Oregon State University</span>
+            <span class="cred-detail">B.S., Computer Science</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <div class="cta-headline">WANT TO SEE<br>WHAT WE'D BUILD?</div>
+  <a href="/#contact" class="btn-dark">Get a free audit →</a>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="shell">
+    <div class="footer-inner">
+      <div class="footer-logo">BLD<span>R</span> Digital</div>
+      <ul class="footer-links">
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+      <div class="footer-copy">© 2026 BLDR Digital · Woodland Hills, CA</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button, .team-card').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%,-50%) scale(2.5)');
+    el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%,-50%) scale(1)');
+  });
+
+  // Scroll reveal
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Mobile nav toggle
+  const mobileBtn = document.querySelector('.nav-mobile-btn');
+  const navLinks = document.querySelector('.nav-links');
+  let navOpen = false;
+
+  mobileBtn.addEventListener('click', () => {
+    navOpen = !navOpen;
+    navLinks.classList.toggle('nav-open', navOpen);
+    mobileBtn.setAttribute('aria-expanded', navOpen);
+    const spans = mobileBtn.querySelectorAll('span');
+    if (navOpen) {
+      spans[0].style.transform = 'rotate(45deg) translate(4px, 4px)';
+      spans[1].style.opacity = '0';
+      spans[2].style.transform = 'rotate(-45deg) translate(4px, -4px)';
+    } else {
+      spans[0].style.transform = '';
+      spans[1].style.opacity = '';
+      spans[2].style.transform = '';
+    }
+  });
+</script>
+
+</body>
+</html>
