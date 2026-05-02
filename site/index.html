@@ -1,42 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QH5480LQY"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-4QH5480LQY');
 </script>
 <meta charset="UTF-8">
-<!-- noindex removed April 23, 2026 — site now public -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BLDR Digital — Web Design & AI Automation for Local Businesses</title>
 <meta name="description" content="BLDR Digital builds websites and AI tools for local businesses in the San Fernando Valley. We build it. We maintain it. You grow.">
-
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,600&family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --black:#080808;
-  --dark:#0F0F0F;
-  --dark-2:#161616;
-  --dark-3:#1E1E1E;
-  --dark-4:#2A2A2A;
-  --orange:#FF5C00;
-  --orange-dim:#CC4A00;
-  --orange-glow:rgba(255,92,0,0.15);
-  --white:#F5F5F5;
-  --white-dim:#A0A0A0;
-  --white-faint:#404040;
-  --border:#242424;
+  /* Cream base */
+  --cream:#F5F0E8;
+  --cream-2:#EDE5D5;
+  --cream-3:#E0D5C0;
+  /* Navy structural */
+  --navy:#1A2840;
+  --navy-mid:#243652;
+  --navy-light:#4A6080;
+  --navy-faint:#8A9BB0;
+  /* Orange accent — kept punchy from original, slightly warmed */
+  --orange:#E85500;
+  --orange-dim:#C04500;
+  --orange-soft:#F07030;
+  --orange-pale:#FDF0E6;
+  --orange-glow:rgba(232,85,0,0.12);
+  /* Borders */
+  --border-light:rgba(26,40,64,0.12);
+  --border-dark:rgba(26,40,64,0.22);
+  /* Fonts */
+  --font-serif:'Playfair Display',Georgia,serif;
   --font-display:'Bebas Neue',sans-serif;
   --font-mono:'DM Mono',monospace;
   --font-sans:'DM Sans',system-ui,sans-serif;
@@ -46,8 +50,8 @@ html{scroll-behavior:smooth}
 body{
   font-family:var(--font-sans);
   font-weight:300;
-  color:var(--white);
-  background:var(--black);
+  color:var(--navy);
+  background:var(--cream);
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
   cursor:crosshair;
@@ -55,757 +59,456 @@ body{
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 
+/* grain overlay */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
+  opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:180px 180px;
+}
+
+/* CURSOR */
 .cursor{
   position:fixed;width:8px;height:8px;
   background:var(--orange);border-radius:50%;
   pointer-events:none;z-index:9999;
   transform:translate(-50%,-50%);
   transition:transform 0.1s;
-  mix-blend-mode:normal;
 }
 @media(hover:none){.cursor{display:none}}
 
-.shell{max-width:1280px;margin:0 auto;padding:0 40px}
+.shell{max-width:1280px;margin:0 auto;padding:0 48px}
 
+/* ===================== NAV ===================== */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:0 40px;height:64px;
+  padding:0 48px;height:68px;
   display:flex;align-items:center;justify-content:space-between;
-  background:rgba(8,8,8,0.92);
+  background:rgba(245,240,232,0.94);
   backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid var(--border-light);
 }
-
 .nav-logo{
-  font-family:var(--font-display);
-  font-size:28px;
-  letter-spacing:0.12em;
-  color:var(--white);
-  display:flex;align-items:center;gap:2px;
+  display:flex;align-items:center;gap:10px;
 }
-
-.nav-logo-accent{color:var(--orange)}
-
+.nav-logo-mark{
+  width:34px;height:34px;background:var(--navy);
+  display:flex;align-items:center;justify-content:center;border-radius:4px;flex-shrink:0;
+}
+.nav-logo-mark span{font-family:var(--font-serif);font-size:17px;font-weight:700;color:var(--orange-soft);line-height:1;}
+.nav-logo-text{font-family:var(--font-display);font-size:26px;letter-spacing:0.1em;color:var(--navy);}
+.nav-logo-accent{color:var(--orange);}
 .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
 .nav-links a{
-  font-family:var(--font-mono);
-  font-size:11px;font-weight:400;
-  color:var(--white-dim);
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  transition:color 0.2s;
+  font-family:var(--font-mono);font-size:11px;font-weight:400;
+  color:var(--navy-light);letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;
 }
 .nav-links a:hover{color:var(--orange)}
-
 .nav-cta{
-  font-family:var(--font-mono);
-  font-size:11px;font-weight:500;
+  font-family:var(--font-mono);font-size:11px;font-weight:500;
   letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--black)!important;
-  background:var(--orange);
-  padding:10px 20px;
-  border:none;cursor:pointer;
-  transition:background 0.2s,transform 0.15s;
-  display:inline-block;
+  color:var(--cream)!important;background:var(--navy);
+  padding:10px 20px;border:none;cursor:pointer;
+  transition:background 0.2s,transform 0.15s;display:inline-block;
+  border-radius:3px;
 }
-.nav-cta:hover{background:var(--orange-dim);transform:translateY(-1px)}
-
+.nav-cta:hover{background:var(--navy-mid);transform:translateY(-1px)}
 .nav-mobile-btn{
-  display:none;background:none;border:none;
-  cursor:pointer;padding:4px;flex-direction:column;gap:5px;
+  display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px;
 }
-.nav-mobile-btn span{display:block;width:22px;height:1px;background:var(--white)}
+.nav-mobile-btn span{display:block;width:22px;height:1px;background:var(--navy)}
 
+/* ===================== HERO ===================== */
 .hero{
   min-height:90vh;
-  display:flex;flex-direction:column;
-  justify-content:flex-end;
-  padding-top:64px;
-  position:relative;
-  overflow:hidden;
-  background:var(--black);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding-top:68px;position:relative;overflow:hidden;
+  background:var(--cream);
 }
-
+/* Orange-tinted grid — from original, recolored warm */
 .hero-grid{
   position:absolute;inset:0;
   background-image:
-    linear-gradient(rgba(255,92,0,0.08) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,92,0,0.08) 1px,transparent 1px);
+    linear-gradient(rgba(232,85,0,0.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(232,85,0,0.07) 1px,transparent 1px);
   background-size:80px 80px;
   mask-image:linear-gradient(to bottom,transparent 0%,black 30%,black 70%,transparent 100%);
 }
-
+/* Watermark — BLDR in navy outline */
 .hero-mark{
-  position:absolute;
-  top:50%;left:50%;
+  position:absolute;top:50%;left:50%;
   transform:translate(-50%,-52%);
   font-family:var(--font-display);
   font-size:clamp(180px,25vw,380px);
-  letter-spacing:0.05em;
-  color:transparent;
-  -webkit-text-stroke:1px rgba(255,92,0,0.15);
-  pointer-events:none;
-  white-space:nowrap;
-  user-select:none;
+  letter-spacing:0.05em;color:transparent;
+  -webkit-text-stroke:1px rgba(26,40,64,0.07);
+  pointer-events:none;white-space:nowrap;user-select:none;
 }
-
 .hero-content{
   position:relative;z-index:2;
-  padding:0 40px 80px;
-  max-width:1280px;
-  margin:0 auto;
-  width:100%;
+  padding:0 48px 88px;
+  max-width:1280px;margin:0 auto;width:100%;
 }
-
+/* Stamp tag */
 .hero-tag{
-  font-family:var(--font-mono);
-  font-size:11px;font-weight:400;
-  color:var(--orange);
-  letter-spacing:0.2em;text-transform:uppercase;
-  margin-bottom:24px;
-  display:flex;align-items:center;gap:12px;
+  display:inline-flex;align-items:center;gap:12px;
+  margin-bottom:28px;
   opacity:0;animation:fadeUp 0.8s 0.2s forwards;
 }
-
-.hero-tag::before{
-  content:'';display:block;
-  width:32px;height:1px;background:var(--orange);
+.hero-tag-stamp{
+  display:flex;align-items:center;gap:8px;
+  border:1.5px solid var(--orange);padding:4px 12px 4px 9px;border-radius:3px;position:relative;
 }
+.hero-tag-stamp::before{content:'';position:absolute;inset:2px;border:1px solid rgba(232,85,0,0.2);border-radius:2px;}
+.hero-tag-dot{width:6px;height:6px;background:var(--orange);border-radius:50%;}
+.hero-tag-text{font-family:var(--font-mono);font-size:10px;color:var(--orange);letter-spacing:0.18em;text-transform:uppercase;}
+.hero-tag-divider{width:1px;height:18px;background:var(--border-dark);}
+.hero-tag-loc{font-family:var(--font-mono);font-size:10px;color:var(--navy-light);letter-spacing:0.1em;text-transform:uppercase;}
 
 .hero-headline{
   font-family:var(--font-display);
   font-size:clamp(60px,9vw,140px);
-  line-height:0.92;
-  letter-spacing:0.02em;
-  color:var(--white);
-  margin-bottom:32px;
+  line-height:0.92;letter-spacing:0.02em;
+  color:var(--navy);margin-bottom:32px;
   opacity:0;animation:fadeUp 0.8s 0.35s forwards;
 }
-
 .hero-headline span{color:var(--orange)}
 
 .hero-sub{
-  font-family:var(--font-mono);
-  font-size:14px;font-weight:300;
-  color:var(--white-dim);
-  line-height:1.8;
-  max-width:480px;
-  margin-bottom:48px;
+  font-family:var(--font-mono);font-size:14px;font-weight:300;
+  color:var(--navy-light);line-height:1.8;max-width:480px;margin-bottom:48px;
   opacity:0;animation:fadeUp 0.8s 0.5s forwards;
 }
-
 .hero-actions{
   display:flex;align-items:center;gap:24px;
   opacity:0;animation:fadeUp 0.8s 0.65s forwards;
 }
-
 .btn-primary{
-  font-family:var(--font-mono);
-  font-size:12px;font-weight:500;
+  font-family:var(--font-mono);font-size:12px;font-weight:500;
   letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--black);
-  background:var(--orange);
-  padding:14px 32px;
-  border:none;cursor:pointer;
-  transition:background 0.2s,transform 0.15s;
-  display:inline-block;
+  color:var(--cream);background:var(--navy);
+  padding:14px 32px;border:none;cursor:pointer;
+  transition:background 0.2s,transform 0.15s;display:inline-block;border-radius:3px;
+  box-shadow:0 3px 14px rgba(26,40,64,0.2);
 }
-.btn-primary:hover{background:var(--orange-dim);transform:translateY(-1px);color:var(--black)}
-
+.btn-primary:hover{background:var(--navy-mid);transform:translateY(-1px)}
 .btn-outline{
-  font-family:var(--font-mono);
-  font-size:12px;font-weight:400;
+  font-family:var(--font-mono);font-size:12px;font-weight:400;
   letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--white-dim);
-  border:1px solid var(--white-faint);
-  padding:14px 32px;
-  transition:border-color 0.2s,color 0.2s;
-  display:inline-block;
+  color:var(--navy-light);border:1px solid var(--border-dark);
+  padding:14px 32px;transition:border-color 0.2s,color 0.2s;display:inline-block;border-radius:3px;
 }
 .btn-outline:hover{border-color:var(--orange);color:var(--orange)}
 
+/* Hero side stats */
 .hero-stats{
-  position:absolute;right:40px;bottom:80px;
+  position:absolute;right:48px;bottom:88px;
   display:flex;flex-direction:column;gap:24px;
   opacity:0;animation:fadeIn 1s 0.8s forwards;
 }
-
 .hero-stat-num{
-  font-family:var(--font-display);
-  font-size:40px;letter-spacing:0.05em;
-  color:var(--white);line-height:1;
+  font-family:var(--font-display);font-size:40px;letter-spacing:0.05em;color:var(--navy);line-height:1;
 }
-
 .hero-stat-label{
-  font-family:var(--font-mono);
-  font-size:10px;color:var(--white-dim);
-  letter-spacing:0.12em;text-transform:uppercase;
-  margin-top:4px;
+  font-family:var(--font-mono);font-size:10px;color:var(--navy-faint);
+  letter-spacing:0.12em;text-transform:uppercase;margin-top:4px;
+}
+.hero-stat-divider{width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--border-dark),transparent);}
+
+/* ===================== DIFFERENTIATOR STRIP ===================== */
+.diff-strip{
+  background:var(--navy);padding:52px 48px;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  position:relative;overflow:hidden;
+  border-top:3px solid var(--orange);
+}
+.diff-strip::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+.diff-item{padding:0 40px;position:relative;z-index:1;border-right:1px solid rgba(255,255,255,0.07);}
+.diff-item:last-child{border-right:none;}
+.diff-eyebrow{
+  font-family:var(--font-mono);font-size:9px;color:var(--orange-soft);
+  letter-spacing:0.2em;text-transform:uppercase;margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;
+}
+.diff-eyebrow::before{content:'◆';font-size:6px;}
+.diff-headline{
+  font-family:var(--font-display);font-size:28px;letter-spacing:0.04em;
+  color:var(--cream);line-height:1.1;margin-bottom:10px;
+}
+.diff-body{
+  font-family:var(--font-mono);font-size:11px;font-weight:300;
+  color:rgba(245,240,232,0.45);line-height:1.7;
 }
 
-.hero-stat-divider{
-  width:1px;height:40px;
-  background:linear-gradient(to bottom,transparent,var(--border),transparent);
-}
-
+/* ===================== MARQUEE ===================== */
 .marquee-wrap{
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  background:var(--dark-2);
-  padding:14px 0;
-  overflow:hidden;
-  position:relative;z-index:2;
+  border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);
+  background:var(--cream-2);padding:14px 0;overflow:hidden;position:relative;z-index:2;
 }
-
-.marquee-track{
-  display:flex;gap:0;
-  animation:marquee 30s linear infinite;
-  width:max-content;
-}
-
+.marquee-track{display:flex;animation:marquee 32s linear infinite;width:max-content;}
 .marquee-item{
-  font-family:var(--font-mono);
-  font-size:11px;font-weight:400;
-  color:var(--white-dim);
-  letter-spacing:0.14em;text-transform:uppercase;
-  padding:0 32px;
-  white-space:nowrap;
-  display:flex;align-items:center;gap:32px;
+  font-family:var(--font-mono);font-size:11px;font-weight:400;
+  color:var(--navy-light);letter-spacing:0.14em;text-transform:uppercase;
+  padding:0 32px;white-space:nowrap;display:flex;align-items:center;gap:32px;
 }
+.marquee-item::after{content:'◆';color:var(--orange);font-size:8px;}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-.marquee-item::after{
-  content:'◆';color:var(--orange);font-size:8px;
-}
-
-@keyframes marquee{
-  from{transform:translateX(0)}
-  to{transform:translateX(-50%)}
-}
-
+/* ===================== SHARED SECTION STYLES ===================== */
 .section{padding:120px 0}
-.section--dark{background:var(--dark)}
-.section--dark-2{background:var(--dark-2)}
-.section--black{background:var(--black)}
+.section--cream{background:var(--cream)}
+.section--cream-2{background:var(--cream-2)}
+.section--navy{background:var(--navy)}
 
 .section-label{
-  font-family:var(--font-mono);
-  font-size:10px;font-weight:500;
-  color:var(--orange);
-  letter-spacing:0.2em;text-transform:uppercase;
-  margin-bottom:20px;
-  display:flex;align-items:center;gap:12px;
+  font-family:var(--font-mono);font-size:10px;font-weight:500;
+  color:var(--orange);letter-spacing:0.2em;text-transform:uppercase;
+  margin-bottom:20px;display:flex;align-items:center;gap:12px;
 }
-.section-label::before{content:'//';color:var(--white-faint)}
+.section-label::before{content:'//';color:var(--cream-3);}
+.section-label--light::before{color:rgba(255,255,255,0.15);}
 
 .section-headline{
   font-family:var(--font-display);
-  font-size:clamp(42px,5vw,80px);
-  letter-spacing:0.03em;
-  line-height:0.95;
-  color:var(--white);
-  margin-bottom:24px;
+  font-size:clamp(42px,5vw,80px);letter-spacing:0.03em;line-height:0.95;
+  color:var(--navy);margin-bottom:24px;
 }
 .section-headline span{color:var(--orange)}
+.section-headline--light{color:var(--cream);}
 
 .section-body{
-  font-family:var(--font-mono);
-  font-size:13px;font-weight:300;
-  color:var(--white-dim);
-  line-height:1.9;
-  margin-bottom:16px;
+  font-family:var(--font-mono);font-size:13px;font-weight:300;
+  color:var(--navy-light);line-height:1.9;margin-bottom:16px;
 }
+.section-body--light{color:rgba(245,240,232,0.55);}
 
-.services-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:1px;
-  background:var(--border);
-  margin-top:60px;
-}
-
-.service-card{
-  background:var(--dark);
-  padding:48px 40px;
-  position:relative;
-  overflow:hidden;
-  transition:background 0.3s;
-}
-
-.service-card::before{
-  content:'';
-  position:absolute;top:0;left:0;right:0;
-  height:2px;
-  background:var(--orange);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform 0.4s;
-}
-
-.service-card:hover{background:var(--dark-2)}
-.service-card:hover::before{transform:scaleX(1)}
-
-.service-num{
-  font-family:var(--font-display);
-  font-size:72px;letter-spacing:0.05em;
-  color:var(--border);
-  line-height:1;margin-bottom:20px;
-  transition:color 0.3s;
-}
-.service-card:hover .service-num{color:var(--dark-4)}
-
-.service-name{
-  font-family:var(--font-display);
-  font-size:28px;letter-spacing:0.05em;
-  color:var(--white);margin-bottom:12px;
-}
-
-.service-desc{
-  font-family:var(--font-mono);
-  font-size:12px;font-weight:300;
-  color:var(--white-dim);
-  line-height:1.8;margin-bottom:24px;
-}
-
-.service-tags{display:flex;flex-wrap:wrap;gap:8px}
-.service-tag{
-  font-family:var(--font-mono);
-  font-size:10px;font-weight:400;
-  color:var(--orange);
-  border:1px solid rgba(255,92,0,0.3);
-  padding:4px 10px;
-  letter-spacing:0.1em;
-}
-
+/* ===================== BLDR ACRONYM ===================== */
 .bldr-section{
-  padding:120px 0;
-  background:var(--black);
-  position:relative;
-  overflow:hidden;
+  padding:120px 0;background:var(--cream);position:relative;overflow:hidden;
 }
-
 .bldr-section::before{
-  content:'BLDR';
-  position:absolute;right:-40px;top:50%;
-  transform:translateY(-50%);
-  font-family:var(--font-display);
-  font-size:300px;letter-spacing:0.1em;
-  color:transparent;
-  -webkit-text-stroke:1px var(--border);
-  pointer-events:none;
-  user-select:none;
+  content:'BLDR';position:absolute;right:-40px;top:50%;transform:translateY(-50%);
+  font-family:var(--font-display);font-size:300px;letter-spacing:0.1em;
+  color:transparent;-webkit-text-stroke:1px var(--border-light);pointer-events:none;user-select:none;
 }
-
-.bldr-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:80px;
-  align-items:center;
-}
-
-.bldr-letters{
-  display:flex;flex-direction:column;gap:0;
-}
-
+.bldr-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.bldr-letters{display:flex;flex-direction:column;gap:0;}
 .bldr-letter-row{
-  display:flex;align-items:stretch;
-  border-bottom:1px solid var(--border);
-  padding:28px 0;
-  gap:24px;
-  position:relative;
-  overflow:hidden;
-  transition:background 0.2s;
-  cursor:default;
+  display:flex;align-items:stretch;border-bottom:1px solid var(--border-light);
+  padding:28px 0;gap:24px;position:relative;overflow:hidden;
+  transition:background 0.2s;cursor:default;
 }
-
-.bldr-letter-row:first-child{border-top:1px solid var(--border)}
-.bldr-letter-row:hover{background:var(--dark-2)}
-
+.bldr-letter-row:first-child{border-top:1px solid var(--border-light);}
+.bldr-letter-row:hover{background:var(--cream-2);}
 .bldr-letter{
-  font-family:var(--font-display);
-  font-size:64px;letter-spacing:0.05em;
-  color:var(--orange);
-  line-height:1;
-  width:64px;flex-shrink:0;
+  font-family:var(--font-display);font-size:64px;letter-spacing:0.05em;
+  color:var(--orange);line-height:1;width:64px;flex-shrink:0;
 }
-
-.bldr-letter-content{display:flex;flex-direction:column;justify-content:center}
-
+.bldr-letter-content{display:flex;flex-direction:column;justify-content:center;}
 .bldr-letter-word{
-  font-family:var(--font-display);
-  font-size:28px;letter-spacing:0.05em;
-  color:var(--white);
-  margin-bottom:4px;
+  font-family:var(--font-display);font-size:28px;letter-spacing:0.05em;
+  color:var(--navy);margin-bottom:4px;
 }
-
 .bldr-letter-desc{
-  font-family:var(--font-mono);
-  font-size:11px;font-weight:300;
-  color:var(--white-dim);
-  line-height:1.6;
-  letter-spacing:0.04em;
+  font-family:var(--font-mono);font-size:11px;font-weight:300;
+  color:var(--navy-light);line-height:1.6;letter-spacing:0.04em;
 }
 
+/* ===================== SERVICES ===================== */
+.services-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:1px;background:var(--border-light);margin-top:60px;
+}
+.service-card{
+  background:var(--cream);padding:48px 40px;position:relative;overflow:hidden;transition:background 0.3s;
+}
+.service-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform 0.4s;
+}
+.service-card:hover{background:white;}
+.service-card:hover::before{transform:scaleX(1);}
+.service-num{
+  font-family:var(--font-display);font-size:72px;letter-spacing:0.05em;
+  color:var(--cream-3);line-height:1;margin-bottom:20px;transition:color 0.3s;
+}
+.service-card:hover .service-num{color:var(--cream-2);}
+.service-name{
+  font-family:var(--font-serif);font-size:22px;font-weight:500;
+  color:var(--navy);margin-bottom:12px;line-height:1.2;
+}
+.service-desc{
+  font-family:var(--font-mono);font-size:12px;font-weight:300;
+  color:var(--navy-light);line-height:1.8;margin-bottom:24px;
+}
+.service-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.service-tag{
+  font-family:var(--font-mono);font-size:10px;font-weight:400;
+  color:var(--orange);border:1px solid rgba(232,85,0,0.3);
+  padding:4px 10px;letter-spacing:0.1em;border-radius:2px;
+}
+
+/* ===================== PROCESS ===================== */
 .process-steps{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1px;
-  background:var(--border);
-  margin-top:60px;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border-light);margin-top:60px;
 }
-
-.process-step{
-  background:var(--dark);
-  padding:40px 32px;
-  position:relative;
-}
-
+.process-step{background:var(--cream-2);padding:40px 32px;position:relative;}
 .process-step-num{
-  font-family:var(--font-display);
-  font-size:48px;letter-spacing:0.05em;
-  color:var(--border);
-  line-height:1;margin-bottom:20px;
+  font-family:var(--font-display);font-size:48px;letter-spacing:0.05em;
+  color:var(--cream-3);line-height:1;margin-bottom:20px;
 }
-
 .process-step-name{
-  font-family:var(--font-display);
-  font-size:22px;letter-spacing:0.05em;
-  color:var(--white);margin-bottom:12px;
+  font-family:var(--font-serif);font-size:20px;font-weight:500;
+  color:var(--navy);margin-bottom:12px;
 }
-
 .process-step-desc{
-  font-family:var(--font-mono);
-  font-size:11px;font-weight:300;
-  color:var(--white-dim);
-  line-height:1.8;
+  font-family:var(--font-mono);font-size:11px;font-weight:300;
+  color:var(--navy-light);line-height:1.8;
 }
-
 .process-step::after{
-  content:'→';
-  position:absolute;right:-12px;top:40px;
-  font-size:16px;color:var(--orange);
-  z-index:2;
+  content:'→';position:absolute;right:-12px;top:40px;
+  font-size:16px;color:var(--orange);z-index:2;
 }
-.process-step:last-child::after{display:none}
+.process-step:last-child::after{display:none;}
 
+/* ===================== PRICING ===================== */
 .pricing-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1px;
-  background:var(--border);
-  margin-top:60px;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--border-light);margin-top:60px;
 }
-
-.pricing-card{
-  background:var(--dark);
-  padding:56px 48px;
-  position:relative;
-  overflow:hidden;
-}
-
-.pricing-card--featured{
-  background:var(--dark-2);
-}
-
+.pricing-card{background:var(--cream);padding:56px 48px;position:relative;overflow:hidden;}
+.pricing-card--featured{background:var(--cream-2);}
 .pricing-card--featured::before{
-  content:'';
-  position:absolute;top:0;left:0;right:0;
-  height:2px;
-  background:var(--orange);
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--orange);
 }
-
 .pricing-badge{
-  font-family:var(--font-mono);
-  font-size:10px;font-weight:500;
-  color:var(--black);
-  background:var(--orange);
-  padding:4px 12px;
-  letter-spacing:0.12em;text-transform:uppercase;
-  display:inline-block;
-  margin-bottom:24px;
+  font-family:var(--font-mono);font-size:10px;font-weight:500;
+  color:var(--cream);background:var(--orange);
+  padding:4px 12px;letter-spacing:0.12em;text-transform:uppercase;
+  display:inline-block;margin-bottom:24px;border-radius:2px;
 }
-
 .pricing-name{
-  font-family:var(--font-display);
-  font-size:40px;letter-spacing:0.05em;
-  color:var(--white);margin-bottom:8px;
+  font-family:var(--font-display);font-size:40px;letter-spacing:0.05em;
+  color:var(--navy);margin-bottom:8px;
 }
-
 .pricing-desc{
-  font-family:var(--font-mono);
-  font-size:11px;font-weight:300;
-  color:var(--white-dim);
-  margin-bottom:32px;
-  line-height:1.7;
+  font-family:var(--font-mono);font-size:11px;font-weight:300;
+  color:var(--navy-light);margin-bottom:32px;line-height:1.7;
 }
-
 .pricing-retainer-num{
-  font-family:var(--font-display);
-  font-size:72px;letter-spacing:0.03em;
-  color:var(--white);line-height:1;
+  font-family:var(--font-display);font-size:72px;letter-spacing:0.03em;
+  color:var(--navy);line-height:1;
 }
-
 .pricing-retainer-label{
-  font-family:var(--font-mono);
-  font-size:10px;color:var(--white-dim);
-  letter-spacing:0.12em;text-transform:uppercase;
-  margin-top:6px;
-  margin-bottom:8px;
+  font-family:var(--font-mono);font-size:10px;color:var(--navy-faint);
+  letter-spacing:0.12em;text-transform:uppercase;margin-top:6px;margin-bottom:8px;
 }
-
 .pricing-build-note{
-  font-family:var(--font-mono);
-  font-size:11px;font-weight:400;
-  color:var(--orange);
-  letter-spacing:0.06em;
-  margin-bottom:40px;
+  font-family:var(--font-mono);font-size:11px;font-weight:400;
+  color:var(--orange);letter-spacing:0.06em;margin-bottom:40px;
 }
-
-.pricing-divider{
-  width:100%;height:1px;
-  background:var(--border);
-  margin-bottom:32px;
-}
-
-.pricing-features{
-  list-style:none;
-  display:flex;flex-direction:column;
-  gap:12px;margin-bottom:40px;
-}
-
+.pricing-divider{width:100%;height:1px;background:var(--border-light);margin-bottom:32px;}
+.pricing-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:40px;}
 .pricing-feature{
-  font-family:var(--font-mono);
-  font-size:12px;font-weight:300;
-  color:var(--white-dim);
-  display:flex;align-items:flex-start;gap:12px;
-  line-height:1.5;
+  font-family:var(--font-mono);font-size:12px;font-weight:300;
+  color:var(--navy-light);display:flex;align-items:flex-start;gap:12px;line-height:1.5;
+}
+.pricing-feature::before{content:'→';color:var(--orange);flex-shrink:0;font-size:11px;margin-top:1px;}
+
+/* pricing note */
+.pricing-note{
+  margin-top:32px;padding:24px 32px;
+  border:1px solid var(--border-light);background:var(--cream-2);border-radius:2px;
+}
+.pricing-note p{
+  font-family:var(--font-mono);font-size:11px;color:var(--navy-light);line-height:1.8;letter-spacing:0.04em;
 }
 
-.pricing-feature::before{
-  content:'→';color:var(--orange);
-  flex-shrink:0;font-size:11px;
-  margin-top:1px;
-}
-
-.about-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:80px;
-  align-items:center;
-}
-
-.about-stats{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1px;
-  background:var(--border);
-  margin-top:48px;
-}
-
-.about-stat{
-  background:var(--dark-3);
-  padding:28px 24px;
-}
-
-.about-stat-num{
-  font-family:var(--font-display);
-  font-size:44px;letter-spacing:0.05em;
-  color:var(--orange);line-height:1;
-}
-
-.about-stat-label{
-  font-family:var(--font-mono);
-  font-size:10px;color:var(--white-dim);
-  letter-spacing:0.1em;text-transform:uppercase;
-  margin-top:6px;
-}
-
+/* ===================== ABOUT ===================== */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border-light);margin-top:48px;}
+.about-stat{background:var(--cream-2);padding:28px 24px;}
+.about-stat-num{font-family:var(--font-display);font-size:44px;letter-spacing:0.05em;color:var(--orange);line-height:1;}
+.about-stat-label{font-family:var(--font-mono);font-size:10px;color:var(--navy-faint);letter-spacing:0.1em;text-transform:uppercase;margin-top:6px;}
 .about-visual{position:relative;}
-
 .about-img-block{
-  background:var(--dark-3);
-  border:1px solid var(--border);
-  aspect-ratio:4/5;
-  display:flex;align-items:center;justify-content:center;
-  position:relative;
-  overflow:hidden;
+  background:var(--cream-3);border:1px solid var(--border-light);
+  aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
 }
+.about-img-placeholder{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:12px;}
+.about-img-placeholder svg{width:48px;height:48px;stroke:var(--navy-faint);fill:none;stroke-width:1;}
+.about-img-placeholder span{font-family:var(--font-mono);font-size:10px;color:var(--navy-faint);letter-spacing:0.14em;text-transform:uppercase;}
+.about-accent{position:absolute;bottom:-16px;right:-16px;width:120px;height:120px;border:1px solid var(--orange);opacity:0.2;}
 
-.about-img-block::before{
-  content:'';
-  position:absolute;inset:0;
-  background:linear-gradient(135deg,var(--dark-3) 0%,var(--dark-4) 100%);
-}
-
-.about-img-placeholder{
-  position:relative;z-index:1;
-  display:flex;flex-direction:column;
-  align-items:center;gap:12px;
-}
-
-.about-img-placeholder svg{
-  width:48px;height:48px;
-  stroke:var(--white-faint);fill:none;stroke-width:1;
-}
-
-.about-img-placeholder span{
-  font-family:var(--font-mono);
-  font-size:10px;color:var(--white-faint);
-  letter-spacing:0.14em;text-transform:uppercase;
-}
-
-.about-accent{
-  position:absolute;
-  bottom:-16px;right:-16px;
-  width:120px;height:120px;
-  border:1px solid var(--orange);
-  opacity:0.2;
-}
-
-.contact-section{
-  padding:120px 0;
-  background:var(--dark);
-  position:relative;
-  overflow:hidden;
-}
-
+/* ===================== CONTACT ===================== */
+.contact-section{padding:120px 0;background:var(--cream-2);position:relative;overflow:hidden;}
 .contact-section::before{
-  content:'BUILD';
-  position:absolute;bottom:-40px;right:-20px;
-  font-family:var(--font-display);
-  font-size:200px;letter-spacing:0.1em;
-  color:transparent;
-  -webkit-text-stroke:1px var(--border);
-  pointer-events:none;
+  content:'BUILD';position:absolute;bottom:-40px;right:-20px;
+  font-family:var(--font-display);font-size:200px;letter-spacing:0.1em;
+  color:transparent;-webkit-text-stroke:1px var(--border-light);pointer-events:none;
 }
-
-.contact-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:80px;
-  align-items:start;
-}
-
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
 .contact-form{display:flex;flex-direction:column;gap:16px;}
-
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-
-.form-field{display:flex;flex-direction:column;gap:8px}
-
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-field{display:flex;flex-direction:column;gap:8px;}
 .form-label{
-  font-family:var(--font-mono);
-  font-size:10px;font-weight:500;
-  color:var(--white-dim);
-  letter-spacing:0.14em;text-transform:uppercase;
+  font-family:var(--font-mono);font-size:10px;font-weight:500;
+  color:var(--navy-light);letter-spacing:0.14em;text-transform:uppercase;
 }
-
-.form-input,
-.form-textarea{
-  background:var(--dark-3);
-  border:1px solid var(--border);
-  color:var(--white);
-  font-family:var(--font-mono);
-  font-size:13px;font-weight:300;
-  padding:14px 16px;
-  outline:none;
-  transition:border-color 0.2s;
-  width:100%;
+.form-input,.form-textarea{
+  background:var(--cream);border:1px solid var(--border-dark);
+  color:var(--navy);font-family:var(--font-mono);font-size:13px;font-weight:300;
+  padding:14px 16px;outline:none;transition:border-color 0.2s;width:100%;border-radius:2px;
 }
-
-.form-input:focus,
-.form-textarea:focus{border-color:var(--orange)}
-
-.form-textarea{height:120px;resize:none}
-
+.form-input::placeholder,.form-textarea::placeholder{color:var(--navy-faint);}
+.form-input:focus,.form-textarea:focus{border-color:var(--orange);}
+.form-textarea{height:120px;resize:none;}
 .form-submit{
-  font-family:var(--font-mono);
-  font-size:12px;font-weight:500;
+  font-family:var(--font-mono);font-size:12px;font-weight:500;
   letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--black);
-  background:var(--orange);
-  border:none;cursor:pointer;
-  padding:16px 32px;
-  transition:background 0.2s;
-  margin-top:8px;
-  align-self:flex-start;
+  color:var(--cream);background:var(--navy);
+  border:none;cursor:pointer;padding:16px 32px;
+  transition:background 0.2s;margin-top:8px;align-self:flex-start;border-radius:3px;
 }
-
-.form-submit:hover{background:var(--orange-dim)}
-
+.form-submit:hover{background:var(--navy-mid);}
 .contact-info{display:flex;flex-direction:column;gap:32px;padding-top:8px;}
-
-.contact-info-item{
-  display:flex;flex-direction:column;gap:6px;
-  padding-bottom:32px;
-  border-bottom:1px solid var(--border);
-}
-.contact-info-item:last-child{border-bottom:none}
-
+.contact-info-item{display:flex;flex-direction:column;gap:6px;padding-bottom:32px;border-bottom:1px solid var(--border-light);}
+.contact-info-item:last-child{border-bottom:none;}
 .contact-info-label{
-  font-family:var(--font-mono);
-  font-size:10px;font-weight:500;
-  color:var(--orange);
-  letter-spacing:0.16em;text-transform:uppercase;
+  font-family:var(--font-mono);font-size:10px;font-weight:500;
+  color:var(--orange);letter-spacing:0.16em;text-transform:uppercase;
 }
+.contact-info-value{font-family:var(--font-mono);font-size:13px;font-weight:300;color:var(--navy);line-height:1.7;}
+.contact-info-value a{color:var(--navy);transition:color 0.2s;}
+.contact-info-value a:hover{color:var(--orange);}
 
-.contact-info-value{
-  font-family:var(--font-mono);
-  font-size:13px;font-weight:300;
-  color:var(--white);
-  line-height:1.7;
-}
-
-.contact-info-value a{color:var(--white);transition:color 0.2s}
-.contact-info-value a:hover{color:var(--orange)}
-
-.footer{
-  background:var(--black);
-  border-top:1px solid var(--border);
-  padding:40px 0;
-}
-
-.footer-inner{
-  display:flex;align-items:center;
-  justify-content:space-between;
-}
-
-.footer-logo{
-  font-family:var(--font-display);
-  font-size:24px;letter-spacing:0.12em;
-  color:var(--white);
-}
-
-.footer-logo span{color:var(--orange)}
-
+/* ===================== FOOTER ===================== */
+.footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.06);padding:40px 0;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;}
+.footer-logo{display:flex;align-items:center;gap:10px;}
+.footer-logo-mark{width:28px;height:28px;background:rgba(255,255,255,0.08);border-radius:3px;display:flex;align-items:center;justify-content:center;}
+.footer-logo-mark span{font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--orange-soft);}
+.footer-logo-text{font-family:var(--font-display);font-size:22px;letter-spacing:0.1em;color:rgba(245,240,232,0.7);}
+.footer-logo-text span{color:var(--orange-soft);}
 .footer-links{display:flex;gap:32px;list-style:none;}
+.footer-links a{font-family:var(--font-mono);font-size:11px;color:rgba(245,240,232,0.35);letter-spacing:0.08em;transition:color 0.2s;}
+.footer-links a:hover{color:var(--orange-soft);}
+.footer-copy{font-family:var(--font-mono);font-size:11px;color:rgba(245,240,232,0.2);letter-spacing:0.06em;}
 
-.footer-links a{
-  font-family:var(--font-mono);
-  font-size:11px;color:var(--white-dim);
-  letter-spacing:0.08em;
-  transition:color 0.2s;
-}
-.footer-links a:hover{color:var(--orange)}
+/* ===================== ANIMATIONS ===================== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s,transform 0.7s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
 
-.footer-copy{
-  font-family:var(--font-mono);
-  font-size:11px;color:var(--white-faint);
-  letter-spacing:0.06em;
-}
-
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
-}
-@keyframes fadeIn{
-  from{opacity:0}to{opacity:1}
-}
-
-.reveal{
-  opacity:0;transform:translateY(24px);
-  transition:opacity 0.7s,transform 0.7s;
-}
-.reveal.visible{opacity:1;transform:translateY(0)}
-
+/* ===================== RESPONSIVE ===================== */
 @media(max-width:1024px){
   .bldr-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
   .services-grid{grid-template-columns:1fr}
@@ -815,25 +518,20 @@ img{display:block;max-width:100%}
   .about-visual{display:none}
   .bldr-section::before{display:none}
 }
-
 @media(max-width:768px){
   .nav{padding:0 20px}
   .nav-links{display:none}
   .nav-mobile-btn{display:flex}
   .nav-links.nav-open{
-    display:flex;flex-direction:column;
-    position:fixed;top:64px;left:0;right:0;
-    background:rgba(8,8,8,0.97);
-    backdrop-filter:blur(16px);
-    padding:24px 20px 32px;
-    gap:0;z-index:99;
-    border-bottom:1px solid var(--border);
+    display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;
+    background:rgba(245,240,232,0.97);backdrop-filter:blur(16px);
+    padding:24px 20px 32px;gap:0;z-index:99;border-bottom:1px solid var(--border-light);
   }
-  .nav-links.nav-open li{border-bottom:1px solid var(--border);}
+  .nav-links.nav-open li{border-bottom:1px solid var(--border-light);}
   .nav-links.nav-open a{display:block;padding:16px 0;font-size:14px;}
   .nav-links.nav-open .nav-cta{margin-top:16px;text-align:center;padding:14px 20px;display:block;}
   .shell{padding:0 20px}
-  .hero-content{padding:0 20px 60px}
+  .hero-content{padding:0 20px 64px}
   .hero{justify-content:center;min-height:100vh;}
   .section{padding:80px 0}
   .process-steps{grid-template-columns:1fr}
@@ -842,7 +540,9 @@ img{display:block;max-width:100%}
   .footer-inner{flex-direction:column;gap:24px;text-align:center}
   .footer-links{flex-wrap:wrap;justify-content:center}
   .form-row{grid-template-columns:1fr}
-  .contact-grid{grid-template-columns:1fr}
+  .diff-strip{grid-template-columns:1fr;gap:32px;padding:40px 20px;}
+  .diff-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.07);padding:0 0 32px;}
+  .diff-item:last-child{border-bottom:none;padding-bottom:0;}
 }
 </style>
 </head>
@@ -850,8 +550,11 @@ img{display:block;max-width:100%}
 
 <div class="cursor" id="cursor"></div>
 
+<!-- NAV -->
 <nav class="nav">
-  <a href="/" class="nav-logo">BLD<span class="nav-logo-accent">R</span></a>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-text">BLD<span class="nav-logo-accent">R</span></div>
+  </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#process">Process</a></li>
@@ -864,30 +567,33 @@ img{display:block;max-width:100%}
   </button>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="hero-mark">BLDR</div>
-
   <div class="hero-content">
-    <div class="hero-tag">San Fernando Valley · Woodland Hills, CA</div>
-
+    <div class="hero-tag">
+      <div class="hero-tag-stamp">
+        <div class="hero-tag-dot"></div>
+        <div class="hero-tag-text">Est. 2026</div>
+      </div>
+      <div class="hero-tag-divider"></div>
+      <div class="hero-tag-loc">San Fernando Valley · Woodland Hills, CA</div>
+    </div>
     <h1 class="hero-headline">
       We don't<br>
       template.<br>
       We <span>build.</span>
     </h1>
-
     <p class="hero-sub">
-      BLDR Digital builds websites and AI tools for local businesses that are tired
-      of looking invisible online. We build it. We maintain it. You grow.
+      BLDR Digital builds websites and AI tools for local businesses that deserve better than invisible.
+      We build it. We maintain it. You grow.
     </p>
-
     <div class="hero-actions">
       <a href="#contact" class="btn-primary">Get a free audit</a>
       <a href="#pricing" class="btn-outline">See pricing</a>
     </div>
   </div>
-
   <div class="hero-stats">
     <div>
       <div class="hero-stat-num">$0</div>
@@ -906,6 +612,26 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
+<!-- DIFFERENTIATOR STRIP -->
+<div class="diff-strip">
+  <div class="diff-item">
+    <div class="diff-eyebrow">Ownership</div>
+    <div class="diff-headline">YOUR FILES.<br>ALWAYS.</div>
+    <div class="diff-body">Every site lives on GitHub and Cloudflare Pages. Cancel anytime — your code, your domain, your content. Nothing disappears.</div>
+  </div>
+  <div class="diff-item">
+    <div class="diff-eyebrow">The team</div>
+    <div class="diff-headline">TWO PEOPLE,<br>EVERY PROJECT.</div>
+    <div class="diff-body">Not an account manager and a team you'll never meet. Brian builds it. Jessica manages it. Both of us pick up the phone.</div>
+  </div>
+  <div class="diff-item">
+    <div class="diff-eyebrow">AI tools</div>
+    <div class="diff-headline">BUILT IN,<br>NOT BOLTED ON.</div>
+    <div class="diff-body">Chatbot and review automation are part of the system from day one — not add-ons you pay extra for after the fact.</div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
     <div class="marquee-item">Website Design</div>
@@ -929,6 +655,7 @@ img{display:block;max-width:100%}
   </div>
 </div>
 
+<!-- BLDR ACRONYM -->
 <section class="bldr-section" id="about-bldr">
   <div class="shell">
     <div class="bldr-grid">
@@ -942,12 +669,9 @@ img{display:block;max-width:100%}
         </p>
         <p class="section-body">
           We're a husband-and-wife team from Woodland Hills.
-          Together we serve the local businesses that make
-          the San Fernando Valley run — and we stay with them long after
-          the site goes live.
+          Together we serve the local businesses that make the San Fernando Valley run.
         </p>
       </div>
-
       <div class="bldr-letters reveal">
         <div class="bldr-letter-row">
           <div class="bldr-letter">B</div>
@@ -967,14 +691,14 @@ img{display:block;max-width:100%}
           <div class="bldr-letter">D</div>
           <div class="bldr-letter-content">
             <div class="bldr-letter-word">Drive</div>
-            <div class="bldr-letter-desc">We execute every detail — chatbots, integrations, updates, and automations — fully configured and running at all times. No manuals, no handoffs, no loose ends.</div>
+            <div class="bldr-letter-desc">We execute every detail — chatbots, integrations, updates, and automations — fully running at all times.</div>
           </div>
         </div>
         <div class="bldr-letter-row">
           <div class="bldr-letter">R</div>
           <div class="bldr-letter-content">
             <div class="bldr-letter-word">Results</div>
-            <div class="bldr-letter-desc">We measure everything and report back — more appointments, more reviews, more revenue. Results you can see.</div>
+            <div class="bldr-letter-desc">We measure everything and report back — more appointments, more reviews, more revenue you can see.</div>
           </div>
         </div>
       </div>
@@ -982,25 +706,24 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
-<section class="section section--dark" id="services">
+<!-- SERVICES -->
+<section class="section section--cream-2" id="services">
   <div class="shell">
     <div class="reveal">
       <div class="section-label">What we build</div>
       <h2 class="section-headline">EVERYTHING YOUR<br>BUSINESS NEEDS <span>ONLINE</span></h2>
     </div>
-
     <div class="services-grid">
       <div class="service-card reveal">
         <div class="service-num">01</div>
         <div class="service-name">Website Design & Build</div>
-        <p class="service-desc">Modern, fast, mobile-ready sites built to convert visitors into customers. Custom designed — never templated.</p>
+        <p class="service-desc">Modern, fast, mobile-ready sites built to convert visitors into customers — not just look nice.</p>
         <div class="service-tags">
           <span class="service-tag">Custom design</span>
           <span class="service-tag">Mobile-first</span>
           <span class="service-tag">SEO-ready</span>
         </div>
       </div>
-
       <div class="service-card reveal">
         <div class="service-num">02</div>
         <div class="service-name">AI Chatbot & Lead Capture</div>
@@ -1011,7 +734,6 @@ img{display:block;max-width:100%}
           <span class="service-tag">Auto-booking</span>
         </div>
       </div>
-
       <div class="service-card reveal">
         <div class="service-num">03</div>
         <div class="service-name">Review Automation</div>
@@ -1022,33 +744,32 @@ img{display:block;max-width:100%}
           <span class="service-tag">Automated</span>
         </div>
       </div>
-
       <div class="service-card reveal">
         <div class="service-num">04</div>
         <div class="service-name">Local SEO & Google Business</div>
-        <p class="service-desc">Get found when local customers search. Google Business Profile optimization, citations, and local search presence — built in from day one.</p>
+        <p class="service-desc">Get found when local customers search. GBP optimization, citations, monthly rank tracking, and locally-targeted blog content — built in and compounding from day one.</p>
         <div class="service-tags">
           <span class="service-tag">Local search</span>
           <span class="service-tag">GBP setup</span>
-          <span class="service-tag">Citations</span>
+          <span class="service-tag">Rank tracking</span>
+          <span class="service-tag">SEO content</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section section--black" id="process">
+<!-- PROCESS -->
+<section class="section section--cream" id="process">
   <div class="shell">
     <div class="reveal">
       <div class="section-label">How it works</div>
       <h2 class="section-headline">SIMPLE FROM<br><span>START</span> TO LAUNCH</h2>
       <p class="section-body" style="max-width:560px">
-        Four steps. Flat-rate pricing. No tech jargon, no long meetings,
-        no surprises. We've designed this process for business owners who
-        have a business to run, not a website to manage.
+        Four steps. Flat-rate pricing. No tech jargon, no long meetings, no surprises.
+        Designed for business owners who have a business to run, not a website to manage.
       </p>
     </div>
-
     <div class="process-steps">
       <div class="process-step reveal">
         <div class="process-step-num">01</div>
@@ -1058,7 +779,7 @@ img{display:block;max-width:100%}
       <div class="process-step reveal">
         <div class="process-step-num">02</div>
         <div class="process-step-name">Proposal</div>
-        <p class="process-step-desc">You get a clear, itemized plan with flat-rate pricing. No hourly billing, no tech jargon, no scope creep.</p>
+        <p class="process-step-desc">You get a clear, itemized plan with flat-rate pricing. No hourly estimates, no surprises at the end.</p>
       </div>
       <div class="process-step reveal">
         <div class="process-step-num">03</div>
@@ -1068,38 +789,32 @@ img{display:block;max-width:100%}
       <div class="process-step reveal">
         <div class="process-step-num">04</div>
         <div class="process-step-name">We Maintain</div>
-        <p class="process-step-desc">After launch your monthly retainer keeps everything current, secure, and performing. We're always one call away.</p>
+        <p class="process-step-desc">After launch, your monthly retainer keeps everything current, secure, and performing. We're always one call away.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING — retainer-only display, build fee quoted after audit -->
-<section class="section section--dark" id="pricing">
+<!-- PRICING -->
+<section class="section section--cream-2" id="pricing">
   <div class="shell">
     <div class="reveal">
       <div class="section-label">Investment</div>
       <h2 class="section-headline">TRANSPARENT,<br><span>FLAT-RATE</span> PLANS</h2>
       <p class="section-body" style="max-width:560px">
-        A fixed monthly retainer covers everything — maintenance, tools, reporting, and support.
+        A fixed monthly retainer covers everything: maintenance, tools, reporting, and support.
         Your one-time build fee is quoted after the free audit, based on your site's scope.
         No hourly surprises. No contracts longer than 90 days.
       </p>
     </div>
-
     <div class="pricing-grid">
-
-      <!-- STARTER -->
       <div class="pricing-card reveal">
         <div class="pricing-name">Starter</div>
-        <p class="pricing-desc">A clean, professional website that establishes your presence and captures leads. Perfect for businesses ready to stop being invisible online.</p>
-
+        <p class="pricing-desc">A clean, professional website that establishes your presence and captures leads. For businesses ready to stop being invisible online.</p>
         <div class="pricing-retainer-num">$250</div>
         <div class="pricing-retainer-label">Per month</div>
         <div class="pricing-build-note">+ one-time build fee — quoted after your free audit</div>
-
         <div class="pricing-divider"></div>
-
         <ul class="pricing-features">
           <li class="pricing-feature">5–7 page custom website</li>
           <li class="pricing-feature">Mobile-first, SEO-optimized design</li>
@@ -1109,48 +824,40 @@ img{display:block;max-width:100%}
           <li class="pricing-feature">Monthly site maintenance & updates (2 hrs/mo)</li>
           <li class="pricing-feature">Monthly performance report</li>
         </ul>
-
         <a href="#contact" class="btn-outline">Get started</a>
       </div>
-
-      <!-- GROWTH -->
       <div class="pricing-card pricing-card--featured reveal">
         <div class="pricing-badge">Most popular</div>
         <div class="pricing-name">Growth</div>
-        <p class="pricing-desc">The full system — website plus AI tools that work while you sleep. Built for businesses ready to actively grow their client base.</p>
-
+        <p class="pricing-desc">The full system — website plus AI tools that work while you sleep. For businesses ready to actively grow their patient base.</p>
         <div class="pricing-retainer-num">$500</div>
         <div class="pricing-retainer-label">Per month</div>
         <div class="pricing-build-note">+ one-time build fee — quoted after your free audit</div>
-
         <div class="pricing-divider"></div>
-
         <ul class="pricing-features">
           <li class="pricing-feature">Everything in Starter</li>
           <li class="pricing-feature">8–10 page custom website</li>
           <li class="pricing-feature">AI chatbot — answers questions & books appointments 24/7</li>
           <li class="pricing-feature">Automated review generation system</li>
           <li class="pricing-feature">Online booking widget integration</li>
+          <li class="pricing-feature">2 locally-targeted SEO blog posts per month</li>
+          <li class="pricing-feature">Local keyword rank tracking — see your position changes monthly</li>
           <li class="pricing-feature">Monthly check-in call with performance review</li>
           <li class="pricing-feature">Priority support & faster response times</li>
         </ul>
-
         <a href="#contact" class="btn-primary">Get started</a>
       </div>
-
     </div>
-
-    <div style="margin-top:32px;padding:24px 32px;border:1px solid var(--border);background:var(--dark-2)">
-      <p style="font-family:var(--font-mono);font-size:11px;color:var(--white-dim);line-height:1.8;letter-spacing:0.04em">
-        All plans require a 50% deposit to begin. Retainer includes up to 2 hours of site updates per month — additional work billed at $85/hr.
-        No contracts longer than 90 days. Upgrade from Starter to Growth anytime for a $500 expansion fee.
-        Domain registered in your name — you own it always.
-      </p>
+    <div class="pricing-note reveal">
+      <p>All plans require a 50% deposit to begin. Retainer includes up to 2 hours of site updates per month — additional work billed at $85/hr.
+      No contracts longer than 90 days. Upgrade from Starter to Growth anytime for a $500 expansion fee.
+      Your domain is always registered in your name.</p>
     </div>
   </div>
 </section>
 
-<section class="section section--black" id="about">
+<!-- ABOUT -->
+<section class="section section--cream" id="about">
   <div class="shell">
     <div class="about-grid">
       <div class="reveal">
@@ -1165,13 +872,29 @@ img{display:block;max-width:100%}
           display:inline-flex;align-items:center;gap:10px;
           font-family:var(--font-mono);font-size:11px;font-weight:500;
           letter-spacing:0.14em;text-transform:uppercase;
-          color:var(--orange);margin-top:28px;
-          transition:gap 0.2s;
+          color:var(--orange);margin-top:28px;transition:gap 0.2s;
         " onmouseenter="this.style.gap='16px'" onmouseleave="this.style.gap='10px'">
           Meet the team <span>→</span>
         </a>
+        <div class="about-stats">
+          <div class="about-stat">
+            <div class="about-stat-num">$0</div>
+            <div class="about-stat-label">Cost to audit</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">24/7</div>
+            <div class="about-stat-label">AI coverage</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">7–10</div>
+            <div class="about-stat-label">Days to launch</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">2</div>
+            <div class="about-stat-label">People, every project</div>
+          </div>
+        </div>
       </div>
-
       <div class="about-visual reveal">
         <div class="about-img-block">
           <div class="about-img-placeholder">
@@ -1185,6 +908,7 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
+<!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="shell">
     <div class="contact-grid">
@@ -1192,11 +916,10 @@ img{display:block;max-width:100%}
         <div class="section-label">Get in touch</div>
         <h2 class="section-headline">LET'S AUDIT<br>YOUR SITE — <span>FREE</span></h2>
         <p class="section-body">
-          Tell us about your business. We'll review your current online
-          presence and come back with specific, honest recommendations.
-          No commitment, no sales pressure.
+          Tell us about your business. We'll review your current online presence
+          and come back with specific, honest recommendations.
+          No commitment, no pressure.
         </p>
-
         <div class="contact-info">
           <div class="contact-info-item">
             <div class="contact-info-label">Location</div>
@@ -1212,7 +935,6 @@ img{display:block;max-width:100%}
           </div>
         </div>
       </div>
-
       <div class="reveal">
         <form class="contact-form" action="https://formspree.io/f/xjgjynwp" method="POST">
           <input type="hidden" name="_replyto" value="info@bldrdigital.com">
@@ -1253,10 +975,14 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="footer">
   <div class="shell">
     <div class="footer-inner">
-      <div class="footer-logo">BLD<span>R</span> Digital</div>
+      <div class="footer-logo">
+        <div class="footer-logo-mark"><span>B</span></div>
+        <div class="footer-logo-text">BLD<span>R</span> Digital</div>
+      </div>
       <ul class="footer-links">
         <li><a href="#services">Services</a></li>
         <li><a href="#pricing">Pricing</a></li>
@@ -1269,22 +995,18 @@ img{display:block;max-width:100%}
 </footer>
 
 <script>
+// Cursor
 const cursor = document.getElementById('cursor');
 document.addEventListener('mousemove', e => {
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 });
-
 document.querySelectorAll('a, button, .service-card, .bldr-letter-row').forEach(el => {
   el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%,-50%) scale(2.5)');
   el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%,-50%) scale(1)');
 });
 
-const nav = document.querySelector('.nav');
-window.addEventListener('scroll', () => {
-  nav.style.borderBottomColor = window.scrollY > 20 ? 'var(--border)' : 'transparent';
-}, { passive: true });
-
+// Scroll reveal
 const obs = new IntersectionObserver((entries) => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
@@ -1293,19 +1015,16 @@ const obs = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Mobile nav toggle
+// Mobile nav
 const mobileBtn = document.querySelector('.nav-mobile-btn');
 const navLinks = document.querySelector('.nav-links');
 let navOpen = false;
-
 mobileBtn.addEventListener('click', () => {
   navOpen = !navOpen;
   navLinks.classList.toggle('nav-open', navOpen);
   mobileBtn.setAttribute('aria-expanded', navOpen);
-  // Animate hamburger to X
   const spans = mobileBtn.querySelectorAll('span');
   if (navOpen) {
     spans[0].style.transform = 'rotate(45deg) translate(4px, 4px)';
@@ -1318,10 +1037,10 @@ mobileBtn.addEventListener('click', () => {
   }
 });
 
+// Smooth scroll + close mobile nav
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
-    // Close mobile nav if open
     if (navOpen) {
       navOpen = false;
       navLinks.classList.remove('nav-open');
@@ -1336,145 +1055,91 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 </script>
 
-<!-- ============================================================
-     Blueprint — BLDR Digital AI Assistant
-     Worker: bldr-chat.merrittbt4.workers.dev
-     ============================================================ -->
+<!-- Blueprint chatbot -->
 <script>
 (function() {
-
   const WORKER_URL    = "https://bldr-chat.merrittbt4.workers.dev";
-  const BRAND_COLOR   = "#FF5C00";
-  const PRACTICE_NAME = "BLDR Digital";
+  const BRAND_COLOR   = "#E85500";
   const GREETING      = "Hey — I'm Blueprint, BLDR's AI assistant. What kind of business are you looking to grow?";
-
-  let messages = [];
-  let isOpen   = false;
-  let isTyping = false;
+  let messages = [], isOpen = false, isTyping = false;
 
   const style = document.createElement("style");
   style.textContent = `
     #bldr-chat-btn {
-      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
-      width: 56px; height: 56px; border-radius: 50%;
-      background: ${BRAND_COLOR}; border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 16px rgba(255,92,0,0.3);
-      transition: transform 0.2s, box-shadow 0.2s;
+      position:fixed;bottom:24px;right:24px;z-index:9999;
+      width:56px;height:56px;border-radius:50%;
+      background:${BRAND_COLOR};border:none;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 4px 16px rgba(232,85,0,0.3);
+      transition:transform 0.2s,box-shadow 0.2s;
     }
-    #bldr-chat-btn:hover { transform: scale(1.08); box-shadow: 0 6px 20px rgba(255,92,0,0.4); }
-    #bldr-chat-btn svg { width: 24px; height: 24px; fill: #fff; }
-
+    #bldr-chat-btn:hover{transform:scale(1.08);box-shadow:0 6px 20px rgba(232,85,0,0.4);}
+    #bldr-chat-btn svg{width:24px;height:24px;fill:#fff;}
     #bldr-chat-window {
-      position: fixed; bottom: 92px; right: 24px; z-index: 9998;
-      width: 340px; max-height: 520px;
-      background: #0F0F0F; border-radius: 16px;
-      border: 1px solid #242424;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-      display: none; flex-direction: column;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      overflow: hidden;
+      position:fixed;bottom:92px;right:24px;z-index:9998;
+      width:340px;max-height:520px;
+      background:#1A2840;border-radius:12px;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 8px 32px rgba(0,0,0,0.3);
+      display:none;flex-direction:column;
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      overflow:hidden;
     }
-    #bldr-chat-window.open { display: flex; }
-
-    #bldr-chat-header {
-      background: #161616; color: #F5F5F5;
-      padding: 14px 16px; display: flex; align-items: center; gap: 10px;
-      border-bottom: 1px solid #242424;
+    #bldr-chat-window.open{display:flex;}
+    #bldr-chat-header{
+      background:#243652;color:#F5F0E8;
+      padding:14px 16px;display:flex;align-items:center;gap:10px;
+      border-bottom:1px solid rgba(255,255,255,0.07);
     }
-    #bldr-chat-header-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: #FF5C00; flex-shrink: 0;
+    #bldr-chat-header-dot{width:8px;height:8px;border-radius:50%;background:${BRAND_COLOR};flex-shrink:0;}
+    #bldr-chat-header-name{font-size:14px;font-weight:600;color:#F5F0E8;}
+    #bldr-chat-header-sub{font-size:11px;color:rgba(245,240,232,0.45);margin-top:1px;}
+    #bldr-chat-messages{
+      flex:1;overflow-y:auto;padding:16px;
+      display:flex;flex-direction:column;gap:10px;background:#1A2840;
     }
-    #bldr-chat-header-name { font-size: 14px; font-weight: 600; color: #F5F5F5; }
-    #bldr-chat-header-sub  { font-size: 11px; color: #A0A0A0; margin-top: 1px; }
-
-    #bldr-chat-messages {
-      flex: 1; overflow-y: auto; padding: 16px;
-      display: flex; flex-direction: column; gap: 10px;
-      background: #0F0F0F;
+    .bldr-msg{max-width:82%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5;word-wrap:break-word;}
+    .bldr-msg-bot{background:#243652;color:#F5F0E8;border-bottom-left-radius:4px;align-self:flex-start;border:1px solid rgba(255,255,255,0.07);}
+    .bldr-msg-user{background:${BRAND_COLOR};color:#fff;border-bottom-right-radius:4px;align-self:flex-end;}
+    .bldr-msg-typing{background:#243652;border:1px solid rgba(255,255,255,0.07);align-self:flex-start;padding:12px 16px;border-radius:12px;border-bottom-left-radius:4px;}
+    .bldr-dots{display:flex;gap:4px;}
+    .bldr-dots span{width:6px;height:6px;border-radius:50%;background:${BRAND_COLOR};animation:bldr-bounce 1.2s infinite;}
+    .bldr-dots span:nth-child(2){animation-delay:0.2s;}
+    .bldr-dots span:nth-child(3){animation-delay:0.4s;}
+    @keyframes bldr-bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+    #bldr-chat-input-wrap{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(255,255,255,0.07);background:#243652;}
+    #bldr-chat-input{
+      flex:1;border:1px solid rgba(255,255,255,0.1);border-radius:20px;
+      padding:8px 14px;font-size:13px;outline:none;font-family:inherit;
+      resize:none;line-height:1.4;transition:border-color 0.2s;
+      background:#1A2840;color:#F5F0E8;
     }
-
-    .bldr-msg {
-      max-width: 82%; padding: 10px 14px;
-      border-radius: 14px; font-size: 13px; line-height: 1.5;
-      word-wrap: break-word;
+    #bldr-chat-input::placeholder{color:rgba(245,240,232,0.25);}
+    #bldr-chat-input:focus{border-color:${BRAND_COLOR};}
+    #bldr-chat-send{
+      width:36px;height:36px;border-radius:50%;background:${BRAND_COLOR};border:none;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;
+      transition:background 0.2s;align-self:flex-end;
     }
-    .bldr-msg-bot {
-      background: #1E1E1E; color: #F5F5F5;
-      border-bottom-left-radius: 4px; align-self: flex-start;
-      border: 1px solid #242424;
-    }
-    .bldr-msg-user {
-      background: ${BRAND_COLOR}; color: #fff;
-      border-bottom-right-radius: 4px; align-self: flex-end;
-    }
-    .bldr-msg-typing {
-      background: #1E1E1E; border: 1px solid #242424;
-      align-self: flex-start;
-      padding: 12px 16px; border-radius: 14px; border-bottom-left-radius: 4px;
-    }
-    .bldr-dots { display: flex; gap: 4px; }
-    .bldr-dots span {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: #FF5C00; animation: bldr-bounce 1.2s infinite;
-    }
-    .bldr-dots span:nth-child(2) { animation-delay: 0.2s; }
-    .bldr-dots span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes bldr-bounce {
-      0%, 60%, 100% { transform: translateY(0); }
-      30% { transform: translateY(-5px); }
-    }
-
-    #bldr-chat-input-wrap {
-      display: flex; gap: 8px; padding: 12px;
-      border-top: 1px solid #242424;
-      background: #161616;
-    }
-    #bldr-chat-input {
-      flex: 1; border: 1px solid #2A2A2A; border-radius: 20px;
-      padding: 8px 14px; font-size: 13px; outline: none;
-      font-family: inherit; resize: none; line-height: 1.4;
-      transition: border-color 0.2s;
-      background: #0F0F0F; color: #F5F5F5;
-    }
-    #bldr-chat-input::placeholder { color: #404040; }
-    #bldr-chat-input:focus { border-color: ${BRAND_COLOR}; }
-    #bldr-chat-send {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: ${BRAND_COLOR}; border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: background 0.2s; align-self: flex-end;
-    }
-    #bldr-chat-send:hover { filter: brightness(0.9); }
-    #bldr-chat-send svg { width: 16px; height: 16px; fill: #fff; }
-    #bldr-chat-send:disabled { opacity: 0.4; cursor: default; }
-
-    #bldr-chat-footer {
-      text-align: center; padding: 6px 0 10px;
-      font-size: 10px; color: #404040;
-      font-family: inherit; background: #161616;
-      letter-spacing: 0.06em;
-    }
+    #bldr-chat-send:hover{filter:brightness(0.9);}
+    #bldr-chat-send svg{width:16px;height:16px;fill:#fff;}
+    #bldr-chat-send:disabled{opacity:0.4;cursor:default;}
+    #bldr-chat-footer{text-align:center;padding:6px 0 10px;font-size:10px;color:rgba(245,240,232,0.2);font-family:inherit;background:#243652;letter-spacing:0.06em;}
   `;
   document.head.appendChild(style);
 
   const btn = document.createElement("button");
   btn.id = "bldr-chat-btn";
-  btn.setAttribute("aria-label", "Open Blueprint chat");
+  btn.setAttribute("aria-label","Open Blueprint chat");
   btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>`;
 
   const win = document.createElement("div");
   win.id = "bldr-chat-window";
-  win.setAttribute("role", "dialog");
-  win.setAttribute("aria-label", "Blueprint — BLDR Digital assistant");
+  win.setAttribute("role","dialog");
   win.innerHTML = `
     <div id="bldr-chat-header">
       <div id="bldr-chat-header-dot"></div>
-      <div>
-        <div id="bldr-chat-header-name">Blueprint</div>
-        <div id="bldr-chat-header-sub">BLDR Digital AI assistant</div>
-      </div>
+      <div><div id="bldr-chat-header-name">Blueprint</div><div id="bldr-chat-header-sub">BLDR Digital AI assistant</div></div>
     </div>
     <div id="bldr-chat-messages" role="log" aria-live="polite"></div>
     <div id="bldr-chat-input-wrap">
@@ -1490,8 +1155,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   document.body.appendChild(win);
 
   const msgContainer = document.getElementById("bldr-chat-messages");
-  const input        = document.getElementById("bldr-chat-input");
-  const sendBtn      = document.getElementById("bldr-chat-send");
+  const input = document.getElementById("bldr-chat-input");
+  const sendBtn = document.getElementById("bldr-chat-send");
 
   function addMessage(text, role) {
     const el = document.createElement("div");
@@ -1501,63 +1166,36 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     msgContainer.scrollTop = msgContainer.scrollHeight;
     return el;
   }
-
   function showTyping() {
     const el = document.createElement("div");
-    el.className = "bldr-msg-typing";
-    el.id = "bldr-typing";
+    el.className = "bldr-msg-typing"; el.id = "bldr-typing";
     el.innerHTML = `<div class="bldr-dots"><span></span><span></span><span></span></div>`;
     msgContainer.appendChild(el);
     msgContainer.scrollTop = msgContainer.scrollHeight;
   }
-
-  function hideTyping() {
-    const el = document.getElementById("bldr-typing");
-    if (el) el.remove();
-  }
+  function hideTyping() { const el = document.getElementById("bldr-typing"); if (el) el.remove(); }
 
   async function sendMessage(text) {
     if (!text.trim() || isTyping) return;
-
     addMessage(text, "user");
     messages.push({ role: "user", content: text });
-    input.value = "";
-    input.style.height = "auto";
-    sendBtn.disabled = true;
-    isTyping = true;
-    showTyping();
-
+    input.value = ""; input.style.height = "auto";
+    sendBtn.disabled = true; isTyping = true; showTyping();
     try {
-      const res = await fetch(WORKER_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages }),
-      });
-
+      const res = await fetch(WORKER_URL, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({ messages }) });
       const data = await res.json();
       const reply = data.reply || "Something went wrong. Email us at info@bldrdigital.com.";
-
-      hideTyping();
-      addMessage(reply, "bot");
-      messages.push({ role: "assistant", content: reply });
-
+      hideTyping(); addMessage(reply, "bot");
+      messages.push({ role:"assistant", content:reply });
     } catch {
-      hideTyping();
-      addMessage("Having trouble connecting. Email us at info@bldrdigital.com.", "bot");
+      hideTyping(); addMessage("Having trouble connecting. Email us at info@bldrdigital.com.", "bot");
     }
-
-    isTyping = false;
-    sendBtn.disabled = !input.value.trim();
+    isTyping = false; sendBtn.disabled = !input.value.trim();
   }
 
   btn.addEventListener("click", () => {
-    isOpen = !isOpen;
-    win.classList.toggle("open", isOpen);
-
-    if (isOpen && messages.length === 0) {
-      setTimeout(() => addMessage(GREETING, "bot"), 300);
-    }
-
+    isOpen = !isOpen; win.classList.toggle("open", isOpen);
+    if (isOpen && messages.length === 0) setTimeout(() => addMessage(GREETING, "bot"), 300);
     if (isOpen) {
       setTimeout(() => input.focus(), 350);
       btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>`;
@@ -1565,22 +1203,13 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>`;
     }
   });
-
   sendBtn.addEventListener("click", () => sendMessage(input.value));
-
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage(input.value);
-    }
-  });
-
+  input.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(input.value); } });
   input.addEventListener("input", () => {
     sendBtn.disabled = !input.value.trim() || isTyping;
     input.style.height = "auto";
     input.style.height = Math.min(input.scrollHeight, 100) + "px";
   });
-
 })();
 </script>
 
