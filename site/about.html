@@ -64,12 +64,25 @@
       border-bottom:1px solid var(--border);
     }
     .nav-logo{
+      display:flex;align-items:baseline;gap:0;
       font-family:var(--font-display);
-      font-size:28px;letter-spacing:0.12em;
+      font-size:26px;
+      letter-spacing:0.08em;
       color:var(--white);
-      display:flex;align-items:center;gap:2px;
+      line-height:1;
     }
-    .nav-logo-accent{color:var(--orange)}
+    .nav-logo-slash{color:var(--orange);margin:0 1px;}
+    .nav-logo-sub{
+      font-family:var(--font-mono);
+      font-size:9px;
+      font-weight:400;
+      color:#666;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      align-self:flex-end;
+      margin-bottom:2px;
+      margin-left:9px;
+    }
     .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
     .nav-links a{
       font-family:var(--font-mono);
@@ -364,8 +377,8 @@
     /* FOOTER */
     .footer{background:var(--black);border-top:1px solid var(--border);padding:40px 0}
     .footer-inner{display:flex;align-items:center;justify-content:space-between}
-    .footer-logo{font-family:var(--font-display);font-size:24px;letter-spacing:0.12em;color:var(--white)}
-    .footer-logo span{color:var(--orange)}
+    .footer-logo{font-family:var(--font-display);font-size:22px;letter-spacing:0.08em;color:var(--white);display:flex;align-items:baseline;gap:0;}
+    .footer-logo-slash{color:var(--orange)}
     .footer-links{display:flex;gap:32px;list-style:none}
     .footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--white-dim);letter-spacing:0.08em;transition:color 0.2s}
     .footer-links a:hover{color:var(--orange)}
@@ -419,7 +432,10 @@
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="/" class="nav-logo">BLD<span class="nav-logo-accent">R</span></a>
+  <a href="/" class="nav-logo">
+    BL<span class="nav-logo-slash">/</span>DR
+    <span class="nav-logo-sub">Digital</span>
+  </a>
   <ul class="nav-links">
     <li><a href="/#services">Services</a></li>
     <li><a href="/#process">Process</a></li>
@@ -531,7 +547,7 @@
 <footer class="footer">
   <div class="shell">
     <div class="footer-inner">
-      <div class="footer-logo">BLD<span>R</span> Digital</div>
+      <div class="footer-logo">BL<span class="footer-logo-slash">/</span>DR Digital</div>
       <ul class="footer-links">
         <li><a href="/#services">Services</a></li>
         <li><a href="/#pricing">Pricing</a></li>
