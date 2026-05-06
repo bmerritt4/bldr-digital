@@ -130,7 +130,7 @@ img{display:block;max-width:100%}
 .hero{
   min-height:100vh;
   display:flex;flex-direction:column;
-  justify-content:flex-end;
+  justify-content:center;
   padding-top:64px;
   position:relative;
   overflow:hidden;
@@ -167,13 +167,13 @@ img{display:block;max-width:100%}
 /* Hero content */
 .hero-content{
   position:relative;z-index:3;
-  padding:0 40px 72px;
+  padding:60px 40px;
   max-width:1280px;
   margin:0 auto;
   width:100%;
   display:grid;
   grid-template-columns:1fr auto;
-  align-items:flex-end;
+  align-items:center;
   gap:60px;
 }
 
@@ -249,34 +249,6 @@ img{display:block;max-width:100%}
   font-size:9px;color:var(--white-faint);
   letter-spacing:0.14em;text-transform:uppercase;
   margin-top:5px;
-}
-
-/* Full-width wordmark at hero bottom */
-.hero-wordmark{
-  position:relative;z-index:2;
-  width:100%;
-  overflow:hidden;
-  line-height:0.82;
-  border-top:1px solid rgba(255,92,0,0.1);
-  opacity:0;
-  animation:fadeIn 1.2s 0.5s forwards;
-  user-select:none;
-  pointer-events:none;
-}
-.hero-wordmark-inner{
-  font-family:var(--font-display);
-  font-size:clamp(100px,18vw,260px);
-  letter-spacing:0.02em;
-  color:transparent;
-  -webkit-text-stroke:1px rgba(255,92,0,0.18);
-  white-space:nowrap;
-  padding:0 40px;
-  display:flex;align-items:baseline;gap:0;
-}
-.hero-wordmark-slash{
-  color:var(--orange);
-  -webkit-text-stroke:0;
-  opacity:0.6;
 }
 
 /* ── BUTTONS ── */
@@ -719,9 +691,8 @@ img{display:block;max-width:100%}
   .nav-links.nav-open a{display:block;padding:16px 0;font-size:14px}
   .nav-links.nav-open .nav-cta{margin-top:16px;text-align:center;padding:14px 20px;display:block}
   .shell{padding:0 20px}
-  .hero-content{padding:0 20px 56px;grid-template-columns:1fr}
+  .hero-content{padding:40px 20px;grid-template-columns:1fr}
   .hero{min-height:100vh}
-  .hero-wordmark-inner{padding:0 20px;font-size:clamp(72px,22vw,160px)}
   .section{padding:80px 0}
   .process-steps{grid-template-columns:1fr}
   .process-step::after{display:none}
@@ -769,9 +740,8 @@ img{display:block;max-width:100%}
       </h1>
 
       <p class="hero-sub">
-        BLDR Digital builds custom websites and AI tools for local small businesses
-        that are tired of being invisible online. We handle everything —
-        you focus on running your business.
+        Custom websites and practical AI tools for San Fernando Valley 
+        businesses that want more calls, bookings, and local visibility.
       </p>
 
       <div class="hero-actions">
@@ -796,12 +766,6 @@ img{display:block;max-width:100%}
     </div>
   </div>
 
-  <!-- Full-width BL/DR wordmark at hero base -->
-  <div class="hero-wordmark">
-    <div class="hero-wordmark-inner">
-      BL<span class="hero-wordmark-slash">/</span>DR
-    </div>
-  </div>
 </section>
 
 <!-- MARQUEE -->
@@ -836,14 +800,13 @@ img{display:block;max-width:100%}
         <div class="section-label">What we are</div>
         <h2 class="section-headline">BUILD <span>LOCAL.</span><br>DRIVE RESULTS.</h2>
         <p class="section-body">
-          Every letter in BLDR stands for something we actually do —
-          not agency buzzwords, not empty promises. Four principles
-          that drive every project we take on.
+          Every letter in BLDR reflects how we approach our 
+          work — practical, transparent, and focused on results.
         </p>
         <p class="section-body">
-          We're a husband-and-wife team from Woodland Hills.
-          Together we serve the local businesses that make
-          the San Fernando Valley run.
+          Based in Woodland Hills, we help San Fernando Valley 
+          businesses build better websites, improve visibility, 
+          and streamline customer communication.
         </p>
       </div>
 
@@ -852,28 +815,28 @@ img{display:block;max-width:100%}
           <div class="bldr-letter">B</div>
           <div class="bldr-letter-content">
             <div class="bldr-letter-word">Build</div>
-            <div class="bldr-letter-desc">Every site we deliver is built from scratch — custom design, custom code, custom copy. No themes. No recycled layouts. No shortcuts.</div>
+            <div class="bldr-letter-desc">Custom websites built from the ground up — designed around your business, your customers, and your goals.</div>
           </div>
         </div>
         <div class="bldr-letter-row">
           <div class="bldr-letter">L</div>
           <div class="bldr-letter-content">
             <div class="bldr-letter-word">Local</div>
-            <div class="bldr-letter-desc">We're based in Woodland Hills and we serve the Valley. That means we know your market, your competition, and your customers. It also means when someone searches for your business, we make sure they find you — Google Business, local SEO, citations, and rank tracking built into everything we do.</div>
+            <div class="bldr-letter-desc">We live and work in the Valley, so we understand the neighborhoods, competitors, and customers you’re trying to reach.</div>
           </div>
         </div>
         <div class="bldr-letter-row">
           <div class="bldr-letter">D</div>
           <div class="bldr-letter-content">
             <div class="bldr-letter-word">Drive</div>
-            <div class="bldr-letter-desc">We execute every detail — chatbots, integrations, updates, and automations — fully configured and running.</div>
+            <div class="bldr-letter-desc">We handle the details: websites, chatbots, booking tools, review systems, local SEO, and ongoing updates.</div>
           </div>
         </div>
         <div class="bldr-letter-row">
           <div class="bldr-letter">R</div>
           <div class="bldr-letter-content">
             <div class="bldr-letter-word">Results</div>
-            <div class="bldr-letter-desc">We measure everything and report back — more appointments, more reviews, more revenue. Results you can see.</div>
+            <div class="bldr-letter-desc">More visibility, more trust, more calls, and clear reporting on what’s working.</div>
           </div>
         </div>
       </div>
@@ -1369,6 +1332,17 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     isTyping = false;
     sendBtn.disabled = !input.value.trim();
   }
+  // Auto-open chat after 7 seconds
+  setTimeout(() => {
+    if (!isOpen) {
+      isOpen = true;
+      win.classList.add("open");
+      if (messages.length === 0) setTimeout(() => addMessage(GREETING, "bot"), 300);
+      setTimeout(() => input.focus(), 350);
+      btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>`;
+    }
+  }, 7000);
+
   btn.addEventListener("click", () => {
     isOpen = !isOpen;
     win.classList.toggle("open", isOpen);
